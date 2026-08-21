@@ -15,6 +15,7 @@ data class GameBuildUiState(
     val characters: List<GameCharacter> = emptyList(),
     val selectedCharacter: GameCharacter? = null,
     val selectedBuild: CharacterBuild? = null,
+    val filters: NteFilters = NteFilters(),
     val errorMessage: String? = null
 )
 
@@ -28,26 +29,38 @@ class GameBuildViewModel(private val repository: GameRepository = GameRepository
                 _uiState.value = GameBuildUiState(selectedGame = game, characters = characters)
             }
             .onFailure { error ->
-                _uiState.value = _uiState.value.copy(
-                    errorMessage = error.message ?: "Não foi possível carregar o jogo."
-                )
+                _uiState.value = _uiState.value.copy(errorMessage = error.message ?: "Não foi possível carregar o jogo.")
             }
+    }
+
+    fun updateSearch(query: String) {
+        _uiState.value = _uiState.value.copy(filters = _uiState.value.filters.copy(query = query))
+    }
+
+    fun updateElement(element: String?) {
+        _uiState.value = _uiState.value.copy(filters = _uiState.value.filters.copy(element = element))
+    }
+
+    fun updateRole(role: String?) {
+        _uiState.value = _uiState.value.copy(filters = _uiState.value.filters.copy(role = role))
+    }
+
+    fun clearFilters() {
+        _uiState.value = _uiState.value.copy(filters = NteFilters())
     }
 
     fun selectCharacter(character: GameCharacter) {
         runCatching { repository.getBuild(character.id) }
             .onSuccess { build ->
-                _uiState.value = _uiState.value.copy(
-                    selectedCharacter = character,
-                    selectedBuild = build,
-                    errorMessage = null
-                )
+                _uiState.value = _uiState.value.copy(selectedCharacter = character, selectedBuild = build, errorMessage = null)
             }
             .onFailure { error ->
-                _uiState.value = _uiState.value.copy(
-                    errorMessage = error.message ?: "Não foi possível carregar a build."
-                )
+                _uiState.value = _uiState.value.copy(errorMessage = error.message ?: "Não foi possível carregar a build.")
             }
+    }
+
+    fun clearSelection() {
+        _uiState.value = _uiState.value.copy(selectedCharacter = null, selectedBuild = null)
     }
 
     fun clearError() { _uiState.value = _uiState.value.copy(errorMessage = null) }
