@@ -31,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.carlosflima.gamebuild.domain.BuildScoreCalculator
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
@@ -40,7 +41,7 @@ import com.carlosflima.gamebuild.domain.GameCharacter
 fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val state = viewModel.uiState.collectAsStateWithLifecycle().value
     MaterialTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.2") }) }) { padding ->
+        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.4") }) }) { padding ->
             when {
                 state.selectedCharacter != null -> CharacterBuildScreen(state.selectedCharacter!!, state.selectedBuild, viewModel, padding)
                 state.selectedGame != null -> CharacterSelection(state.selectedGame!!, state.characters, state.filters, viewModel, padding)
@@ -161,6 +162,9 @@ private fun CharacterBuildScreen(character: GameCharacter, build: CharacterBuild
                     }
                 }
             }
+        }
+        if (build != null) item {
+            BuildScoreCard(BuildScoreCalculator.calculate(build))
         }
     }
 }
