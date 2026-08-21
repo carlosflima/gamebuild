@@ -16,11 +16,17 @@ data class GameCharacter(
 data class CharacterBuild(
     val characterId: String,
     val title: String,
+    val version: String? = null,
     val arcRecommendation: String? = null,
+    val alternativeArcs: List<String> = emptyList(),
     val cartridgeRecommendation: String? = null,
+    val modulePriority: List<String> = emptyList(),
     val statPriority: List<String> = emptyList(),
+    val skillPriority: List<String> = emptyList(),
     val teamRecommendation: List<String> = emptyList(),
+    val f2pTeam: List<String> = emptyList(),
     val f2pNote: String? = null,
+    val sources: List<String> = emptyList(),
     val sourceUrl: String? = null,
     val sourceUpdatedAt: String? = null
 )
