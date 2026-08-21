@@ -10,8 +10,15 @@ data class GameCharacter(
     val arcType: String? = null,
     val tier: String? = null,
     val imageUrl: String? = null,
-    val sourceUrl: String? = null
+    val sourceUrl: String? = null,
+    val status: NteCharacterStatus = NteCharacterStatus.AVAILABLE,
+    val versionIntroduced: String? = null
 )
+
+enum class NteCharacterStatus {
+    AVAILABLE,
+    UPCOMING
+}
 
 data class CharacterBuild(
     val characterId: String,

@@ -3,6 +3,7 @@ package com.carlosflima.gamebuild.data
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
+import com.carlosflima.gamebuild.domain.NteCharacterStatus
 
 interface GameRepository {
     fun getCharacters(game: Game): List<GameCharacter>
@@ -20,34 +21,39 @@ class GameRepositoryImpl : GameRepository {
 }
 
 private object NteCatalog {
-    private const val WIKI_SOURCE = "https://nte.wiki/characters/"
-    private const val GAMEWITH_SOURCE = "https://gamewith.net/nte/76171"
-    private const val ALLTHINGS_SOURCE = "https://allthings.how/nte-neverness-to-everness-best-zankou-build-guide-and-teams/"
-    private const val NEVERNESS_SOURCE = "https://neverness.gg/zankou-nte-build/"
+    private const val ROSTER_SOURCE = "https://neverness.gg/neverness-to-everness-characters/"
+    private const val MOBALYTICS_SOURCE = "https://mobalytics.gg/never-to-everness/characters"
+    private const val GAMEWITH_TIER_SOURCE = "https://gamewith.net/nte/74170"
+    private const val GAMEWITH_TEAM_SOURCE = "https://gamewith.net/nte/74215"
+    private const val ZANKOU_GAMEWITH = "https://gamewith.net/nte/76171"
+    private const val ZANKOU_ALLTHINGS = "https://allthings.how/nte-neverness-to-everness-best-zankou-build-guide-and-teams/"
+    private const val ZANKOU_NEVERNESS = "https://neverness.gg/zankou-nte-build/"
 
+    // Baseline: NTE v1.3. Roster cross-checked against the August 18-21, 2026 databases.
+    // imageUrl intentionally remains null until a stable, redistributable image URL is verified.
     val characters = listOf(
-        GameCharacter("nte-zankou", "Zankou", "DPS principal", Game.NTE, "S", "Incantation", "Gas", "S", sourceUrl = GAMEWITH_SOURCE),
-        GameCharacter("nte-baicang", "Baicang", "DPS", Game.NTE, "S", "Incantation", "Synthesis", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-chaos", "Chaos", "DPS", Game.NTE, "S", "Lakshana", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-esper-zero", "Esper Zero", "DPS", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-hotori", "Hotori", "DPS", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-iroi", "Iroi", "Suporte", Game.NTE, "S", "Anima", "Synthesis", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-lacrimosa", "Lacrimosa", "DPS", Game.NTE, "S", "Chaos", "Liquid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-shinku", "Shinku", "DPS", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-daffodill", "Daffodill", "DPS", Game.NTE, "S", "Chaos", "Liquid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-fadia", "Fadia", "Sobrevivência", Game.NTE, "S", "Psyche", "Liquid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-hathor", "Hathor", "DPS", Game.NTE, "S", "Lakshana", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-jiuyuan", "Jiuyuan", "DPS", Game.NTE, "S", "Lakshana", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-sakiri", "Sakiri", "Suporte", Game.NTE, "S", "Incantation", "Synthesis", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-skia", "Skia", "DPS", Game.NTE, "S", "Lakshana", "Synthesis", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-chiz", "Chiz", "DPS", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-elyms", "Elyms", "DPS", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-nanally", "Nanally", "DPS", Game.NTE, "S", "Anima", "Synthesis", "S", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-aurelia", "Aurelia", "DPS", Game.NTE, "A", "Psyche", "Liquid", "A", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-haniel", "Haniel", "Suporte", Game.NTE, "A", "Psyche", "Liquid", "A", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-mint", "Mint", "DPS", Game.NTE, "A", "Cosmos", "Solid", "A", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-adler", "Adler", "Sobrevivência", Game.NTE, "A", "Incantation", "Synthesis", "A", sourceUrl = WIKI_SOURCE),
-        GameCharacter("nte-edgar", "Edgar", "Sobrevivência", Game.NTE, "A", "Cosmos", "Liquid", "A", sourceUrl = WIKI_SOURCE)
+        GameCharacter("nte-baicang", "Baicang", "DPS", Game.NTE, "S", "Incantation", "Synthesis", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-chaos", "Chaos", "DPS", Game.NTE, "S", "Lakshana", "Solid", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.1"),
+        GameCharacter("nte-chiz", "Chiz", "DPS", Game.NTE, "S", "Cosmos", null, "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-daffodill", "Daffodill", "DPS", Game.NTE, "S", "Chaos", "Liquid", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-zero", "Zero", "DPS", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-fadia", "Fadia", "Sobrevivência", Game.NTE, "S", "Psyche", null, "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-hathor", "Hathor", "DPS", Game.NTE, "S", "Lakshana", "Plasma", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-hotori", "Hotori", "Suporte", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-iroi", "Iroi", "Sobrevivência", Game.NTE, "S", "Anima", null, "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.2"),
+        GameCharacter("nte-jiuyuan", "Jiuyuan", "DPS", Game.NTE, "S", "Anima", "Solid", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-lacrimosa", "Lacrimosa", "DPS", Game.NTE, "S", "Chaos", "Liquid", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.1"),
+        GameCharacter("nte-linko", "Linko", "DPS", Game.NTE, "S", "Anima", null, "S", sourceUrl = ROSTER_SOURCE, status = NteCharacterStatus.UPCOMING, versionIntroduced = "1.3"),
+        GameCharacter("nte-nanally", "Nanally", "DPS", Game.NTE, "S", "Anima", "Plasma", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-sakiri", "Sakiri", "Suporte", Game.NTE, "S", "Incantation", "Gas", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-shinku", "Shinku", "DPS", Game.NTE, "S", "Cosmos", "Solid", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.2"),
+        GameCharacter("nte-zankou", "Zankou", "DPS", Game.NTE, "S", "Incantation", "Gas", "S", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.3"),
+        GameCharacter("nte-adler", "Adler", "Sobrevivência", Game.NTE, "A", "Incantation", "Synthesis", "A", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-aurelia", "Aurelia", "DPS", Game.NTE, "A", "Psyche", "Liquid", "A", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-edgar", "Edgar", "Sobrevivência", Game.NTE, "A", "Cosmos", "Liquid", "A", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-haniel", "Haniel", "Suporte", Game.NTE, "A", "Psyche", "Solid", "A", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-mint", "Mint", "DPS", Game.NTE, "A", "Anima", "Liquid", "A", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0"),
+        GameCharacter("nte-skia", "Skia", "DPS", Game.NTE, "A", "Lakshana", "Gas", "A", sourceUrl = ROSTER_SOURCE, versionIntroduced = "1.0")
     )
 
     val builds = mapOf(
@@ -63,9 +69,9 @@ private object NteCatalog {
             skillPriority = listOf("Basic Attack", "Ultimate", "Passives"),
             teamRecommendation = listOf("Zankou", "Lacrimosa", "Sakiri", "Iroi"),
             f2pTeam = listOf("Zankou", "Daffodill", "Mint", "Adler"),
-            f2pNote = "A composição F2P mantém Zankou como única personagem limitada e usa Daffodill, Mint e Adler para dano/reação e sobrevivência.",
-            sources = listOf(GAMEWITH_SOURCE, ALLTHINGS_SOURCE, NEVERNESS_SOURCE),
-            sourceUrl = GAMEWITH_SOURCE,
+            f2pNote = "Composição de entrada; o sistema deverá marcar recomendações F2P como alternativas, não equivalentes à equipe meta.",
+            sources = listOf(ZANKOU_GAMEWITH, ZANKOU_ALLTHINGS, ZANKOU_NEVERNESS),
+            sourceUrl = ZANKOU_GAMEWITH,
             sourceUpdatedAt = "2026-08-21"
         ),
         "nte-nanally" to CharacterBuild(
@@ -73,18 +79,19 @@ private object NteCatalog {
             title = "Nanally — DPS principal",
             version = "1.3",
             statPriority = listOf("CRIT", "ATK%", "Dano do elemento"),
-            teamRecommendation = listOf("Nanally", "Sakiri", "Jiuyuan", "Esper Zero"),
-            f2pNote = "Priorizar alternativas acessíveis antes de investir em equipamentos premium.",
-            sourceUrl = WIKI_SOURCE,
+            teamRecommendation = listOf("Nanally", "Sakiri", "Jiuyuan", "Zero"),
+            sources = listOf(MOBALYTICS_SOURCE),
+            sourceUrl = MOBALYTICS_SOURCE,
             sourceUpdatedAt = "2026-08-21"
         ),
         "nte-chiz" to CharacterBuild(
             characterId = "nte-chiz",
-            title = "Chiz — DPS / Charge Engine",
+            title = "Chiz — DPS / Charge",
             version = "1.3",
             statPriority = listOf("CRIT", "ATK%", "Dano do elemento"),
-            teamRecommendation = listOf("Chiz", "Hathor", "Jiuyuan", "Esper Zero"),
-            sourceUrl = "https://gamewith.net/nte/74393",
+            teamRecommendation = listOf("Chiz", "Hathor", "Jiuyuan", "Zero"),
+            sources = listOf(GAMEWITH_TEAM_SOURCE),
+            sourceUrl = GAMEWITH_TEAM_SOURCE,
             sourceUpdatedAt = "2026-08-21"
         )
     )
