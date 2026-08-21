@@ -22,7 +22,7 @@ import com.carlosflima.gamebuild.domain.*
 fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val state = viewModel.uiState.collectAsStateWithLifecycle().value
     MaterialTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.6") }) }) { padding ->
+        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.7") }) }) { padding ->
             when {
                 state.selectedCharacter != null -> CharacterBuildScreen(state.selectedCharacter!!, state.selectedBuild, viewModel, padding)
                 state.selectedGame != null -> CharacterSelection(state.selectedGame!!, state.characters, state.filters, viewModel, padding)
