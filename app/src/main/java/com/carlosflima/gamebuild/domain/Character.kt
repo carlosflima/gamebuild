@@ -5,5 +5,22 @@ data class GameCharacter(
     val name: String,
     val role: String,
     val game: Game,
-    val imageUrl: String? = null
+    val rarity: String? = null,
+    val element: String? = null,
+    val arcType: String? = null,
+    val tier: String? = null,
+    val imageUrl: String? = null,
+    val sourceUrl: String? = null
+)
+
+data class CharacterBuild(
+    val characterId: String,
+    val title: String,
+    val arcRecommendation: String? = null,
+    val cartridgeRecommendation: String? = null,
+    val statPriority: List<String> = emptyList(),
+    val teamRecommendation: List<String> = emptyList(),
+    val f2pNote: String? = null,
+    val sourceUrl: String? = null,
+    val sourceUpdatedAt: String? = null
 )
