@@ -31,16 +31,14 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     }
 }
 
-@Composable
-private fun GameSelection(viewModel: GameBuildViewModel, padding: PaddingValues) {
+@Composable private fun GameSelection(viewModel: GameBuildViewModel, padding: PaddingValues) {
     Column(Modifier.fillMaxSize().padding(padding).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Selecione um jogo", style = MaterialTheme.typography.headlineSmall)
         Game.entries.forEach { game -> Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) { Text(game.displayName, style = MaterialTheme.typography.titleLarge); Text(game.description); Button(onClick = { viewModel.selectGame(game) }) { Text("Selecionar") } } } }
     }
 }
 
-@Composable
-private fun CharacterSelection(game: Game, characters: List<GameCharacter>, filters: NteFilters, viewModel: GameBuildViewModel, padding: PaddingValues) {
+@Composable private fun CharacterSelection(game: Game, characters: List<GameCharacter>, filters: NteFilters, viewModel: GameBuildViewModel, padding: PaddingValues) {
     val filtered = characters.filter { c -> (filters.query.isBlank() || c.name.contains(filters.query, true)) && (filters.element == null || c.element.equals(filters.element, true)) && (filters.role == null || c.role.equals(filters.role, true)) }
     val elements = characters.mapNotNull { it.element }.distinct().sorted(); val roles = characters.map { it.role }.distinct().sorted()
     LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -55,16 +53,15 @@ private fun CharacterSelection(game: Game, characters: List<GameCharacter>, filt
 
 @Composable private fun CharacterImage(character: GameCharacter) { Card(Modifier.size(88.dp)) { if (!character.imageUrl.isNullOrBlank()) AsyncImage(character.imageUrl, "Imagem de ${character.name}", Modifier.fillMaxSize(), contentScale = ContentScale.Crop) else Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) { Text(character.name.take(1).uppercase(), Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.headlineSmall); Text("Sem imagem", Modifier.fillMaxWidth(), textAlign = TextAlign.Center) } } }
 
-@Composable
-private fun CharacterBuildScreen(character: GameCharacter, build: CharacterBuild?, viewModel: GameBuildViewModel, padding: PaddingValues) {
+@Composable private fun CharacterBuildScreen(character: GameCharacter, build: CharacterBuild?, viewModel: GameBuildViewModel, padding: PaddingValues) {
     LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item { Button(onClick = viewModel::clearSelection) { Text("Voltar") }; Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) { CharacterImage(character); Column { Text(character.name, style = MaterialTheme.typography.headlineMedium); Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "?"}"); Text(character.role); Text("Tier: ${character.tier ?: "?"}") } } }
         if (build == null) item { Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp)) { Text("Build em pesquisa", style = MaterialTheme.typography.titleLarge); Text("Ainda não há uma recomendação consolidada.") } } }
-        else { item { BuildScoreCard(BuildScoreCalculator.calculate(build)) }; item { BuildOverviewCard(build) }; item { BuildEquipmentCard(build) }; item { BuildTeamCard(build) }; item { BuildSourcesCard(build) } }
+        else { item { NteBuildScoreCard(BuildScoreCalculator.calculate(build)) }; item { BuildOverviewCard(build) }; item { BuildEquipmentCard(build) }; item { BuildTeamCard(build) }; item { BuildSourcesCard(build) } }
     }
 }
 
-@Composable private fun BuildScoreCard(score: BuildScore) { Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) { Text("Build Score", style = MaterialTheme.typography.titleLarge); Text("${score.total}/100", style = MaterialTheme.typography.displaySmall); Text("Mede a qualidade da recomendação, não o poder absoluto.", style = MaterialTheme.typography.bodySmall); ScoreMetric("Fontes", score.sourceCoverage); ScoreMetric("Atualidade", score.freshness); ScoreMetric("Completude", score.buildCompleteness); ScoreMetric("F2P", score.f2pAvailability); ScoreMetric("Concordância", score.sourceAgreement) } } }
+@Composable private fun NteBuildScoreCard(score: BuildScore) { Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(9.dp)) { Text("Build Score", style = MaterialTheme.typography.titleLarge); Text("${score.total}/100", style = MaterialTheme.typography.displaySmall); Text("Mede a qualidade da recomendação, não o poder absoluto.", style = MaterialTheme.typography.bodySmall); ScoreMetric("Fontes", score.sourceCoverage); ScoreMetric("Atualidade", score.freshness); ScoreMetric("Completude", score.buildCompleteness); ScoreMetric("F2P", score.f2pAvailability); ScoreMetric("Concordância", score.sourceAgreement) } } }
 @Composable private fun ScoreMetric(label: String, value: Int) { Column { Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) { Text(label); Text("$value%") }; LinearProgressIndicator(progress = { value / 100f }, Modifier.fillMaxWidth()) } }
 @Composable private fun BuildOverviewCard(build: CharacterBuild) { Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) { Text(build.title, style = MaterialTheme.typography.titleLarge); build.version?.let { Text("Versão: $it") }; build.sourceUpdatedAt?.let { Text("Atualizada: $it") }; build.arcRecommendation?.let { Text("Arc: $it") }; if (build.alternativeArcs.isNotEmpty()) Text("Alternativas: ${build.alternativeArcs.joinToString(" • ")}") } } }
 @Composable private fun BuildEquipmentCard(build: CharacterBuild) { Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) { Text("Equipamentos e atributos", style = MaterialTheme.typography.titleMedium); build.cartridgeRecommendation?.let { Text("Cartridges: $it") }; if (build.modulePriority.isNotEmpty()) Text("Modules: ${build.modulePriority.joinToString(" → ")}"); if (build.statPriority.isNotEmpty()) Text("Stats: ${build.statPriority.joinToString(" → ")}"); if (build.skillPriority.isNotEmpty()) Text("Skills: ${build.skillPriority.joinToString(" → ")}") } } }
