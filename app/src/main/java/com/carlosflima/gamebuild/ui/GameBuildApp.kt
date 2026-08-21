@@ -24,6 +24,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
 
+@OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
 fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
