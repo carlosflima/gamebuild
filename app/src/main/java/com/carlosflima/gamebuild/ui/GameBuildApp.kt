@@ -20,7 +20,7 @@ import com.carlosflima.gamebuild.domain.*
 fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val state = viewModel.uiState.collectAsStateWithLifecycle().value
     MaterialTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.5") }) }) { padding ->
+        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.6") }) }) { padding ->
             when {
                 state.selectedCharacter != null -> CharacterBuildScreen(state.selectedCharacter!!, state.selectedBuild, viewModel, padding)
                 state.selectedGame != null -> CharacterSelection(state.selectedGame!!, state.characters, state.filters, viewModel, padding)
@@ -42,12 +42,30 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val filtered = characters.filter { c -> (filters.query.isBlank() || c.name.contains(filters.query, true)) && (filters.element == null || c.element.equals(filters.element, true)) && (filters.role == null || c.role.equals(filters.role, true)) }
     val elements = characters.mapNotNull { it.element }.distinct().sorted(); val roles = characters.map { it.role }.distinct().sorted()
     LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        item { Text("Personagens — ${game.displayName}", style = MaterialTheme.typography.headlineSmall); OutlinedTextField(filters.query, viewModel::updateSearch, Modifier.fillMaxWidth().padding(top = 10.dp), label = { Text("Buscar personagem") }, singleLine = true, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(imeAction = ImeAction.Search)) }
-        if (elements.isNotEmpty()) item { Text("Elemento"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) { elements.forEach { e -> FilterChip(filters.element == e, { viewModel.updateElement(if (filters.element == e) null else e) }, label = { Text(e) }) } } }
-        if (roles.isNotEmpty()) item { Text("Função"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) { roles.forEach { r -> FilterChip(filters.role == r, { viewModel.updateRole(if (filters.role == r) null else r) }, label = { Text(r) }) } }; if (filters.query.isNotBlank() || filters.element != null || filters.role != null) AssistChip(onClick = viewModel::clearFilters, label = { Text("Limpar filtros") }) }
+        item { Text("Personagens — ${game.displayName}", style = MaterialTheme.typography.headlineSmall); Text("NTE v1.3 • ${characters.count { it.status == NteCharacterStatus.AVAILABLE }} disponíveis • ${characters.count { it.status == NteCharacterStatus.UPCOMING }} em breve", style = MaterialTheme.typography.bodySmall); OutlinedTextField(filters.query, viewModel::updateSearch, Modifier.fillMaxWidth().padding(top = 10.dp), label = { Text("Buscar personagem") }, singleLine = true, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(imeAction = ImeAction.Search)) }
+        if (elements.isNotEmpty()) item { Text("Elemento"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState())) { elements.forEach { e -> FilterChip(filters.element == e, { viewModel.updateElement(if (filters.element == e) null else e) }, label = { Text(e) }) } } }
+        if (roles.isNotEmpty()) item { Text("Função"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState())) { roles.forEach { r -> FilterChip(filters.role == r, { viewModel.updateRole(if (filters.role == r) null else r) }, label = { Text(r) }) } }; if (filters.query.isNotBlank() || filters.element != null || filters.role != null) AssistChip(onClick = viewModel::clearFilters, label = { Text("Limpar filtros") }) }
         item { Text("${filtered.size} personagem(ns)") }
         if (filtered.isEmpty()) item { Text("Nenhum personagem encontrado.") }
-        items(filtered, key = { it.id }) { character -> Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) { Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) { CharacterImage(character); Column(Modifier.weight(1f)) { Text(character.name, style = MaterialTheme.typography.titleLarge); Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "?"}"); Text("${character.role} • ${character.arcType ?: "Arc não informado"} • Tier ${character.tier ?: "?"}") } }; Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver build") } } } }
+        items(filtered, key = { it.id }) { character ->
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                        CharacterImage(character)
+                        Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(3.dp)) {
+                            Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
+                                Text(character.name, style = MaterialTheme.typography.titleLarge)
+                                if (character.status == NteCharacterStatus.UPCOMING) AssistChip(onClick = {}, label = { Text("Em breve") })
+                            }
+                            Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "?"}")
+                            Text("${character.role} • ${character.arcType ?: "Arc não informado"} • Tier ${character.tier ?: "?"}")
+                            character.versionIntroduced?.let { Text("Versão: $it", style = MaterialTheme.typography.labelSmall) }
+                        }
+                    }
+                    Button(onClick = { viewModel.selectCharacter(character) }, modifier = Modifier.fillMaxWidth()) { Text(if (character.status == NteCharacterStatus.UPCOMING) "Ver informações" else "Ver build") }
+                }
+            }
+        }
     }
 }
 
@@ -55,8 +73,8 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
 
 @Composable private fun CharacterBuildScreen(character: GameCharacter, build: CharacterBuild?, viewModel: GameBuildViewModel, padding: PaddingValues) {
     LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        item { Button(onClick = viewModel::clearSelection) { Text("Voltar") }; Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) { CharacterImage(character); Column { Text(character.name, style = MaterialTheme.typography.headlineMedium); Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "?"}"); Text(character.role); Text("Tier: ${character.tier ?: "?"}") } } }
-        if (build == null) item { Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp)) { Text("Build em pesquisa", style = MaterialTheme.typography.titleLarge); Text("Ainda não há uma recomendação consolidada.") } } }
+        item { Button(onClick = viewModel::clearSelection) { Text("Voltar") }; Row(horizontalArrangement = Arrangement.spacedBy(14.dp), verticalAlignment = Alignment.CenterVertically) { CharacterImage(character); Column { Row(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) { Text(character.name, style = MaterialTheme.typography.headlineMedium); if (character.status == NteCharacterStatus.UPCOMING) AssistChip(onClick = {}, label = { Text("Em breve") }) }; Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "?"}"); Text(character.role); Text("Tier: ${character.tier ?: "?"}") } } }
+        if (build == null) item { Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) { Text(if (character.status == NteCharacterStatus.UPCOMING) "Personagem anunciado" else "Build em pesquisa", style = MaterialTheme.typography.titleLarge); Text(if (character.status == NteCharacterStatus.UPCOMING) "O personagem já está no catálogo, mas a build consolidada será liberada quando houver dados confiáveis suficientes." else "Ainda não há uma recomendação consolidada."); character.sourceUrl?.let { Text("Fonte: $it", style = MaterialTheme.typography.bodySmall) } } } }
         else { item { NteBuildScoreCard(BuildScoreCalculator.calculate(build)) }; item { BuildOverviewCard(build) }; item { BuildEquipmentCard(build) }; item { BuildTeamCard(build) }; item { BuildSourcesCard(build) } }
     }
 }
