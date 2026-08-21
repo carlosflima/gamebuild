@@ -22,12 +22,15 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
@@ -37,7 +40,7 @@ import com.carlosflima.gamebuild.domain.GameCharacter
 fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val state = viewModel.uiState.collectAsStateWithLifecycle().value
     MaterialTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.1") }) }) { padding ->
+        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2.2") }) }) { padding ->
             when {
                 state.selectedCharacter != null -> CharacterBuildScreen(state.selectedCharacter!!, state.selectedBuild, viewModel, padding)
                 state.selectedGame != null -> CharacterSelection(state.selectedGame!!, state.characters, state.filters, viewModel, padding)
@@ -99,15 +102,14 @@ private fun CharacterSelection(game: Game, characters: List<GameCharacter>, filt
         items(filtered, key = { it.id }) { character ->
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(5.dp)) {
-                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                        CharacterImagePlaceholder(character)
+                    Row(horizontalArrangement = Arrangement.spacedBy(10.dp), verticalAlignment = Alignment.CenterVertically) {
+                        CharacterImage(character)
                         Column(Modifier.weight(1f)) {
                             Text(character.name, style = MaterialTheme.typography.titleLarge)
                             Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "Elemento não informado"}")
                             Text("${character.role} • Arc: ${character.arcType ?: "não informado"} • Tier: ${character.tier ?: "?"}")
                         }
                     }
-                    if (!character.imageUrl.isNullOrBlank()) Text("Imagem disponível na fonte", style = MaterialTheme.typography.labelSmall)
                     Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver build") }
                 }
             }
@@ -116,10 +118,20 @@ private fun CharacterSelection(game: Game, characters: List<GameCharacter>, filt
 }
 
 @Composable
-private fun CharacterImagePlaceholder(character: GameCharacter) {
-    Card(Modifier.size(64.dp)) {
-        Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-            Text(character.name.take(1).uppercase(), modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.headlineSmall)
+private fun CharacterImage(character: GameCharacter) {
+    Card(Modifier.size(72.dp)) {
+        if (!character.imageUrl.isNullOrBlank()) {
+            AsyncImage(
+                model = character.imageUrl,
+                contentDescription = "Imagem de ${character.name}",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                onError = { }
+            )
+        } else {
+            Column(Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+                Text(character.name.take(1).uppercase(), modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center, style = MaterialTheme.typography.headlineSmall)
+            }
         }
     }
 }
@@ -129,6 +141,7 @@ private fun CharacterBuildScreen(character: GameCharacter, build: CharacterBuild
     LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         item {
             Button(onClick = viewModel::clearSelection) { Text("Voltar") }
+            CharacterImage(character)
             Text(character.name, style = MaterialTheme.typography.headlineMedium)
             Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "?"} • ${character.role}")
             Text("Arc: ${character.arcType ?: "Não informado"} • Tier: ${character.tier ?: "Não informado"}")
