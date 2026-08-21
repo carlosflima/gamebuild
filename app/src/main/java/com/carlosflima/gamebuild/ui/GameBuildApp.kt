@@ -1,7 +1,9 @@
 package com.carlosflima.gamebuild.ui
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -43,8 +45,8 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val elements = characters.mapNotNull { it.element }.distinct().sorted(); val roles = characters.map { it.role }.distinct().sorted()
     LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
         item { Text("Personagens — ${game.displayName}", style = MaterialTheme.typography.headlineSmall); Text("NTE v1.3 • ${characters.count { it.status == NteCharacterStatus.AVAILABLE }} disponíveis • ${characters.count { it.status == NteCharacterStatus.UPCOMING }} em breve", style = MaterialTheme.typography.bodySmall); OutlinedTextField(filters.query, viewModel::updateSearch, Modifier.fillMaxWidth().padding(top = 10.dp), label = { Text("Buscar personagem") }, singleLine = true, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(imeAction = ImeAction.Search)) }
-        if (elements.isNotEmpty()) item { Text("Elemento"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState())) { elements.forEach { e -> FilterChip(filters.element == e, { viewModel.updateElement(if (filters.element == e) null else e) }, label = { Text(e) }) } } }
-        if (roles.isNotEmpty()) item { Text("Função"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().horizontalScroll(androidx.compose.foundation.rememberScrollState())) { roles.forEach { r -> FilterChip(filters.role == r, { viewModel.updateRole(if (filters.role == r) null else r) }, label = { Text(r) }) } }; if (filters.query.isNotBlank() || filters.element != null || filters.role != null) AssistChip(onClick = viewModel::clearFilters, label = { Text("Limpar filtros") }) }
+        if (elements.isNotEmpty()) item { Text("Elemento"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())) { elements.forEach { e -> FilterChip(filters.element == e, { viewModel.updateElement(if (filters.element == e) null else e) }, label = { Text(e) }) } } }
+        if (roles.isNotEmpty()) item { Text("Função"); Row(horizontalArrangement = Arrangement.spacedBy(6.dp), modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState())) { roles.forEach { r -> FilterChip(filters.role == r, { viewModel.updateRole(if (filters.role == r) null else r) }, label = { Text(r) }) } }; if (filters.query.isNotBlank() || filters.element != null || filters.role != null) AssistChip(onClick = viewModel::clearFilters, label = { Text("Limpar filtros") }) }
         item { Text("${filtered.size} personagem(ns)") }
         if (filtered.isEmpty()) item { Text("Nenhum personagem encontrado.") }
         items(filtered, key = { it.id }) { character ->
