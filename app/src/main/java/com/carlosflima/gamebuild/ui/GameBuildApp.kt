@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
 
@@ -29,9 +30,9 @@ import com.carlosflima.gamebuild.domain.GameCharacter
 fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     MaterialTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.1") }) }) { padding ->
+        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2") }) }) { padding ->
             when {
-                state.selectedCharacter != null -> CharacterPlaceholder(state.selectedCharacter!!.name, padding)
+                state.selectedCharacter != null -> CharacterBuildScreen(state.selectedCharacter!!, state.selectedBuild, padding)
                 state.selectedGame != null -> CharacterSelection(state.selectedGame!!, state.characters, viewModel, padding)
                 else -> GameSelection(viewModel, padding)
             }
@@ -68,9 +69,10 @@ private fun CharacterSelection(game: Game, characters: List<GameCharacter>, view
         item { Text("Personagens — ${game.displayName}", style = MaterialTheme.typography.headlineSmall) }
         items(characters, key = { it.id }) { character ->
             Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(16.dp)) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(character.name, style = MaterialTheme.typography.titleLarge)
-                    Text(character.role)
+                    Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "Elemento não informado"}")
+                    Text("${character.role} • Arc: ${character.arcType ?: "não informado"} • Tier: ${character.tier ?: "?"}")
                     Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver build") }
                 }
             }
@@ -79,10 +81,30 @@ private fun CharacterSelection(game: Game, characters: List<GameCharacter>, view
 }
 
 @Composable
-private fun CharacterPlaceholder(name: String, padding: PaddingValues) {
-    Column(Modifier.fillMaxSize().padding(padding).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        Text(name, style = MaterialTheme.typography.headlineMedium)
-        Text("Tela de build preparada para a V0.2.")
-        Text("Aqui serão exibidos imagem, arma, equipamentos, stats, habilidades, equipe, classificação e fontes.")
+private fun CharacterBuildScreen(character: GameCharacter, build: CharacterBuild?, padding: PaddingValues) {
+    LazyColumn(Modifier.fillMaxSize().padding(padding), contentPadding = PaddingValues(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        item {
+            Text(character.name, style = MaterialTheme.typography.headlineMedium)
+            Text("${character.rarity ?: "?"}-Rank • ${character.element ?: "?"} • ${character.role}")
+            Text("Arc: ${character.arcType ?: "Não informado"} • Tier: ${character.tier ?: "Não informado"}")
+        }
+        item {
+            Card(Modifier.fillMaxWidth()) {
+                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(build?.title ?: "Build em pesquisa", style = MaterialTheme.typography.titleLarge)
+                    if (build == null) {
+                        Text("Ainda não há uma recomendação consolidada para este personagem.")
+                    } else {
+                        build.arcRecommendation?.let { Text("Arc recomendada: $it") }
+                        build.cartridgeRecommendation?.let { Text("Cartridges: $it") }
+                        if (build.statPriority.isNotEmpty()) Text("Prioridade de stats: ${build.statPriority.joinToString(" → ")}")
+                        if (build.teamRecommendation.isNotEmpty()) Text("Equipe: ${build.teamRecommendation.joinToString(" + ")}")
+                        build.f2pNote?.let { Text("F2P: $it") }
+                        build.sourceUpdatedAt?.let { Text("Fonte atualizada: $it") }
+                        build.sourceUrl?.let { Text("Fonte: $it") }
+                    }
+                }
+            }
+        }
     }
 }
