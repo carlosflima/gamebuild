@@ -18,6 +18,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -45,7 +46,14 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
         Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2") }) }) { padding ->
             when {
                 state.selectedCharacter != null -> BuildScreen(state.selectedCharacter!!, state.builds, viewModel, padding)
-                state.selectedGame != null -> CharacterSelection(state.selectedGame!!, state.characters, viewModel, padding)
+                state.selectedGame != null -> CharacterSelection(
+                    game = state.selectedGame!!,
+                    characters = state.filteredCharacters,
+                    query = state.characterQuery,
+                    onQueryChange = viewModel::updateCharacterQuery,
+                    viewModel = viewModel,
+                    padding = padding
+                )
                 else -> GameSelection(viewModel, padding)
             }
 
@@ -78,7 +86,14 @@ private fun GameSelection(viewModel: GameBuildViewModel, padding: PaddingValues)
 }
 
 @Composable
-private fun CharacterSelection(game: Game, characters: List<GameCharacter>, viewModel: GameBuildViewModel, padding: PaddingValues) {
+private fun CharacterSelection(
+    game: Game,
+    characters: List<GameCharacter>,
+    query: String,
+    onQueryChange: (String) -> Unit,
+    viewModel: GameBuildViewModel,
+    padding: PaddingValues
+) {
     LazyColumn(
         Modifier.fillMaxSize().padding(padding),
         contentPadding = PaddingValues(16.dp),
@@ -91,14 +106,36 @@ private fun CharacterSelection(game: Game, characters: List<GameCharacter>, view
             }
         }
 
-        items(characters, key = { it.id }) { character ->
-            Card(Modifier.fillMaxWidth()) {
-                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    CharacterImage(character, Modifier.fillMaxWidth().height(180.dp))
+        item {
+            OutlinedTextField(
+                value = query,
+                onValueChange = onQueryChange,
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true,
+                label = { Text("Buscar personagem") },
+                placeholder = { Text("Nome, função ou elemento") }
+            )
+        }
+
+        if (characters.isEmpty()) {
+            item {
+                Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text(character.name, style = MaterialTheme.typography.titleLarge)
-                        Text(character.role)
-                        Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver builds") }
+                        Text("Nenhum personagem encontrado", style = MaterialTheme.typography.titleMedium)
+                        Text("Tente buscar por outro nome, função ou elemento.")
+                    }
+                }
+            }
+        } else {
+            items(characters, key = { it.id }) { character ->
+                Card(Modifier.fillMaxWidth()) {
+                    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        CharacterImage(character, Modifier.fillMaxWidth().height(180.dp))
+                        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                            Text(character.name, style = MaterialTheme.typography.titleLarge)
+                            Text(character.role)
+                            Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver builds") }
+                        }
                     }
                 }
             }
