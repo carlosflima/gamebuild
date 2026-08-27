@@ -35,6 +35,26 @@ object NteLocalDataSource {
             role = "Damage · Incantation",
             game = Game.NTE,
             imageUrl = "https://cdn.prydwen.gg/images/nte/characters/baicang_card.webp"
+        ),
+        GameCharacter(
+            id = "nte-daffodill",
+            name = "Daffodill",
+            role = "Damage / Break · Chaos",
+            game = Game.NTE,
+            imageUrl = "https://cdn.prydwen.gg/images/nte/characters/daffodil_card.webp"
+        ),
+        GameCharacter(
+            id = "nte-haniel",
+            name = "Haniel",
+            role = "Buff · Psyche",
+            game = Game.NTE,
+            imageUrl = "https://cdn.prydwen.gg/images/nte/characters/haniel_card.webp"
+        ),
+        GameCharacter(
+            id = "nte-adler",
+            name = "Adler",
+            role = "Survival / Support · Incantation",
+            game = Game.NTE
         )
     )
 
@@ -110,6 +130,51 @@ object NteLocalDataSource {
                 team = listOf("Baicang", "Adler", "Sakiri", "Daffodill"),
                 notes = "Baicang é uma DPS Incantation complexa, com forte sinergia com Scorch. O guia destaca Camellia Society e Crimson: Twin Butterflies, além da equipe Baicang/Adler/Sakiri/Daffodill.",
                 sources = listOf(BuildSource("Prydwen — Baicang Build", "https://www.prydwen.gg/neverness-to-everness/characters/baicang"))
+            )
+        ),
+        "nte-daffodill" to listOf(
+            CharacterBuild(
+                id = "nte-daffodill-meta",
+                characterId = "nte-daffodill",
+                title = "Quickswap Break DPS",
+                type = BuildType.META,
+                version = "Patch 1 · revisado em 26/05/2026",
+                weapon = "Youthful Fantasy (M1)",
+                equipment = listOf("Arc: Liquid", "Cartridge: Diabolos"),
+                statPriority = listOf("Crit Rate", "Crit DMG", "Break Intensity", "Chaos DMG", "ATK"),
+                team = listOf("Daffodill", "Incantation core", "Support", "Flex"),
+                notes = "Daffodill funciona melhor em rotações quickswap, com forte pressão de Break e pouco tempo de campo. Diabolos fornece Chaos DMG e Chaos RES Ignore.",
+                sources = listOf(BuildSource("Prydwen — Daffodill Build", "https://www.prydwen.gg/neverness-to-everness/characters/daffodil"))
+            )
+        ),
+        "nte-haniel" to listOf(
+            CharacterBuild(
+                id = "nte-haniel-meta",
+                characterId = "nte-haniel",
+                title = "Universal ATK Buffer",
+                type = BuildType.META,
+                version = "Patch 1 · revisado em 26/05/2026",
+                weapon = "Blow up the Crowd (M1)",
+                equipment = listOf("Arc: Solid", "Cartridge: Speedy Hedgehog"),
+                statPriority = listOf("Crit Rate", "Psyche DMG", "Crit DMG", "ATK", "Break Intensity"),
+                team = listOf("Haniel", "Main DPS", "Chaos enabler", "Flex"),
+                notes = "Haniel é um buffer universal de baixo tempo de campo. Sua assinatura aumenta o ataque do personagem ativo, enquanto Speedy Hedgehog melhora geração de Ultimate e adiciona buff de ATK ao time.",
+                sources = listOf(BuildSource("Prydwen — Haniel Build", "https://www.prydwen.gg/neverness-to-everness/characters/haniel"))
+            )
+        ),
+        "nte-adler" to listOf(
+            CharacterBuild(
+                id = "nte-adler-meta",
+                characterId = "nte-adler",
+                title = "Shield / Scorch Support",
+                type = BuildType.META,
+                version = "Patch 1 · revisado em 26/05/2026",
+                weapon = "Umbrella (M5)",
+                equipment = listOf("Arc: Synthesis", "Cartridge: Kingdom's Guard"),
+                statPriority = listOf("DEF %", "DEF", "Break Intensity", "Cycle Intensity", "DMG"),
+                team = listOf("Baicang", "Adler", "Sakiri", "Daffodill"),
+                notes = "Adler combina escudo e debuffs com pouco tempo de campo. Umbrella fortalece sua sobrevivência e escudos; Kingdom's Guard prioriza DEF e potência de shield.",
+                sources = listOf(BuildSource("Prydwen — Adler Build", "https://www.prydwen.gg/neverness-to-everness/characters/adler"))
             )
         )
     )
