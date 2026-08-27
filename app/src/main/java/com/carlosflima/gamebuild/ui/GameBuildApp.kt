@@ -3,11 +3,13 @@ package com.carlosflima.gamebuild.ui
 import android.content.Intent
 import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -22,11 +24,14 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil3.compose.AsyncImage
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
@@ -39,18 +44,8 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     MaterialTheme {
         Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2") }) }) { padding ->
             when {
-                state.selectedCharacter != null -> BuildScreen(
-                    character = state.selectedCharacter!!,
-                    builds = state.builds,
-                    viewModel = viewModel,
-                    padding = padding
-                )
-                state.selectedGame != null -> CharacterSelection(
-                    game = state.selectedGame!!,
-                    characters = state.characters,
-                    viewModel = viewModel,
-                    padding = padding
-                )
+                state.selectedCharacter != null -> BuildScreen(state.selectedCharacter!!, state.builds, viewModel, padding)
+                state.selectedGame != null -> CharacterSelection(state.selectedGame!!, state.characters, viewModel, padding)
                 else -> GameSelection(viewModel, padding)
             }
 
@@ -68,12 +63,8 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
 
 @Composable
 private fun GameSelection(viewModel: GameBuildViewModel, padding: PaddingValues) {
-    Column(
-        Modifier.fillMaxSize().padding(padding).padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp)
-    ) {
+    Column(Modifier.fillMaxSize().padding(padding).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
         Text("Selecione um jogo", style = MaterialTheme.typography.headlineSmall)
-
         Game.entries.forEach { game ->
             Card(Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -87,12 +78,7 @@ private fun GameSelection(viewModel: GameBuildViewModel, padding: PaddingValues)
 }
 
 @Composable
-private fun CharacterSelection(
-    game: Game,
-    characters: List<GameCharacter>,
-    viewModel: GameBuildViewModel,
-    padding: PaddingValues
-) {
+private fun CharacterSelection(game: Game, characters: List<GameCharacter>, viewModel: GameBuildViewModel, padding: PaddingValues) {
     LazyColumn(
         Modifier.fillMaxSize().padding(padding),
         contentPadding = PaddingValues(16.dp),
@@ -107,10 +93,13 @@ private fun CharacterSelection(
 
         items(characters, key = { it.id }) { character ->
             Card(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    Text(character.name, style = MaterialTheme.typography.titleLarge)
-                    Text(character.role)
-                    Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver builds") }
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    CharacterImage(character, Modifier.fillMaxWidth().height(180.dp))
+                    Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                        Text(character.name, style = MaterialTheme.typography.titleLarge)
+                        Text(character.role)
+                        Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver builds") }
+                    }
                 }
             }
         }
@@ -118,24 +107,22 @@ private fun CharacterSelection(
 }
 
 @Composable
-private fun BuildScreen(
-    character: GameCharacter,
-    builds: List<CharacterBuild>,
-    viewModel: GameBuildViewModel,
-    padding: PaddingValues
-) {
+private fun BuildScreen(character: GameCharacter, builds: List<CharacterBuild>, viewModel: GameBuildViewModel, padding: PaddingValues) {
     LazyColumn(
         Modifier.fillMaxSize().padding(padding),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Column {
-                    Text(character.name, style = MaterialTheme.typography.headlineMedium)
-                    Text(character.role, style = MaterialTheme.typography.bodyMedium)
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                CharacterImage(character, Modifier.fillMaxWidth().height(220.dp))
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+                    Column {
+                        Text(character.name, style = MaterialTheme.typography.headlineMedium)
+                        Text(character.role, style = MaterialTheme.typography.bodyMedium)
+                    }
+                    TextButton(onClick = viewModel::backToCharacters) { Text("Voltar") }
                 }
-                TextButton(onClick = viewModel::backToCharacters) { Text("Voltar") }
             }
         }
 
@@ -149,9 +136,23 @@ private fun BuildScreen(
                 }
             }
         } else {
-            items(builds, key = { it.id }) { build ->
-                BuildCard(build)
-            }
+            items(builds, key = { it.id }) { build -> BuildCard(build) }
+        }
+    }
+}
+
+@Composable
+private fun CharacterImage(character: GameCharacter, modifier: Modifier = Modifier) {
+    if (character.imageUrl != null) {
+        AsyncImage(
+            model = character.imageUrl,
+            contentDescription = "Imagem de ${character.name}",
+            modifier = modifier,
+            contentScale = ContentScale.Crop
+        )
+    } else {
+        Box(modifier = modifier, contentAlignment = Alignment.Center) {
+            Text(character.name.take(1), style = MaterialTheme.typography.displayMedium)
         }
     }
 }
@@ -159,18 +160,15 @@ private fun BuildScreen(
 @Composable
 private fun BuildCard(build: CharacterBuild) {
     val context = LocalContext.current
-
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(build.title, style = MaterialTheme.typography.titleLarge)
             Text("${build.type.displayName} • ${build.version}", style = MaterialTheme.typography.labelLarge)
-
             HorizontalDivider()
             BuildSection("Arma", listOf(build.weapon))
             BuildSection("Equipamentos", build.equipment)
             BuildSection("Prioridade de stats", build.statPriority)
             BuildSection("Equipe", build.team)
-
             HorizontalDivider()
             Text("Notas", style = MaterialTheme.typography.titleMedium)
             Text(build.notes)
@@ -181,13 +179,9 @@ private fun BuildCard(build: CharacterBuild) {
                 build.sources.forEach { source ->
                     if (source.url != null) {
                         TextButton(
-                            onClick = {
-                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(source.url)))
-                            },
+                            onClick = { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(source.url))) },
                             contentPadding = PaddingValues(0.dp)
-                        ) {
-                            Text(source.name)
-                        }
+                        ) { Text(source.name) }
                     } else {
                         Text("• ${source.name}")
                     }
