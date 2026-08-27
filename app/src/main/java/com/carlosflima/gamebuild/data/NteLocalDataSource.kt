@@ -8,10 +8,34 @@ import com.carlosflima.gamebuild.domain.GameCharacter
 
 object NteLocalDataSource {
     val characters: List<GameCharacter> = listOf(
-        GameCharacter("nte-nanally", "Nanally", "Damage · Anima", Game.NTE),
-        GameCharacter("nte-sakiri", "Sakiri", "Buff · Incantation", Game.NTE),
-        GameCharacter("nte-zero", "Zero", "Damage / Cycle enabler · Cosmos", Game.NTE),
-        GameCharacter("nte-baicang", "Baicang", "Damage · Incantation", Game.NTE)
+        GameCharacter(
+            id = "nte-nanally",
+            name = "Nanally",
+            role = "Damage · Anima",
+            game = Game.NTE,
+            imageUrl = "https://cdn.prydwen.gg/images/nte/characters/nanally_card.webp"
+        ),
+        GameCharacter(
+            id = "nte-sakiri",
+            name = "Sakiri",
+            role = "Buff · Incantation",
+            game = Game.NTE,
+            imageUrl = "https://cdn.prydwen.gg/images/nte/characters/sakiri_card.webp"
+        ),
+        GameCharacter(
+            id = "nte-zero",
+            name = "Zero",
+            role = "Damage / Cycle enabler · Cosmos",
+            game = Game.NTE,
+            imageUrl = "https://cdn.prydwen.gg/images/nte/characters/zero_card.webp"
+        ),
+        GameCharacter(
+            id = "nte-baicang",
+            name = "Baicang",
+            role = "Damage · Incantation",
+            game = Game.NTE,
+            imageUrl = "https://cdn.prydwen.gg/images/nte/characters/baicang_card.webp"
+        )
     )
 
     private val buildsByCharacterId: Map<String, List<CharacterBuild>> = mapOf(
