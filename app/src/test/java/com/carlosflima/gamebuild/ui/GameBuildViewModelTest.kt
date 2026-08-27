@@ -1,0 +1,36 @@
+package com.carlosflima.gamebuild.ui
+
+import com.carlosflima.gamebuild.data.GameRepository
+import com.carlosflima.gamebuild.domain.CharacterBuild
+import com.carlosflima.gamebuild.domain.Game
+import com.carlosflima.gamebuild.domain.GameCharacter
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class GameBuildViewModelTest {
+    private val characters = listOf(
+        GameCharacter("1", "Nanally", "Damage · Anima", Game.NTE),
+        GameCharacter("2", "Sakiri", "Buff · Incantation", Game.NTE),
+        GameCharacter("3", "Zero", "Damage / Cycle enabler · Cosmos", Game.NTE)
+    )
+
+    private val repository = object : GameRepository {
+        override fun getCharacters(game: Game): List<GameCharacter> = characters
+        override fun getBuilds(characterId: String): List<CharacterBuild> = emptyList()
+    }
+
+    @Test
+    fun filtersCharactersByNameAndRoleAndRestoresFullRoster() {
+        val viewModel = GameBuildViewModel(repository)
+        viewModel.selectGame(Game.NTE)
+
+        viewModel.updateCharacterQuery("nan")
+        assertEquals(listOf("Nanally"), viewModel.uiState.value.filteredCharacters.map { it.name })
+
+        viewModel.updateCharacterQuery("incantation")
+        assertEquals(listOf("Sakiri"), viewModel.uiState.value.filteredCharacters.map { it.name })
+
+        viewModel.updateCharacterQuery("")
+        assertEquals(characters, viewModel.uiState.value.filteredCharacters)
+    }
+}
