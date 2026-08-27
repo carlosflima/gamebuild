@@ -12,7 +12,8 @@ data class BuildScore(
 object BuildScoreCalculator {
     fun calculate(build: CharacterBuild): BuildScore {
         val sourceCoverage = (build.sources.distinct().size * 25).coerceAtMost(100)
-        val freshness = if (build.version != null && !build.sourceUpdatedAt.isNullOrBlank()) 100 else 50
+        // Missing version/date means freshness cannot be verified, so it contributes zero.
+        val freshness = if (build.version != null && !build.sourceUpdatedAt.isNullOrBlank()) 100 else 0
         val buildCompleteness = listOf(
             build.arcRecommendation,
             build.cartridgeRecommendation,
