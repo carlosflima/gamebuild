@@ -14,8 +14,10 @@ interface GameRepository {
 class FakeGameRepository : GameRepository {
     override fun getCharacters(game: Game): List<GameCharacter> = when (game) {
         Game.NTE -> listOf(
-            GameCharacter("nte-demo-1", "Personagem NTE 01", "DPS", Game.NTE),
-            GameCharacter("nte-demo-2", "Personagem NTE 02", "Suporte", Game.NTE)
+            GameCharacter("nte-nanally", "Nanally", "Damage · Anima", Game.NTE),
+            GameCharacter("nte-sakiri", "Sakiri", "Buff · Incantation", Game.NTE),
+            GameCharacter("nte-zero", "Zero", "Damage / Cycle enabler · Cosmos", Game.NTE),
+            GameCharacter("nte-baicang", "Baicang", "Damage · Incantation", Game.NTE)
         )
         Game.WARFRAME -> listOf(
             GameCharacter("wf-demo-1", "Warframe Demo 01", "DPS", Game.WARFRAME),
@@ -28,47 +30,87 @@ class FakeGameRepository : GameRepository {
     }
 
     override fun getBuilds(characterId: String): List<CharacterBuild> = when (characterId) {
-        "nte-demo-1" -> listOf(
+        "nte-nanally" -> listOf(
             CharacterBuild(
-                id = "nte-demo-1-meta",
+                id = "nte-nanally-meta",
                 characterId = characterId,
-                title = "DPS principal",
+                title = "On-field Damage",
                 type = BuildType.META,
-                version = "V0.2 demo",
-                weapon = "Arma recomendada (placeholder)",
-                equipment = listOf("Conjunto ofensivo", "Peça de crítico", "Peça de dano"),
-                statPriority = listOf("Taxa crítica", "Dano crítico", "ATK"),
-                team = listOf("Personagem NTE 01", "Suporte NTE", "Flex"),
-                notes = "Estrutura preparada para receber dados reais e atualização por versão.",
-                sources = listOf(BuildSource("Fonte oficial / guia — pendente"))
+                version = "Patch 1 · revisado em 23/06/2026",
+                weapon = "Ready-Ready (M1)",
+                equipment = listOf("Arc: Plasma", "Cartridge: ajustar conforme composição e substats"),
+                statPriority = listOf("Crit Rate", "Crit DMG", "ATK"),
+                team = listOf("Nanally", "Sakiri", "Zero", "Flex Anima/Survival"),
+                notes = "Nanally é uma DPS Anima de campo com foco em Follow-Up Attacks. A composição prioriza buffs, Esper Cycles e tempo de campo para manter sua janela de dano.",
+                sources = listOf(
+                    BuildSource("Prydwen — Nanally Build", "https://www.prydwen.gg/neverness-to-everness/characters/nanally")
+                )
             ),
             CharacterBuild(
-                id = "nte-demo-1-f2p",
+                id = "nte-nanally-f2p",
                 characterId = characterId,
-                title = "Alternativa acessível",
+                title = "Alternativa F2P",
                 type = BuildType.F2P,
-                version = "V0.2 demo",
-                weapon = "Arma F2P (placeholder)",
-                equipment = listOf("Conjunto acessível", "Peça de ATK"),
-                statPriority = listOf("ATK", "Taxa crítica", "Dano crítico"),
-                team = listOf("Personagem NTE 01", "Suporte acessível", "Flex"),
-                notes = "Opção demonstrativa para validar comparação entre Meta e F2P.",
-                sources = listOf(BuildSource("Fonte comunitária — pendente"))
+                version = "Patch 1 · revisado em 23/06/2026",
+                weapon = "Raging Flames (M1)",
+                equipment = listOf("Arc: Plasma", "Priorizar conjunto completo antes de substats perfeitos"),
+                statPriority = listOf("Crit Rate", "Crit DMG", "ATK"),
+                team = listOf("Nanally", "Zero", "Haniel", "Flex"),
+                notes = "Raging Flames é indicada como a melhor opção F2P no guia consultado. Zero ajuda a acelerar os Esper Cycles e Haniel funciona como suporte acessível.",
+                sources = listOf(
+                    BuildSource("Prydwen — Nanally Build", "https://www.prydwen.gg/neverness-to-everness/characters/nanally")
+                )
             )
         )
-        "nte-demo-2" -> listOf(
+        "nte-sakiri" -> listOf(
             CharacterBuild(
-                id = "nte-demo-2-support",
+                id = "nte-sakiri-meta",
                 characterId = characterId,
-                title = "Suporte geral",
-                type = BuildType.F2P,
-                version = "V0.2 demo",
-                weapon = "Arma de suporte (placeholder)",
-                equipment = listOf("Conjunto de suporte", "Recarga/Utilidade"),
-                statPriority = listOf("Recarga", "Utilidade", "ATK"),
-                team = listOf("DPS", "Personagem NTE 02", "Flex"),
-                notes = "Build demonstrativa de suporte.",
-                sources = listOf(BuildSource("Fonte — pendente"))
+                title = "Universal Buff / Scorch Support",
+                type = BuildType.META,
+                version = "Patch 1 · revisado em 26/05/2026",
+                weapon = "Good Boy's Grand Adventure (M1)",
+                equipment = listOf("Arc: Gas", "Cartridge: Speedy Hedgehog"),
+                statPriority = listOf("Crit Rate / Crit DMG", "ATK", "Incantation DMG", "Cycle Intensity"),
+                team = listOf("Baicang", "Sakiri", "Daffodill", "Incantation/Chaos Flex"),
+                notes = "Sakiri exige pouco tempo de campo, agrupa inimigos e oferece ATK buff + redução de DEF. É especialmente forte em equipes Scorch e ainda funciona como suporte universal.",
+                sources = listOf(
+                    BuildSource("Prydwen — Sakiri Build", "https://www.prydwen.gg/neverness-to-everness/characters/sakiri")
+                )
+            )
+        )
+        "nte-zero" -> listOf(
+            CharacterBuild(
+                id = "nte-zero-meta",
+                characterId = characterId,
+                title = "Cycle Enabler",
+                type = BuildType.META,
+                version = "Patch 1 · revisado em 31/05/2026",
+                weapon = "Day Off (M1)",
+                equipment = listOf("Arc: Solid", "Cartridge: Speedy Hedgehog ou Lost Radiance"),
+                statPriority = listOf("Energia / suporte ao ciclo", "Crit", "ATK"),
+                team = listOf("Zero", "Nanally", "Anima Support", "Flex"),
+                notes = "Apesar da função oficial Damage, o principal valor de Zero é completar instantaneamente um Esper Cycle com a Skill, simplificando rotações e habilitando reações com baixo tempo de campo.",
+                sources = listOf(
+                    BuildSource("Prydwen — Zero Build", "https://www.prydwen.gg/neverness-to-everness/characters/zero")
+                )
+            )
+        )
+        "nte-baicang" -> listOf(
+            CharacterBuild(
+                id = "nte-baicang-meta",
+                characterId = characterId,
+                title = "Scorch Main DPS",
+                type = BuildType.META,
+                version = "Patch 1 · revisado em 26/05/2026",
+                weapon = "Camellia Society (M1)",
+                equipment = listOf("Arc: Synthesis", "Cartridge: Crimson: Twin Butterflies"),
+                statPriority = listOf("Incantation DMG", "Crit Rate", "Crit DMG", "ATK", "Break Intensity"),
+                team = listOf("Baicang", "Adler", "Sakiri", "Daffodill"),
+                notes = "Baicang é uma DPS Incantation complexa, com forte sinergia com Scorch. O guia destaca Camellia Society e Crimson: Twin Butterflies, além da equipe Baicang/Adler/Sakiri/Daffodill.",
+                sources = listOf(
+                    BuildSource("Prydwen — Baicang Build", "https://www.prydwen.gg/neverness-to-everness/characters/baicang")
+                )
             )
         )
         else -> emptyList()
