@@ -13,11 +13,130 @@ interface GameRepository {
 class GameRepositoryImpl : GameRepository {
     override fun getCharacters(game: Game): List<GameCharacter> = when (game) {
         Game.NTE -> NteCatalog.characters
-        Game.WARFRAME -> emptyList()
+        Game.WARFRAME -> WarframeCatalog.characters
         Game.ENDFIELD -> emptyList()
     }
 
-    override fun getBuild(characterId: String): CharacterBuild? = NteCatalog.builds[characterId]
+    override fun getBuild(characterId: String): CharacterBuild? =
+        NteCatalog.builds[characterId] ?: WarframeCatalog.builds[characterId]
+}
+
+private object WarframeCatalog {
+    private const val PATCH_NOTES = "https://www.warframe.com/en/patch-notes"
+    private const val REVENANT_SOURCE = "https://overframe.gg/items/arsenal/5952/revenant-prime/"
+    private const val WISP_SOURCE = "https://overframe.gg/items/arsenal/6227/wisp/"
+    private const val MESA_SOURCE = "https://overframe.gg/items/arsenal/2387/mesa-prime/"
+
+    // V0.3 baseline: Warframe Update 43.5 (Amir's Shockwave), August 2026.
+    // Community build recommendations are represented as a curated starting point and keep
+    // their source URLs visible so they can be refreshed without changing the UI contract.
+    val characters = listOf(
+        GameCharacter(
+            id = "warframe-revenant-prime",
+            name = "Revenant Prime",
+            role = "Tank / Weapons Platform",
+            game = Game.WARFRAME,
+            rarity = "Prime",
+            element = "Sobrevivência",
+            arcType = "Mesmer Skin",
+            tier = "S",
+            sourceUrl = REVENANT_SOURCE,
+            versionIntroduced = "Update 32"
+        ),
+        GameCharacter(
+            id = "warframe-wisp-prime",
+            name = "Wisp Prime",
+            role = "Suporte / Weapons Platform",
+            game = Game.WARFRAME,
+            rarity = "Prime",
+            element = "Suporte",
+            arcType = "Reservoirs",
+            tier = "S",
+            sourceUrl = WISP_SOURCE,
+            versionIntroduced = "Update 33.6"
+        ),
+        GameCharacter(
+            id = "warframe-mesa-prime",
+            name = "Mesa Prime",
+            role = "DPS",
+            game = Game.WARFRAME,
+            rarity = "Prime",
+            element = "Dano",
+            arcType = "Peacemaker",
+            tier = "S",
+            sourceUrl = MESA_SOURCE,
+            versionIntroduced = "Update 24.2"
+        )
+    )
+
+    val builds = mapOf(
+        "warframe-revenant-prime" to CharacterBuild(
+            characterId = "warframe-revenant-prime",
+            title = "Revenant Prime — Mesmer Tank / Steel Path",
+            version = "43.5",
+            arcRecommendation = "Mesmer Skin + Weapons Platform",
+            alternativeArcs = listOf("Reave one-shot", "Danse Macabre"),
+            cartridgeRecommendation = "Molt Augmented / Arcane Energize",
+            modulePriority = listOf(
+                "Mesmer Shield",
+                "Blind Rage",
+                "Transient Fortitude",
+                "Umbral Intensify",
+                "Primed Continuity",
+                "Primed Flow"
+            ),
+            statPriority = listOf("Ability Strength", "Duration", "Energy"),
+            skillPriority = listOf("Mesmer Skin", "Reave", "Enthrall"),
+            f2pNote = "Substitua mods Primed/Umbral por variantes normais enquanto progride; priorize Strength para aumentar as cargas de Mesmer Skin.",
+            sources = listOf(REVENANT_SOURCE, PATCH_NOTES),
+            sourceUrl = REVENANT_SOURCE,
+            sourceUpdatedAt = "2026-08-27"
+        ),
+        "warframe-wisp-prime" to CharacterBuild(
+            characterId = "warframe-wisp-prime",
+            title = "Wisp Prime — Reservoir Support / Steel Path",
+            version = "43.5",
+            arcRecommendation = "Reservoirs + Breach Surge",
+            alternativeArcs = listOf("Nourish weapons platform", "Roar support"),
+            cartridgeRecommendation = "Molt Augmented / Arcane Energize",
+            modulePriority = listOf(
+                "Fused Reservoir",
+                "Blind Rage",
+                "Transient Fortitude",
+                "Archon Stretch",
+                "Primed Continuity",
+                "Umbral Intensify"
+            ),
+            statPriority = listOf("Ability Strength", "Duration", "Range"),
+            skillPriority = listOf("Reservoirs", "Breach Surge", "Wil-O-Wisp"),
+            f2pNote = "Uma versão de baixo investimento pode usar Intensify, Continuity e Stretch normais mantendo foco em Strength e Duration.",
+            sources = listOf(WISP_SOURCE, PATCH_NOTES),
+            sourceUrl = WISP_SOURCE,
+            sourceUpdatedAt = "2026-08-27"
+        ),
+        "warframe-mesa-prime" to CharacterBuild(
+            characterId = "warframe-mesa-prime",
+            title = "Mesa Prime — Peacemaker DPS / Steel Path",
+            version = "43.5",
+            arcRecommendation = "Peacemaker + Shatter Shield",
+            alternativeArcs = listOf("Nourish", "Pillage"),
+            cartridgeRecommendation = "Arcane Velocity / Molt Augmented",
+            modulePriority = listOf(
+                "Mesa's Waltz",
+                "Primed Continuity",
+                "Primed Flow",
+                "Umbral Intensify",
+                "Narrow Minded",
+                "Streamline"
+            ),
+            statPriority = listOf("Duration", "Efficiency", "Ability Strength"),
+            skillPriority = listOf("Peacemaker", "Shatter Shield", "Shooting Gallery"),
+            f2pNote = "Use Continuity, Flow e Intensify normais até obter as versões Primed/Umbral; mantenha Efficiency suficiente para sustentar Peacemaker.",
+            sources = listOf(MESA_SOURCE, PATCH_NOTES),
+            sourceUrl = MESA_SOURCE,
+            sourceUpdatedAt = "2026-08-27"
+        )
+    )
 }
 
 private object NteCatalog {
