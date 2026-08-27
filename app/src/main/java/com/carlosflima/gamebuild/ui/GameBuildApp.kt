@@ -1,5 +1,7 @@
 package com.carlosflima.gamebuild.ui
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -21,6 +23,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -155,6 +158,8 @@ private fun BuildScreen(
 
 @Composable
 private fun BuildCard(build: CharacterBuild) {
+    val context = LocalContext.current
+
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(build.title, style = MaterialTheme.typography.titleLarge)
@@ -174,7 +179,18 @@ private fun BuildCard(build: CharacterBuild) {
                 HorizontalDivider()
                 Text("Fontes", style = MaterialTheme.typography.titleMedium)
                 build.sources.forEach { source ->
-                    Text("• ${source.name}${source.url?.let { " — $it" } ?: ""}")
+                    if (source.url != null) {
+                        TextButton(
+                            onClick = {
+                                context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(source.url)))
+                            },
+                            contentPadding = PaddingValues(0.dp)
+                        ) {
+                            Text(source.name)
+                        }
+                    } else {
+                        Text("• ${source.name}")
+                    }
                 }
             }
         }
