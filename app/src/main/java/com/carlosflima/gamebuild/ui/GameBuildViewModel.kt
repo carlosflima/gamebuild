@@ -3,6 +3,7 @@ package com.carlosflima.gamebuild.ui
 import androidx.lifecycle.ViewModel
 import com.carlosflima.gamebuild.data.FakeGameRepository
 import com.carlosflima.gamebuild.data.GameRepository
+import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +14,7 @@ data class GameBuildUiState(
     val selectedGame: Game? = null,
     val characters: List<GameCharacter> = emptyList(),
     val selectedCharacter: GameCharacter? = null,
+    val builds: List<CharacterBuild> = emptyList(),
     val errorMessage: String? = null
 )
 
@@ -27,7 +29,25 @@ class GameBuildViewModel(private val repository: GameRepository = FakeGameReposi
     }
 
     fun selectCharacter(character: GameCharacter) {
-        _uiState.value = _uiState.value.copy(selectedCharacter = character, errorMessage = null)
+        runCatching { repository.getBuilds(character.id) }
+            .onSuccess { builds ->
+                _uiState.value = _uiState.value.copy(
+                    selectedCharacter = character,
+                    builds = builds,
+                    errorMessage = null
+                )
+            }
+            .onFailure { error ->
+                _uiState.value = _uiState.value.copy(errorMessage = error.message ?: "Não foi possível carregar as builds.")
+            }
+    }
+
+    fun backToCharacters() {
+        _uiState.value = _uiState.value.copy(selectedCharacter = null, builds = emptyList(), errorMessage = null)
+    }
+
+    fun backToGames() {
+        _uiState.value = GameBuildUiState()
     }
 
     fun clearError() { _uiState.value = _uiState.value.copy(errorMessage = null) }
