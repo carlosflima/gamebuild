@@ -13,10 +13,22 @@ import kotlinx.coroutines.flow.asStateFlow
 data class GameBuildUiState(
     val selectedGame: Game? = null,
     val characters: List<GameCharacter> = emptyList(),
+    val characterQuery: String = "",
     val selectedCharacter: GameCharacter? = null,
     val builds: List<CharacterBuild> = emptyList(),
     val errorMessage: String? = null
-)
+) {
+    val filteredCharacters: List<GameCharacter>
+        get() {
+            val query = characterQuery.trim()
+            if (query.isEmpty()) return characters
+
+            return characters.filter { character ->
+                character.name.contains(query, ignoreCase = true) ||
+                    character.role.contains(query, ignoreCase = true)
+            }
+        }
+}
 
 class GameBuildViewModel(private val repository: GameRepository = FakeGameRepository()) : ViewModel() {
     private val _uiState = MutableStateFlow(GameBuildUiState())
@@ -26,6 +38,10 @@ class GameBuildViewModel(private val repository: GameRepository = FakeGameReposi
         runCatching { repository.getCharacters(game) }
             .onSuccess { characters -> _uiState.value = GameBuildUiState(selectedGame = game, characters = characters) }
             .onFailure { error -> _uiState.value = _uiState.value.copy(errorMessage = error.message ?: "Não foi possível carregar o jogo.") }
+    }
+
+    fun updateCharacterQuery(query: String) {
+        _uiState.value = _uiState.value.copy(characterQuery = query)
     }
 
     fun selectCharacter(character: GameCharacter) {
