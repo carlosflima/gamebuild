@@ -35,7 +35,7 @@ jobs:
       - name: Prepare branded APK
         run: cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/Game-Builds-0.3.5-debug.apk
       - name: Upload debug APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Game-Builds-0.3.5-debug
           path: app/build/outputs/apk/debug/Game-Builds-0.3.5-debug.apk
