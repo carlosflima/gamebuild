@@ -39,9 +39,9 @@ class TermsRepository(context: Context) {
 
     private fun parseTerms(json: String): AppTerms? = runCatching {
         val root = JSONObject(json)
-        if (root.optInt("schemaVersion", -1) != SUPPORTED_SCHEMA_VERSION) return null
+        require(root.optInt("schemaVersion", -1) == SUPPORTED_SCHEMA_VERSION)
 
-        val termsObject = root.optJSONObject("terms") ?: return null
+        val termsObject = requireNotNull(root.optJSONObject("terms"))
         val values = mutableMapOf<String, String>()
         val keys = termsObject.keys()
 
@@ -51,7 +51,8 @@ class TermsRepository(context: Context) {
             if (key.isNotBlank() && value.isNotBlank()) values[key] = value
         }
 
-        if (values.isEmpty()) null else AppTerms(values)
+        require(values.isNotEmpty())
+        AppTerms(values)
     }.getOrNull()
 
     private fun downloadRemoteTerms(): String {
