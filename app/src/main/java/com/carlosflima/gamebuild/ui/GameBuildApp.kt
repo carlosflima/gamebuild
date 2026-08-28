@@ -46,7 +46,7 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
 
     MaterialTheme {
-        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.2") }) }) { padding ->
+        Scaffold(topBar = { TopAppBar(title = { Text("GameBuild — V0.3") }) }) { padding ->
             when {
                 state.selectedCharacter != null -> BuildScreen(state.selectedCharacter!!, state.builds, viewModel, padding)
                 state.selectedGame != null -> CharacterSelection(
@@ -203,7 +203,7 @@ private fun BuildScreen(character: GameCharacter, builds: List<CharacterBuild>, 
                 Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                         Text("Sem builds disponíveis", style = MaterialTheme.typography.titleMedium)
-                        Text("Os dados desta personagem ainda não foram adicionados à V0.2.")
+                        Text("Os dados desta personagem ainda não foram adicionados à V0.3.")
                     }
                 }
             }
