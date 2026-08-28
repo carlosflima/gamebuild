@@ -1,10 +1,10 @@
 # Catálogo de termos do Game Builds
 
-O arquivo `config/terms.json` será a fonte remota de textos editáveis do aplicativo.
+`config/terms.json` é a única fonte remota oficial de textos editáveis do aplicativo.
 
 ## Como editar
 
-Altere somente os valores dentro de `terms`. Mantenha as chaves existentes para evitar incompatibilidade com versões instaladas do app.
+Altere somente os valores dentro de `terms`. Mantenha `schemaVersion` em `1` e preserve as chaves existentes para evitar incompatibilidade com versões instaladas do app.
 
 Exemplo:
 
@@ -18,10 +18,16 @@ pode ser alterado para:
 "character.search.label": "Pesquisar personagem"
 ```
 
-## Fallback local
+Depois que a alteração for mesclada na `main`, a próxima abertura do app consulta a versão atual de `config/terms.json` e aplica os valores válidos.
 
-`app/src/main/assets/terms.json` contém a cópia padrão distribuída dentro do APK. Ela será usada quando não houver internet ou quando o arquivo remoto não puder ser carregado.
+## Ordem de carregamento
 
-## Próxima etapa
+1. O app abre imediatamente com os termos da última versão válida salva em cache.
+2. Se ainda não houver cache, usa `app/src/main/assets/terms.json`, que é o fallback distribuído dentro do APK.
+3. Em segundo plano, consulta `config/terms.json` na branch `main`.
+4. Se `schemaVersion` for compatível e o JSON for válido, aplica os novos termos e salva essa versão no cache.
+5. Se a rede falhar ou o arquivo remoto for inválido, mantém o cache/fallback sem interromper a abertura do app.
 
-A integração remota fará o app consultar `config/terms.json` na abertura, validar `schemaVersion`, salvar a última versão válida localmente e usar o fallback embutido quando necessário.
+## Observação
+
+A atualização remota corrige rótulos e textos já mapeados no catálogo. Mudanças estruturais de tela, novas funcionalidades ou novas chaves ainda exigem uma atualização do aplicativo.
