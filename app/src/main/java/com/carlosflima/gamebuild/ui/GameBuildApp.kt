@@ -85,7 +85,7 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
                 containerColor = Color.Transparent,
                 topBar = {
                     TopAppBar(
-                        title = { Text("GameBuild — V0.3") },
+                        title = { Text("Game Builds — V0.3") },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
                         navigationIcon = {
                             if (canNavigateBack) {
