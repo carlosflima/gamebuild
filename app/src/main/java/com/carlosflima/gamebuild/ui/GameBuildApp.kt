@@ -78,13 +78,17 @@ fun GameBuildApp(
 
     MaterialTheme(colorScheme = GameBuildDarkColors) {
         Box(Modifier.fillMaxSize()) {
-            Image(
-                painter = painterResource(R.drawable.app_background),
-                contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+            AppBackground(
+                selectedGame = state.selectedGame,
+                selectedCharacter = state.selectedCharacter
             )
-            Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.66f)))
+            Box(
+                Modifier
+                    .fillMaxSize()
+                    .background(
+                        Color.Black.copy(alpha = if (state.selectedCharacter != null) 0.74f else 0.66f)
+                    )
+            )
 
             Scaffold(
                 containerColor = Color.Transparent,
@@ -146,6 +150,39 @@ fun GameBuildApp(
                     )
                 }
             }
+        }
+    }
+}
+
+@Composable
+private fun AppBackground(
+    selectedGame: Game?,
+    selectedCharacter: GameCharacter?
+) {
+    when {
+        selectedCharacter?.imageUrl != null -> {
+            AsyncImage(
+                model = selectedCharacter.imageUrl,
+                contentDescription = "Fundo de ${selectedCharacter.name}",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
+        selectedGame != null -> {
+            Image(
+                painter = painterResource(gameBackground(selectedGame)),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
+        else -> {
+            Image(
+                painter = painterResource(R.drawable.app_background),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
         }
     }
 }
