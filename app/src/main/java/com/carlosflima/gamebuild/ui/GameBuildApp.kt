@@ -17,9 +17,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -34,6 +34,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -54,8 +55,8 @@ import com.carlosflima.gamebuild.domain.GameCharacter
 
 private val GameBuildDarkColors = darkColorScheme(
     background = Color(0xFF080A0F),
-    surface = Color(0xFF11151D),
-    surfaceVariant = Color(0xFF1A202B),
+    surface = Color(0xE611151D),
+    surfaceVariant = Color(0xE61A202B),
     primary = Color(0xFF8B9DFF),
     secondary = Color(0xFF7DD3FC)
 )
@@ -71,51 +72,68 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
     }
 
     MaterialTheme(colorScheme = GameBuildDarkColors) {
-        Scaffold(
-            topBar = {
-                TopAppBar(
-                    title = { Text("GameBuild — V0.3") },
-                    navigationIcon = {
-                        if (canNavigateBack) {
-                            IconButton(
-                                onClick = {
-                                    if (state.selectedCharacter != null) viewModel.backToCharacters() else viewModel.backToGames()
+        Box(Modifier.fillMaxSize()) {
+            Image(
+                painter = painterResource(R.drawable.app_background),
+                contentDescription = null,
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+            Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.66f)))
+
+            Scaffold(
+                containerColor = Color.Transparent,
+                topBar = {
+                    TopAppBar(
+                        title = { Text("GameBuild — V0.3") },
+                        colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
+                        navigationIcon = {
+                            if (canNavigateBack) {
+                                IconButton(
+                                    onClick = {
+                                        if (state.selectedCharacter != null) viewModel.backToCharacters()
+                                        else viewModel.backToGames()
+                                    }
+                                ) {
+                                    Icon(
+                                        painter = painterResource(R.drawable.ic_arrow_back),
+                                        contentDescription = "Voltar"
+                                    )
                                 }
-                            ) {
-                                Icon(
-                                    painter = painterResource(R.drawable.ic_arrow_back),
-                                    contentDescription = "Voltar"
-                                )
                             }
                         }
-                    }
-                )
-            }
-        ) { padding ->
-            when {
-                state.selectedCharacter != null -> BuildScreen(state.selectedCharacter!!, state.builds, viewModel, padding)
-                state.selectedGame != null -> CharacterSelection(
-                    game = state.selectedGame!!,
-                    characters = state.filteredCharacters,
-                    query = state.characterQuery,
-                    filters = state.characterFilters,
-                    selectedFilter = state.selectedCharacterFilter,
-                    onQueryChange = viewModel::updateCharacterQuery,
-                    onFilterClick = viewModel::toggleCharacterFilter,
-                    onClearFilters = viewModel::clearCharacterFilters,
-                    viewModel = viewModel,
-                    padding = padding
-                )
-                else -> GameSelection(viewModel, padding)
-            }
+                    )
+                }
+            ) { padding ->
+                when {
+                    state.selectedCharacter != null -> BuildScreen(
+                        state.selectedCharacter!!,
+                        state.builds,
+                        padding
+                    )
+                    state.selectedGame != null -> CharacterSelection(
+                        game = state.selectedGame!!,
+                        characters = state.filteredCharacters,
+                        query = state.characterQuery,
+                        filters = state.characterFilters,
+                        selectedFilter = state.selectedCharacterFilter,
+                        onQueryChange = viewModel::updateCharacterQuery,
+                        onFilterClick = viewModel::toggleCharacterFilter,
+                        onClearFilters = viewModel::clearCharacterFilters,
+                        viewModel = viewModel,
+                        padding = padding
+                    )
+                    else -> GameSelection(viewModel, padding)
+                }
 
-            state.errorMessage?.let { message ->
-                AlertDialog(
-                    onDismissRequest = viewModel::clearError,
-                    confirmButton = { Button(onClick = viewModel::clearError) { Text("OK") } },
-                    title = { Text("Erro") },
-                    text = { Text(message) }
-                )
+                state.errorMessage?.let { message ->
+                    AlertDialog(
+                        onDismissRequest = viewModel::clearError,
+                        confirmButton = { Button(onClick = viewModel::clearError) { Text("OK") } },
+                        title = { Text("Erro") },
+                        text = { Text(message) }
+                    )
+                }
             }
         }
     }
@@ -246,7 +264,11 @@ private fun CharacterSelection(
 }
 
 @Composable
-private fun BuildScreen(character: GameCharacter, builds: List<CharacterBuild>, viewModel: GameBuildViewModel, padding: PaddingValues) {
+private fun BuildScreen(
+    character: GameCharacter,
+    builds: List<CharacterBuild>,
+    padding: PaddingValues
+) {
     LazyColumn(
         Modifier.fillMaxSize().padding(padding),
         contentPadding = PaddingValues(16.dp),
@@ -347,25 +369,19 @@ private fun BuildVisualSection(title: String, values: List<String>, imageUrls: L
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             val imageUrl = imageUrls.getOrNull(index)
-            if (imageUrl != null) {
-                Surface(
-                    modifier = Modifier.size(64.dp),
-                    shape = MaterialTheme.shapes.medium,
-                    color = MaterialTheme.colorScheme.surfaceVariant
-                ) {
+            Surface(
+                modifier = Modifier.size(64.dp),
+                shape = MaterialTheme.shapes.medium,
+                color = MaterialTheme.colorScheme.surfaceVariant
+            ) {
+                if (imageUrl != null) {
                     AsyncImage(
                         model = imageUrl,
                         contentDescription = "Imagem de $value",
                         modifier = Modifier.fillMaxSize().padding(4.dp),
                         contentScale = ContentScale.Fit
                     )
-                }
-            } else {
-                Surface(
-                    modifier = Modifier.size(64.dp),
-                    shape = MaterialTheme.shapes.medium,
-                    color = MaterialTheme.colorScheme.surfaceVariant
-                ) {
+                } else {
                     Box(contentAlignment = Alignment.Center) {
                         Text(value.take(1), style = MaterialTheme.typography.titleLarge)
                     }
