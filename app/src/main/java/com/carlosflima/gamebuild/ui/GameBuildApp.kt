@@ -2,6 +2,7 @@ package com.carlosflima.gamebuild.ui
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,11 +12,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -50,7 +53,11 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
                     game = state.selectedGame!!,
                     characters = state.filteredCharacters,
                     query = state.characterQuery,
+                    filters = state.characterFilters,
+                    selectedFilter = state.selectedCharacterFilter,
                     onQueryChange = viewModel::updateCharacterQuery,
+                    onFilterClick = viewModel::toggleCharacterFilter,
+                    onClearFilters = viewModel::clearCharacterFilters,
                     viewModel = viewModel,
                     padding = padding
                 )
@@ -90,7 +97,11 @@ private fun CharacterSelection(
     game: Game,
     characters: List<GameCharacter>,
     query: String,
+    filters: List<String>,
+    selectedFilter: String?,
     onQueryChange: (String) -> Unit,
+    onFilterClick: (String) -> Unit,
+    onClearFilters: () -> Unit,
     viewModel: GameBuildViewModel,
     padding: PaddingValues
 ) {
@@ -115,6 +126,30 @@ private fun CharacterSelection(
                 label = { Text("Buscar personagem") },
                 placeholder = { Text("Nome, função ou elemento") }
             )
+        }
+
+        if (filters.isNotEmpty()) {
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Row(
+                        Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        filters.forEach { filter ->
+                            FilterChip(
+                                selected = selectedFilter == filter,
+                                onClick = { onFilterClick(filter) },
+                                label = { Text(filter) }
+                            )
+                        }
+                    }
+                    if (query.isNotBlank() || selectedFilter != null) {
+                        TextButton(onClick = onClearFilters, contentPadding = PaddingValues(0.dp)) {
+                            Text("Limpar filtros")
+                        }
+                    }
+                }
+            }
         }
 
         if (characters.isEmpty()) {
