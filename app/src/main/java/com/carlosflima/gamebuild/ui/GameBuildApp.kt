@@ -49,6 +49,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.AsyncImage
 import com.carlosflima.gamebuild.R
+import com.carlosflima.gamebuild.domain.AppTerms
+import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
@@ -63,7 +65,10 @@ private val GameBuildDarkColors = darkColorScheme(
 
 @OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 @Composable
-fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
+fun GameBuildApp(
+    terms: AppTerms = AppTerms.Empty,
+    viewModel: GameBuildViewModel = viewModel()
+) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val canNavigateBack = state.selectedGame != null
 
@@ -85,7 +90,7 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
                 containerColor = Color.Transparent,
                 topBar = {
                     TopAppBar(
-                        title = { Text("Game Builds — V0.3") },
+                        title = { Text(terms.text("app.title", "Game Builds — V0.3")) },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
                         navigationIcon = {
                             if (canNavigateBack) {
@@ -97,7 +102,7 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
                                 ) {
                                     Icon(
                                         painter = painterResource(R.drawable.ic_arrow_back),
-                                        contentDescription = "Voltar"
+                                        contentDescription = terms.text("common.back", "Voltar")
                                     )
                                 }
                             }
@@ -107,9 +112,10 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
             ) { padding ->
                 when {
                     state.selectedCharacter != null -> BuildScreen(
-                        state.selectedCharacter!!,
-                        state.builds,
-                        padding
+                        character = state.selectedCharacter!!,
+                        builds = state.builds,
+                        terms = terms,
+                        padding = padding
                     )
                     state.selectedGame != null -> CharacterSelection(
                         game = state.selectedGame!!,
@@ -121,16 +127,21 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
                         onFilterClick = viewModel::toggleCharacterFilter,
                         onClearFilters = viewModel::clearCharacterFilters,
                         viewModel = viewModel,
+                        terms = terms,
                         padding = padding
                     )
-                    else -> GameSelection(viewModel, padding)
+                    else -> GameSelection(viewModel, terms, padding)
                 }
 
                 state.errorMessage?.let { message ->
                     AlertDialog(
                         onDismissRequest = viewModel::clearError,
-                        confirmButton = { Button(onClick = viewModel::clearError) { Text("OK") } },
-                        title = { Text("Erro") },
+                        confirmButton = {
+                            Button(onClick = viewModel::clearError) {
+                                Text(terms.text("common.ok", "OK"))
+                            }
+                        },
+                        title = { Text(terms.text("common.error", "Erro")) },
                         text = { Text(message) }
                     )
                 }
@@ -140,24 +151,42 @@ fun GameBuildApp(viewModel: GameBuildViewModel = viewModel()) {
 }
 
 @Composable
-private fun GameSelection(viewModel: GameBuildViewModel, padding: PaddingValues) {
+private fun GameSelection(
+    viewModel: GameBuildViewModel,
+    terms: AppTerms,
+    padding: PaddingValues
+) {
     LazyColumn(
         Modifier.fillMaxSize().padding(padding),
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(14.dp)
     ) {
-        item { Text("Selecione um jogo", style = MaterialTheme.typography.headlineSmall) }
-        items(Game.entries, key = { it.name }) { game -> GameSelectionCard(game, viewModel) }
+        item {
+            Text(
+                terms.text("game.select.title", "Selecione um jogo"),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
+        items(Game.entries, key = { it.name }) { game ->
+            GameSelectionCard(game, viewModel, terms)
+        }
     }
 }
 
 @Composable
-private fun GameSelectionCard(game: Game, viewModel: GameBuildViewModel) {
+private fun GameSelectionCard(
+    game: Game,
+    viewModel: GameBuildViewModel,
+    terms: AppTerms
+) {
+    val gameName = terms.gameName(game)
+    val gameDescription = terms.gameDescription(game)
+
     Card(Modifier.fillMaxWidth()) {
         Box(Modifier.fillMaxWidth().height(176.dp)) {
             Image(
                 painter = painterResource(gameBackground(game)),
-                contentDescription = "Fundo de ${game.displayName}",
+                contentDescription = "Fundo de $gameName",
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
@@ -166,10 +195,13 @@ private fun GameSelectionCard(game: Game, viewModel: GameBuildViewModel) {
                 modifier = Modifier.fillMaxSize().padding(18.dp),
                 verticalArrangement = Arrangement.Bottom
             ) {
-                Text(game.displayName, style = MaterialTheme.typography.headlineSmall)
-                Text(game.description, style = MaterialTheme.typography.bodyMedium)
-                Button(onClick = { viewModel.selectGame(game) }, modifier = Modifier.padding(top = 10.dp)) {
-                    Text("Selecionar")
+                Text(gameName, style = MaterialTheme.typography.headlineSmall)
+                Text(gameDescription, style = MaterialTheme.typography.bodyMedium)
+                Button(
+                    onClick = { viewModel.selectGame(game) },
+                    modifier = Modifier.padding(top = 10.dp)
+                ) {
+                    Text(terms.text("game.select.button", "Selecionar"))
                 }
             }
         }
@@ -193,6 +225,7 @@ private fun CharacterSelection(
     onFilterClick: (String) -> Unit,
     onClearFilters: () -> Unit,
     viewModel: GameBuildViewModel,
+    terms: AppTerms,
     padding: PaddingValues
 ) {
     LazyColumn(
@@ -200,7 +233,12 @@ private fun CharacterSelection(
         contentPadding = PaddingValues(16.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        item { Text("Personagens — ${game.displayName}", style = MaterialTheme.typography.headlineSmall) }
+        item {
+            Text(
+                "${terms.text("character.list.titlePrefix", "Personagens")} — ${terms.gameName(game)}",
+                style = MaterialTheme.typography.headlineSmall
+            )
+        }
 
         item {
             OutlinedTextField(
@@ -208,8 +246,10 @@ private fun CharacterSelection(
                 onValueChange = onQueryChange,
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
-                label = { Text("Buscar personagem") },
-                placeholder = { Text("Nome, função ou elemento") }
+                label = { Text(terms.text("character.search.label", "Buscar personagem")) },
+                placeholder = {
+                    Text(terms.text("character.search.placeholder", "Nome, função ou elemento"))
+                }
             )
         }
 
@@ -230,7 +270,7 @@ private fun CharacterSelection(
                     }
                     if (query.isNotBlank() || selectedFilter != null) {
                         TextButton(onClick = onClearFilters, contentPadding = PaddingValues(0.dp)) {
-                            Text("Limpar filtros")
+                            Text(terms.text("character.filters.clear", "Limpar filtros"))
                         }
                     }
                 }
@@ -241,8 +281,16 @@ private fun CharacterSelection(
             item {
                 Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                        Text("Nenhum personagem encontrado", style = MaterialTheme.typography.titleMedium)
-                        Text("Tente buscar por outro nome, função ou elemento.")
+                        Text(
+                            terms.text("character.empty.title", "Nenhum personagem encontrado"),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Text(
+                            terms.text(
+                                "character.empty.body",
+                                "Tente buscar por outro nome, função ou elemento."
+                            )
+                        )
                     }
                 }
             }
@@ -254,7 +302,9 @@ private fun CharacterSelection(
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             Text(character.name, style = MaterialTheme.typography.titleLarge)
                             Text(character.role)
-                            Button(onClick = { viewModel.selectCharacter(character) }) { Text("Ver builds") }
+                            Button(onClick = { viewModel.selectCharacter(character) }) {
+                                Text(terms.text("character.builds.button", "Ver builds"))
+                            }
                         }
                     }
                 }
@@ -267,6 +317,7 @@ private fun CharacterSelection(
 private fun BuildScreen(
     character: GameCharacter,
     builds: List<CharacterBuild>,
+    terms: AppTerms,
     padding: PaddingValues
 ) {
     LazyColumn(
@@ -288,13 +339,21 @@ private fun BuildScreen(
             item {
                 Card(Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Text("Sem builds disponíveis", style = MaterialTheme.typography.titleMedium)
-                        Text("Os dados desta personagem ainda não foram adicionados à V0.3.")
+                        Text(
+                            terms.text("build.empty.title", "Sem builds disponíveis"),
+                            style = MaterialTheme.typography.titleMedium
+                        )
+                        Text(
+                            terms.text(
+                                "build.empty.body",
+                                "Os dados desta personagem ainda não foram adicionados à V0.3."
+                            )
+                        )
                     }
                 }
             }
         } else {
-            items(builds, key = { it.id }) { build -> BuildCard(build) }
+            items(builds, key = { it.id }) { build -> BuildCard(build, terms) }
         }
     }
 }
@@ -316,34 +375,40 @@ private fun CharacterImage(character: GameCharacter, modifier: Modifier = Modifi
 }
 
 @Composable
-private fun BuildCard(build: CharacterBuild) {
+private fun BuildCard(build: CharacterBuild, terms: AppTerms) {
     val context = LocalContext.current
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(build.title, style = MaterialTheme.typography.titleLarge)
-            Text("${build.type.displayName} • ${build.version}", style = MaterialTheme.typography.labelLarge)
+            Text(
+                "${terms.buildTypeName(build.type)} • ${build.version}",
+                style = MaterialTheme.typography.labelLarge
+            )
             HorizontalDivider()
             BuildVisualSection(
-                title = "Arma",
+                title = terms.text("build.section.weapon", "Arma"),
                 values = listOf(build.weapon),
                 imageUrls = listOf(build.weaponImageUrl ?: buildItemImageUrl(build.weapon))
             )
             BuildVisualSection(
-                title = "Equipamentos",
+                title = terms.text("build.section.equipment", "Equipamentos"),
                 values = build.equipment,
                 imageUrls = build.equipment.mapIndexed { index, value ->
                     build.equipmentImageUrls.getOrNull(index) ?: buildItemImageUrl(value)
                 }
             )
-            BuildSection("Prioridade de stats", build.statPriority)
-            BuildSection("Equipe", build.team)
+            BuildSection(terms.text("build.section.stats", "Prioridade de stats"), build.statPriority)
+            BuildSection(terms.text("build.section.team", "Equipe"), build.team)
             HorizontalDivider()
-            Text("Notas", style = MaterialTheme.typography.titleMedium)
+            Text(terms.text("build.section.notes", "Notas"), style = MaterialTheme.typography.titleMedium)
             Text(build.notes)
 
             if (build.sources.isNotEmpty()) {
                 HorizontalDivider()
-                Text("Fontes", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    terms.text("build.section.sources", "Fontes"),
+                    style = MaterialTheme.typography.titleMedium
+                )
                 build.sources.forEach { source ->
                     if (source.url != null) {
                         TextButton(
@@ -422,4 +487,21 @@ private fun buildItemImageUrl(value: String): String? {
 private fun BuildSection(title: String, values: List<String>) {
     Text(title, style = MaterialTheme.typography.titleMedium)
     values.forEach { value -> Text("• $value") }
+}
+
+private fun AppTerms.gameName(game: Game): String = when (game) {
+    Game.NTE -> text("game.nte.name", game.displayName)
+    Game.WARFRAME -> text("game.warframe.name", game.displayName)
+    Game.ENDFIELD -> text("game.endfield.name", game.displayName)
+}
+
+private fun AppTerms.gameDescription(game: Game): String = when (game) {
+    Game.NTE -> text("game.nte.description", game.description)
+    Game.WARFRAME -> text("game.warframe.description", game.description)
+    Game.ENDFIELD -> text("game.endfield.description", game.description)
+}
+
+private fun AppTerms.buildTypeName(type: BuildType): String = when (type) {
+    BuildType.META -> text("build.type.meta", type.displayName)
+    BuildType.F2P -> text("build.type.f2p", type.displayName)
 }
