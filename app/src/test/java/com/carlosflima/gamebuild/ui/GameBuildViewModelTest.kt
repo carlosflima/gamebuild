@@ -33,4 +33,18 @@ class GameBuildViewModelTest {
         viewModel.updateCharacterQuery("")
         assertEquals(characters, viewModel.uiState.value.filteredCharacters)
     }
+
+    @Test
+    fun unavailableGameDoesNotNavigateToCharacterList() {
+        val viewModel = GameBuildViewModel(repository)
+
+        viewModel.selectGame(Game.WARFRAME)
+
+        assertEquals(null, viewModel.uiState.value.selectedGame)
+        assertEquals(emptyList<GameCharacter>(), viewModel.uiState.value.characters)
+        assertEquals(
+            "Conteúdo de Warframe ainda está em preparação.",
+            viewModel.uiState.value.errorMessage
+        )
+    }
 }
