@@ -3,7 +3,7 @@
   "updatedAt": "2026-08-31",
   "terms": {
     "app.name": "Game Builds",
-    "app.title": "Game Builds — V0.3",
+    "app.title": "Game Builds — V0.3.5",
     "common.ok": "OK",
     "common.error": "Erro",
     "common.back": "Voltar",
@@ -27,7 +27,7 @@
     "build.compare.title": "Comparação rápida",
     "build.compare.body": "Principais diferenças entre as opções disponíveis.",
     "build.empty.title": "Sem builds disponíveis",
-    "build.empty.body": "Os dados desta personagem ainda não foram adicionados à V0.3.",
+    "build.empty.body": "Os dados desta personagem ainda não foram adicionados à V0.3.5.",
     "build.section.weapon": "Arma",
     "build.section.equipment": "Equipamentos",
     "build.section.stats": "Prioridade de stats",
