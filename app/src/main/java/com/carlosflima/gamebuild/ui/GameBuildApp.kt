@@ -240,9 +240,16 @@ private fun GameSelectionCard(
                 Text(gameDescription, style = MaterialTheme.typography.bodyMedium)
                 Button(
                     onClick = { viewModel.selectGame(game) },
+                    enabled = game.isAvailable,
                     modifier = Modifier.padding(top = 10.dp)
                 ) {
-                    Text(terms.text("game.select.button", "Selecionar"))
+                    Text(
+                        if (game.isAvailable) {
+                            terms.text("game.select.button", "Selecionar")
+                        } else {
+                            terms.text("game.select.comingSoon", "Em breve")
+                        }
+                    )
                 }
             }
         }
