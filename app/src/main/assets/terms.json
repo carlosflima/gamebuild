@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-28",
+  "updatedAt": "2026-08-31",
   "terms": {
     "app.name": "Game Builds",
     "app.title": "Game Builds — V0.3",
@@ -12,9 +12,9 @@
     "game.nte.name": "Neverness to Everness",
     "game.nte.description": "Builds, characters and teams",
     "game.warframe.name": "Warframe",
-    "game.warframe.description": "Warframes, weapons and builds",
+    "game.warframe.description": "Em breve — Warframes, weapons and builds",
     "game.endfield.name": "Arknights: Endfield",
-    "game.endfield.description": "Operators, weapons and teams",
+    "game.endfield.description": "Em breve — Operators, weapons and teams",
     "character.list.titlePrefix": "Personagens",
     "character.search.label": "Buscar personagem",
     "character.search.placeholder": "Nome, função ou elemento",

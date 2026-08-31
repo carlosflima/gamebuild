@@ -49,6 +49,13 @@ class GameBuildViewModel(private val repository: GameRepository = FakeGameReposi
     val uiState: StateFlow<GameBuildUiState> = _uiState.asStateFlow()
 
     fun selectGame(game: Game) {
+        if (!game.isAvailable) {
+            _uiState.value = _uiState.value.copy(
+                errorMessage = "Conteúdo de ${game.displayName} ainda está em preparação."
+            )
+            return
+        }
+
         runCatching { repository.getCharacters(game) }
             .onSuccess { characters -> _uiState.value = GameBuildUiState(selectedGame = game, characters = characters) }
             .onFailure { error -> _uiState.value = _uiState.value.copy(errorMessage = error.message ?: "Não foi possível carregar o jogo.") }
