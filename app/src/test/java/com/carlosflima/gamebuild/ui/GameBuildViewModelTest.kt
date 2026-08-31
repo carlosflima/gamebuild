@@ -1,6 +1,7 @@
 package com.carlosflima.gamebuild.ui
 
 import com.carlosflima.gamebuild.data.GameRepository
+import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
@@ -14,9 +15,14 @@ class GameBuildViewModelTest {
         GameCharacter("3", "Zero", "Damage / Cycle enabler · Cosmos", Game.NTE)
     )
 
+    private val builds = listOf(
+        build("meta", BuildType.META),
+        build("f2p", BuildType.F2P)
+    )
+
     private val repository = object : GameRepository {
         override fun getCharacters(game: Game): List<GameCharacter> = characters
-        override fun getBuilds(characterId: String): List<CharacterBuild> = emptyList()
+        override fun getBuilds(characterId: String): List<CharacterBuild> = builds
     }
 
     @Test
@@ -47,4 +53,33 @@ class GameBuildViewModelTest {
             viewModel.uiState.value.errorMessage
         )
     }
+
+    @Test
+    fun filtersBuildsByTypeAndRestoresAllBuilds() {
+        val viewModel = GameBuildViewModel(repository)
+        viewModel.selectGame(Game.NTE)
+        viewModel.selectCharacter(characters.first())
+
+        assertEquals(listOf(BuildType.META, BuildType.F2P), viewModel.uiState.value.availableBuildTypes)
+        assertEquals(builds, viewModel.uiState.value.filteredBuilds)
+
+        viewModel.selectBuildType(BuildType.F2P)
+        assertEquals(listOf("f2p"), viewModel.uiState.value.filteredBuilds.map { it.id })
+
+        viewModel.selectBuildType(null)
+        assertEquals(builds, viewModel.uiState.value.filteredBuilds)
+    }
+
+    private fun build(id: String, type: BuildType) = CharacterBuild(
+        id = id,
+        characterId = characters.first().id,
+        title = id,
+        type = type,
+        version = "test",
+        weapon = "test",
+        equipment = emptyList(),
+        statPriority = emptyList(),
+        team = emptyList(),
+        notes = "test"
+    )
 }
