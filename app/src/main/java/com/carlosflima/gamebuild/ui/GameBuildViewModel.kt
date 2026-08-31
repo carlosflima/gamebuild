@@ -3,6 +3,7 @@ package com.carlosflima.gamebuild.ui
 import androidx.lifecycle.ViewModel
 import com.carlosflima.gamebuild.data.FakeGameRepository
 import com.carlosflima.gamebuild.data.GameRepository
+import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
@@ -17,6 +18,7 @@ data class GameBuildUiState(
     val selectedCharacterFilter: String? = null,
     val selectedCharacter: GameCharacter? = null,
     val builds: List<CharacterBuild> = emptyList(),
+    val selectedBuildType: BuildType? = null,
     val errorMessage: String? = null
 ) {
     val characterFilters: List<String>
@@ -42,6 +44,14 @@ data class GameBuildUiState(
                 matchesQuery && matchesFilter
             }
         }
+
+    val availableBuildTypes: List<BuildType>
+        get() = builds.map { it.type }.distinct()
+
+    val filteredBuilds: List<CharacterBuild>
+        get() = selectedBuildType
+            ?.let { type -> builds.filter { it.type == type } }
+            ?: builds
 }
 
 class GameBuildViewModel(private val repository: GameRepository = FakeGameRepository()) : ViewModel() {
@@ -81,6 +91,7 @@ class GameBuildViewModel(private val repository: GameRepository = FakeGameReposi
                 _uiState.value = _uiState.value.copy(
                     selectedCharacter = character,
                     builds = builds,
+                    selectedBuildType = null,
                     errorMessage = null
                 )
             }
@@ -89,8 +100,17 @@ class GameBuildViewModel(private val repository: GameRepository = FakeGameReposi
             }
     }
 
+    fun selectBuildType(type: BuildType?) {
+        _uiState.value = _uiState.value.copy(selectedBuildType = type)
+    }
+
     fun backToCharacters() {
-        _uiState.value = _uiState.value.copy(selectedCharacter = null, builds = emptyList(), errorMessage = null)
+        _uiState.value = _uiState.value.copy(
+            selectedCharacter = null,
+            builds = emptyList(),
+            selectedBuildType = null,
+            errorMessage = null
+        )
     }
 
     fun backToGames() {

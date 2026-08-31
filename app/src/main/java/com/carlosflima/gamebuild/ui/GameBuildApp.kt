@@ -117,7 +117,10 @@ fun GameBuildApp(
                 when {
                     state.selectedCharacter != null -> BuildScreen(
                         character = state.selectedCharacter!!,
-                        builds = state.builds,
+                        builds = state.filteredBuilds,
+                        buildTypes = state.availableBuildTypes,
+                        selectedBuildType = state.selectedBuildType,
+                        onBuildTypeChange = viewModel::selectBuildType,
                         terms = terms,
                         padding = padding
                     )
@@ -354,6 +357,9 @@ private fun CharacterSelection(
 private fun BuildScreen(
     character: GameCharacter,
     builds: List<CharacterBuild>,
+    buildTypes: List<BuildType>,
+    selectedBuildType: BuildType?,
+    onBuildTypeChange: (BuildType?) -> Unit,
     terms: AppTerms,
     padding: PaddingValues
 ) {
@@ -368,6 +374,34 @@ private fun BuildScreen(
                 Column {
                     Text(character.name, style = MaterialTheme.typography.headlineMedium)
                     Text(character.role, style = MaterialTheme.typography.bodyMedium)
+                }
+            }
+        }
+
+        if (buildTypes.size > 1) {
+            item {
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(
+                        terms.text("build.filters.title", "Filtrar builds"),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    Row(
+                        Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        FilterChip(
+                            selected = selectedBuildType == null,
+                            onClick = { onBuildTypeChange(null) },
+                            label = { Text(terms.text("build.filters.all", "Todas")) }
+                        )
+                        buildTypes.forEach { type ->
+                            FilterChip(
+                                selected = selectedBuildType == type,
+                                onClick = { onBuildTypeChange(type) },
+                                label = { Text(terms.buildTypeName(type)) }
+                            )
+                        }
+                    }
                 }
             }
         }
