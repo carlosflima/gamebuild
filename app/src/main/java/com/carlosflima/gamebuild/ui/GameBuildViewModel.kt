@@ -52,6 +52,9 @@ data class GameBuildUiState(
         get() = selectedBuildType
             ?.let { type -> builds.filter { it.type == type } }
             ?: builds
+
+    val comparisonBuilds: List<CharacterBuild>
+        get() = if (selectedBuildType == null && availableBuildTypes.size > 1) builds else emptyList()
 }
 
 class GameBuildViewModel(private val repository: GameRepository = FakeGameRepository()) : ViewModel() {
