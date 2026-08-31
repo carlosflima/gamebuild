@@ -24,6 +24,8 @@
     "character.builds.button": "Ver builds",
     "build.filters.title": "Filtrar builds",
     "build.filters.all": "Todas",
+    "build.compare.title": "Comparação rápida",
+    "build.compare.body": "Principais diferenças entre as opções disponíveis.",
     "build.empty.title": "Sem builds disponíveis",
     "build.empty.body": "Os dados desta personagem ainda não foram adicionados à V0.3.",
     "build.section.weapon": "Arma",

@@ -118,6 +118,7 @@ fun GameBuildApp(
                     state.selectedCharacter != null -> BuildScreen(
                         character = state.selectedCharacter!!,
                         builds = state.filteredBuilds,
+                        comparisonBuilds = state.comparisonBuilds,
                         buildTypes = state.availableBuildTypes,
                         selectedBuildType = state.selectedBuildType,
                         onBuildTypeChange = viewModel::selectBuildType,
@@ -357,6 +358,7 @@ private fun CharacterSelection(
 private fun BuildScreen(
     character: GameCharacter,
     builds: List<CharacterBuild>,
+    comparisonBuilds: List<CharacterBuild>,
     buildTypes: List<BuildType>,
     selectedBuildType: BuildType?,
     onBuildTypeChange: (BuildType?) -> Unit,
@@ -406,6 +408,10 @@ private fun BuildScreen(
             }
         }
 
+        if (comparisonBuilds.size > 1) {
+            item { BuildComparisonCard(comparisonBuilds, terms) }
+        }
+
         if (builds.isEmpty()) {
             item {
                 Card(Modifier.fillMaxWidth()) {
@@ -426,6 +432,58 @@ private fun BuildScreen(
         } else {
             items(builds, key = { it.id }) { build -> BuildCard(build, terms) }
         }
+    }
+}
+
+@Composable
+private fun BuildComparisonCard(builds: List<CharacterBuild>, terms: AppTerms) {
+    Card(Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+            Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text(
+                    terms.text("build.compare.title", "Comparação rápida"),
+                    style = MaterialTheme.typography.titleLarge
+                )
+                Text(
+                    terms.text("build.compare.body", "Principais diferenças entre as opções disponíveis."),
+                    style = MaterialTheme.typography.bodyMedium
+                )
+            }
+
+            builds.forEachIndexed { index, build ->
+                if (index > 0) HorizontalDivider()
+                Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                    Text(
+                        "${terms.buildTypeName(build.type)} — ${build.title}",
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    BuildComparisonLine(
+                        terms.text("build.section.weapon", "Arma"),
+                        build.weapon
+                    )
+                    BuildComparisonLine(
+                        terms.text("build.section.equipment", "Equipamentos"),
+                        build.equipment.joinToString(" • ").ifBlank { "—" }
+                    )
+                    BuildComparisonLine(
+                        terms.text("build.section.stats", "Prioridade de stats"),
+                        build.statPriority.joinToString(" > ").ifBlank { "—" }
+                    )
+                    BuildComparisonLine(
+                        terms.text("build.section.team", "Equipe"),
+                        build.team.joinToString(" • ").ifBlank { "—" }
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun BuildComparisonLine(label: String, value: String) {
+    Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
+        Text(label, style = MaterialTheme.typography.labelLarge)
+        Text(value, style = MaterialTheme.typography.bodyMedium)
     }
 }
 

@@ -62,12 +62,15 @@ class GameBuildViewModelTest {
 
         assertEquals(listOf(BuildType.META, BuildType.F2P), viewModel.uiState.value.availableBuildTypes)
         assertEquals(builds, viewModel.uiState.value.filteredBuilds)
+        assertEquals(builds, viewModel.uiState.value.comparisonBuilds)
 
         viewModel.selectBuildType(BuildType.F2P)
         assertEquals(listOf("f2p"), viewModel.uiState.value.filteredBuilds.map { it.id })
+        assertEquals(emptyList<CharacterBuild>(), viewModel.uiState.value.comparisonBuilds)
 
         viewModel.selectBuildType(null)
         assertEquals(builds, viewModel.uiState.value.filteredBuilds)
+        assertEquals(builds, viewModel.uiState.value.comparisonBuilds)
     }
 
     private fun build(id: String, type: BuildType) = CharacterBuild(
