@@ -167,21 +167,23 @@ private fun AppBackground(
     selectedCharacter: GameCharacter?
 ) {
     when {
-        selectedCharacter?.imageUrl != null -> {
-            AsyncImage(
-                model = selectedCharacter.imageUrl,
-                contentDescription = "Fundo de ${selectedCharacter.name}",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-        }
         selectedCharacter != null -> {
-            Image(
-                painter = painterResource(characterFallbackBackground(selectedCharacter.game)),
-                contentDescription = "Fundo de ${selectedCharacter.name}",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
+            Box(Modifier.fillMaxSize()) {
+                Image(
+                    painter = painterResource(characterFallbackBackground(selectedCharacter.game)),
+                    contentDescription = "Fundo de ${selectedCharacter.name}",
+                    modifier = Modifier.fillMaxSize(),
+                    contentScale = ContentScale.Crop
+                )
+                selectedCharacter.imageUrl?.let { imageUrl ->
+                    AsyncImage(
+                        model = imageUrl,
+                        contentDescription = "Fundo de ${selectedCharacter.name}",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+            }
         }
         selectedGame != null -> {
             Image(
