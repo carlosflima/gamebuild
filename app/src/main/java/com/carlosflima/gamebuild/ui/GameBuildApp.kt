@@ -172,9 +172,17 @@ private fun AppBackground(
                 contentScale = ContentScale.Crop
             )
         }
+        selectedCharacter != null -> {
+            Image(
+                painter = painterResource(characterFallbackBackground(selectedCharacter.game)),
+                contentDescription = "Fundo de ${selectedCharacter.name}",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
         selectedGame != null -> {
             Image(
-                painter = painterResource(gameBackground(selectedGame)),
+                painter = painterResource(gamePageBackground(selectedGame)),
                 contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
@@ -260,6 +268,18 @@ private fun gameBackground(game: Game): Int = when (game) {
     Game.NTE -> R.drawable.bg_game_nte
     Game.WARFRAME -> R.drawable.bg_game_warframe
     Game.ENDFIELD -> R.drawable.bg_game_endfield
+}
+
+private fun gamePageBackground(game: Game): Int = when (game) {
+    Game.NTE -> R.drawable.bg_page_nte
+    Game.WARFRAME -> R.drawable.bg_page_warframe
+    Game.ENDFIELD -> R.drawable.bg_page_endfield
+}
+
+private fun characterFallbackBackground(game: Game): Int = when (game) {
+    Game.NTE -> R.drawable.bg_character_nte
+    Game.WARFRAME -> R.drawable.bg_page_warframe
+    Game.ENDFIELD -> R.drawable.bg_page_endfield
 }
 
 @Composable
