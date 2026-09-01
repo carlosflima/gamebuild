@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-08-31",
+  "updatedAt": "2026-09-01",
   "terms": {
     "app.name": "Game Builds",
     "app.title": "Game Builds — V0.3.5",
@@ -35,6 +35,9 @@
     "build.section.team": "Equipe",
     "build.section.notes": "Notas",
     "build.section.sources": "Fontes",
+    "build.item.details.hint": "Toque para ver atributos",
+    "build.item.details.title": "Atributos especiais",
+    "build.item.details.close": "Fechar",
     "build.type.meta": "Meta",
     "build.type.f2p": "F2P"
   }
