@@ -5,6 +5,7 @@ import android.net.Uri
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -38,6 +39,8 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -544,14 +547,16 @@ private fun BuildCard(build: CharacterBuild, terms: AppTerms) {
             BuildVisualSection(
                 title = terms.text("build.section.weapon", "Arma"),
                 values = listOf(build.weapon),
-                imageUrls = listOf(build.weaponImageUrl ?: buildItemImageUrl(build.weapon))
+                imageUrls = listOf(build.weaponImageUrl ?: buildItemImageUrl(build.weapon)),
+                terms = terms
             )
             BuildVisualSection(
                 title = terms.text("build.section.equipment", "Equipamentos"),
                 values = build.equipment,
                 imageUrls = build.equipment.mapIndexed { index, value ->
                     build.equipmentImageUrls.getOrNull(index) ?: buildItemImageUrl(value)
-                }
+                },
+                terms = terms
             )
             BuildSection(terms.text("build.section.stats", "Prioridade de stats"), build.statPriority)
             BuildSection(terms.text("build.section.team", "Equipe"), build.team)
@@ -580,16 +585,37 @@ private fun BuildCard(build: CharacterBuild, terms: AppTerms) {
     }
 }
 
+private data class BuildItemDetails(
+    val name: String,
+    val attributes: List<String>
+)
+
 @Composable
-private fun BuildVisualSection(title: String, values: List<String>, imageUrls: List<String?>) {
+private fun BuildVisualSection(
+    title: String,
+    values: List<String>,
+    imageUrls: List<String?>,
+    terms: AppTerms
+) {
+    val selectedItem = remember { mutableStateOf<BuildItemDetails?>(null) }
+
     Text(title, style = MaterialTheme.typography.titleMedium)
     values.forEachIndexed { index, value ->
+        val imageUrl = imageUrls.getOrNull(index)
+        val details = buildItemDetails(value)
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .then(
+                    if (details != null) {
+                        Modifier.clickable { selectedItem.value = details }
+                    } else {
+                        Modifier
+                    }
+                ),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            val imageUrl = imageUrls.getOrNull(index)
             Surface(
                 modifier = Modifier.size(64.dp),
                 shape = MaterialTheme.shapes.medium,
@@ -608,8 +634,66 @@ private fun BuildVisualSection(title: String, values: List<String>, imageUrls: L
                     }
                 }
             }
-            Text(value, modifier = Modifier.width(230.dp))
+            Column(Modifier.width(230.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+                Text(value)
+                if (details != null) {
+                    Text(
+                        terms.text("build.item.details.hint", "Toque para ver atributos"),
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.secondary
+                    )
+                }
+            }
         }
+    }
+
+    selectedItem.value?.let { details ->
+        AlertDialog(
+            onDismissRequest = { selectedItem.value = null },
+            confirmButton = {
+                TextButton(onClick = { selectedItem.value = null }) {
+                    Text(terms.text("build.item.details.close", "Fechar"))
+                }
+            },
+            title = { Text(details.name) },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        terms.text("build.item.details.title", "Atributos especiais"),
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    details.attributes.forEach { attribute -> Text("• $attribute") }
+                }
+            }
+        )
+    }
+}
+
+private fun buildItemDetails(value: String): BuildItemDetails? {
+    val normalized = value.lowercase()
+    return when {
+        "speedy hedgehog" in normalized -> BuildItemDetails(
+            name = value,
+            attributes = listOf(
+                "Melhora a geração de Ultimate.",
+                "Adiciona suporte de ATK para a equipe."
+            )
+        )
+        "diabolos" in normalized -> BuildItemDetails(
+            name = value,
+            attributes = listOf(
+                "Concede bônus de Chaos DMG.",
+                "Oferece Chaos RES Ignore."
+            )
+        )
+        "kingdom's guard" in normalized -> BuildItemDetails(
+            name = value,
+            attributes = listOf(
+                "Prioriza DEF para o usuário.",
+                "Aumenta a potência dos escudos."
+            )
+        )
+        else -> null
     }
 }
 
