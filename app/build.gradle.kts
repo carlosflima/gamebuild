@@ -3,6 +3,17 @@ plugins {
     id("org.jetbrains.kotlin.plugin.compose")
 }
 
+val releaseKeystorePath = System.getenv("GAMEBUILDS_KEYSTORE_PATH")
+val releaseKeystorePassword = System.getenv("GAMEBUILDS_KEYSTORE_PASSWORD")
+val releaseKeyAlias = System.getenv("GAMEBUILDS_KEY_ALIAS")
+val releaseKeyPassword = System.getenv("GAMEBUILDS_KEY_PASSWORD")
+val hasReleaseSigningConfig = listOf(
+    releaseKeystorePath,
+    releaseKeystorePassword,
+    releaseKeyAlias,
+    releaseKeyPassword
+).all { !it.isNullOrBlank() }
+
 android {
     namespace = "com.carlosflima.gamebuild"
     compileSdk = 37
@@ -17,11 +28,25 @@ android {
         vectorDrawables.useSupportLibrary = true
     }
 
+    signingConfigs {
+        if (hasReleaseSigningConfig) {
+            create("release") {
+                storeFile = file(releaseKeystorePath!!)
+                storePassword = releaseKeystorePassword
+                keyAlias = releaseKeyAlias
+                keyPassword = releaseKeyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
             isDebuggable = false
             isMinifyEnabled = true
             isShrinkResources = true
+            if (hasReleaseSigningConfig) {
+                signingConfig = signingConfigs.getByName("release")
+            }
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         debug {
