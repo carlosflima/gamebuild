@@ -23,6 +23,7 @@ Os jogos ainda indisponíveis aparecem na seleção inicial com ação desabilit
 - imagens de personagens, armas e equipamentos;
 - popup de atributos especiais para equipamentos compatíveis;
 - fundos visuais específicos para a tela inicial e páginas internas;
+- fallback local no fundo da página de personagem quando a imagem remota não carregar;
 - navegação de retorno por botão e gesto do Android;
 - fontes externas associadas às builds;
 - pipeline de CI com build debug, testes unitários, lint e build release endurecida.
@@ -53,11 +54,17 @@ gradle assembleRelease
 
 ## Teste em dispositivo físico
 
-O CI gera uma APK debug identificada como `Game-Builds-0.3.5-debug`. Ela é usada para as rodadas de validação mobile antes de qualquer etapa de release assinada.
+O CI gera uma APK debug com o padrão `Game-Builds-<versionName>-debug`. Ela é usada para as rodadas de validação mobile antes de qualquer etapa de release assinada.
+
+## Release assinada
+
+O repositório possui um workflow separado e manual para gerar APK/AAB assinados usando GitHub Actions Secrets, sem versionar keystore ou credenciais. O fluxo valida tag e versão, verifica as assinaturas e gera `SHA256SUMS.txt`, mas não publica GitHub Release nem envia artefatos para lojas automaticamente.
+
+As instruções de configuração e teste seguro estão em [`docs/release-signing.md`](docs/release-signing.md).
 
 ## Próximos passos
 
 - ampliar os dados e atributos detalhados das builds;
 - melhorar fallbacks locais para imagens remotas;
 - continuar a evolução visual das páginas de personagens;
-- preparar o pipeline de release assinada somente após as pendências de CI correspondentes serem concluídas.
+- configurar e testar o workflow manual de release assinada em ambiente controlado antes de qualquer publicação real.
