@@ -19,18 +19,14 @@ jobs:
   build-signed-release:
     runs-on: ubuntu-latest
     env:
-      GAMEBUILDS_KEYSTORE_BASE64: ${{ secrets.GAMEBUILDS_KEYSTORE_BASE64 }}
-      GAMEBUILDS_KEYSTORE_PASSWORD: ${{ secrets.GAMEBUILDS_KEYSTORE_PASSWORD }}
-      GAMEBUILDS_KEY_ALIAS: ${{ secrets.GAMEBUILDS_KEY_ALIAS }}
-      GAMEBUILDS_KEY_PASSWORD: ${{ secrets.GAMEBUILDS_KEY_PASSWORD }}
+      RELEASE_TAG: ${{ inputs.release_tag }}
 
     steps:
       - name: Validate requested tag format
         shell: bash
         run: |
           set -euo pipefail
-          tag='${{ inputs.release_tag }}'
-          if [[ ! "$tag" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+          if [[ ! "$RELEASE_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
             echo "A tag deve seguir o formato v<versionName>, por exemplo v0.3.5." >&2
             exit 1
           fi
@@ -79,7 +75,7 @@ jobs:
           fi
 
           expected_tag="v${version_name}"
-          if [[ '${{ inputs.release_tag }}' != "$expected_tag" ]]; then
+          if [[ "$RELEASE_TAG" != "$expected_tag" ]]; then
             echo "Tag incompatível: esperado $expected_tag para versionName=$version_name." >&2
             exit 1
           fi
@@ -95,6 +91,11 @@ jobs:
 
       - name: Validate signing secrets and reconstruct keystore
         shell: bash
+        env:
+          GAMEBUILDS_KEYSTORE_BASE64: ${{ secrets.GAMEBUILDS_KEYSTORE_BASE64 }}
+          GAMEBUILDS_KEYSTORE_PASSWORD: ${{ secrets.GAMEBUILDS_KEYSTORE_PASSWORD }}
+          GAMEBUILDS_KEY_ALIAS: ${{ secrets.GAMEBUILDS_KEY_ALIAS }}
+          GAMEBUILDS_KEY_PASSWORD: ${{ secrets.GAMEBUILDS_KEY_PASSWORD }}
         run: |
           set -euo pipefail
           missing=()
@@ -119,6 +120,10 @@ jobs:
 
       - name: Build signed release APK and AAB
         shell: bash
+        env:
+          GAMEBUILDS_KEYSTORE_PASSWORD: ${{ secrets.GAMEBUILDS_KEYSTORE_PASSWORD }}
+          GAMEBUILDS_KEY_ALIAS: ${{ secrets.GAMEBUILDS_KEY_ALIAS }}
+          GAMEBUILDS_KEY_PASSWORD: ${{ secrets.GAMEBUILDS_KEY_PASSWORD }}
         run: |
           set -euo pipefail
           gradle clean assembleRelease bundleRelease
