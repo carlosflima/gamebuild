@@ -521,16 +521,29 @@ private fun BuildComparisonLine(label: String, value: String) {
 
 @Composable
 private fun CharacterImage(character: GameCharacter, modifier: Modifier = Modifier) {
-    if (character.imageUrl != null) {
-        AsyncImage(
-            model = character.imageUrl,
-            contentDescription = "Imagem de ${character.name}",
-            modifier = modifier,
+    Box(modifier = modifier) {
+        Image(
+            painter = painterResource(characterFallbackBackground(character.game)),
+            contentDescription = null,
+            modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-    } else {
-        Box(modifier = modifier, contentAlignment = Alignment.Center) {
-            Text(character.name.take(1), style = MaterialTheme.typography.displayMedium)
+        if (character.imageUrl != null) {
+            AsyncImage(
+                model = character.imageUrl,
+                contentDescription = "Imagem de ${character.name}",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        } else {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Black.copy(alpha = 0.34f)),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(character.name.take(1), style = MaterialTheme.typography.displayMedium)
+            }
         }
     }
 }
