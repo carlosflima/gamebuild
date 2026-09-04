@@ -403,13 +403,11 @@ private fun BuildScreen(
         verticalArrangement = Arrangement.spacedBy(12.dp)
     ) {
         item {
-            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                CharacterImage(character, Modifier.fillMaxWidth().height(220.dp))
-                Column {
-                    Text(character.name, style = MaterialTheme.typography.headlineMedium)
-                    Text(character.role, style = MaterialTheme.typography.bodyMedium)
-                }
-            }
+            CharacterSummaryHeader(
+                character = character,
+                buildTypes = buildTypes,
+                terms = terms
+            )
         }
 
         if (buildTypes.size > 1) {
@@ -463,6 +461,55 @@ private fun BuildScreen(
             }
         } else {
             items(builds, key = { it.id }) { build -> BuildCard(build, terms) }
+        }
+    }
+}
+
+@Composable
+private fun CharacterSummaryHeader(
+    character: GameCharacter,
+    buildTypes: List<BuildType>,
+    terms: AppTerms
+) {
+    Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+        CharacterImage(character, Modifier.fillMaxWidth().height(220.dp))
+        Card(Modifier.fillMaxWidth()) {
+            Column(
+                modifier = Modifier.padding(16.dp),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
+                Text(character.name, style = MaterialTheme.typography.headlineMedium)
+                Surface(
+                    shape = MaterialTheme.shapes.small,
+                    color = MaterialTheme.colorScheme.surfaceVariant
+                ) {
+                    Text(
+                        character.role,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                        style = MaterialTheme.typography.labelLarge
+                    )
+                }
+                if (buildTypes.isNotEmpty()) {
+                    Row(
+                        Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        buildTypes.forEach { type ->
+                            Surface(
+                                shape = MaterialTheme.shapes.small,
+                                color = MaterialTheme.colorScheme.surfaceVariant
+                            ) {
+                                Text(
+                                    terms.buildTypeName(type),
+                                    modifier = Modifier.padding(horizontal = 10.dp, vertical = 6.dp),
+                                    style = MaterialTheme.typography.labelMedium,
+                                    color = MaterialTheme.colorScheme.secondary
+                                )
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
