@@ -636,18 +636,7 @@ private fun BuildVisualSection(
                 shape = MaterialTheme.shapes.medium,
                 color = MaterialTheme.colorScheme.surfaceVariant
             ) {
-                if (imageUrl != null) {
-                    AsyncImage(
-                        model = imageUrl,
-                        contentDescription = "Imagem de $value",
-                        modifier = Modifier.fillMaxSize().padding(4.dp),
-                        contentScale = ContentScale.Fit
-                    )
-                } else {
-                    Box(contentAlignment = Alignment.Center) {
-                        Text(value.take(1), style = MaterialTheme.typography.titleLarge)
-                    }
-                }
+                BuildItemImage(value = value, imageUrl = imageUrl)
             }
             Column(Modifier.width(230.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(value)
@@ -681,6 +670,32 @@ private fun BuildVisualSection(
                 }
             }
         )
+    }
+}
+
+@Composable
+private fun BuildItemImage(value: String, imageUrl: String?) {
+    val imageLoaded = remember(imageUrl) { mutableStateOf(false) }
+
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        if (!imageLoaded.value) {
+            Text(value.take(1), style = MaterialTheme.typography.titleLarge)
+        }
+
+        imageUrl?.let { url ->
+            AsyncImage(
+                model = url,
+                contentDescription = "Imagem de $value",
+                modifier = Modifier.fillMaxSize().padding(4.dp),
+                contentScale = ContentScale.Fit,
+                onLoading = { imageLoaded.value = false },
+                onSuccess = { imageLoaded.value = true },
+                onError = { imageLoaded.value = false }
+            )
+        }
     }
 }
 
