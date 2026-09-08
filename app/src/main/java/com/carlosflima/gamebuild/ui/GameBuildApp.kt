@@ -602,6 +602,8 @@ private fun BuildComparisonLine(label: String, value: String) {
 
 @Composable
 private fun CharacterImage(character: GameCharacter, modifier: Modifier = Modifier) {
+    val imageLoaded = remember(character.imageUrl) { mutableStateOf(false) }
+
     Box(modifier = modifier) {
         Image(
             painter = painterResource(characterFallbackBackground(character.game)),
@@ -609,14 +611,7 @@ private fun CharacterImage(character: GameCharacter, modifier: Modifier = Modifi
             modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop
         )
-        if (character.imageUrl != null) {
-            AsyncImage(
-                model = character.imageUrl,
-                contentDescription = "Imagem de ${character.name}",
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-        } else {
+        if (!imageLoaded.value) {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -625,6 +620,17 @@ private fun CharacterImage(character: GameCharacter, modifier: Modifier = Modifi
             ) {
                 Text(character.name.take(1), style = MaterialTheme.typography.displayMedium)
             }
+        }
+        character.imageUrl?.let { imageUrl ->
+            AsyncImage(
+                model = imageUrl,
+                contentDescription = "Imagem de ${character.name}",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop,
+                onLoading = { imageLoaded.value = false },
+                onSuccess = { imageLoaded.value = true },
+                onError = { imageLoaded.value = false }
+            )
         }
     }
 }
