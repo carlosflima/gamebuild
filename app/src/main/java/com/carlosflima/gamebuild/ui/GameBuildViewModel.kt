@@ -1,7 +1,7 @@
 package com.carlosflima.gamebuild.ui
 
 import androidx.lifecycle.ViewModel
-import com.carlosflima.gamebuild.data.FakeGameRepository
+import com.carlosflima.gamebuild.data.LocalGameRepository
 import com.carlosflima.gamebuild.data.GameRepository
 import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
@@ -57,7 +57,7 @@ data class GameBuildUiState(
         get() = if (selectedBuildType == null && availableBuildTypes.size > 1) builds else emptyList()
 }
 
-class GameBuildViewModel(private val repository: GameRepository = FakeGameRepository()) : ViewModel() {
+class GameBuildViewModel(private val repository: GameRepository = LocalGameRepository()) : ViewModel() {
     private val _uiState = MutableStateFlow(GameBuildUiState())
     val uiState: StateFlow<GameBuildUiState> = _uiState.asStateFlow()
 
