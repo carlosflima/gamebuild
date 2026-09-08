@@ -439,7 +439,7 @@ private fun BuildScreen(
         }
 
         if (comparisonBuilds.size > 1) {
-            item { BuildComparisonCard(comparisonBuilds, terms) }
+            item { BuildComparisonCard(comparisonBuilds, character, terms) }
         }
 
         if (builds.isEmpty()) {
@@ -515,7 +515,12 @@ private fun CharacterSummaryHeader(
 }
 
 @Composable
-private fun BuildComparisonCard(builds: List<CharacterBuild>, terms: AppTerms) {
+private fun BuildComparisonCard(
+    builds: List<CharacterBuild>,
+    character: GameCharacter,
+    terms: AppTerms
+) {
+    val context = LocalContext.current
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -527,6 +532,35 @@ private fun BuildComparisonCard(builds: List<CharacterBuild>, terms: AppTerms) {
                     terms.text("build.compare.body", "Principais diferenças entre as opções disponíveis."),
                     style = MaterialTheme.typography.bodyMedium
                 )
+                TextButton(
+                    onClick = {
+                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(
+                                Intent.EXTRA_SUBJECT,
+                                "${character.name} — ${terms.text("build.compare.share.title", "Comparação de builds")}"
+                            )
+                            putExtra(
+                                Intent.EXTRA_TEXT,
+                                buildComparisonShareText(
+                                    builds = builds,
+                                    characterName = character.name,
+                                    gameName = terms.gameName(character.game),
+                                    terms = terms
+                                )
+                            )
+                        }
+                        context.startActivity(
+                            Intent.createChooser(
+                                shareIntent,
+                                terms.text("build.compare.share.chooser", "Compartilhar comparação")
+                            )
+                        )
+                    },
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(terms.text("build.compare.share.button", "Compartilhar comparação"))
+                }
             }
 
             builds.forEachIndexed { index, build ->
