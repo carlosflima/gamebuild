@@ -10,14 +10,43 @@ internal fun buildShareText(
     gameName: String,
     terms: AppTerms
 ): String = buildString {
+    appendShareContext(characterName, gameName, terms)
+    appendLine()
+    append(buildDetailsText(build, terms))
+}.trim()
+
+internal fun buildComparisonShareText(
+    builds: List<CharacterBuild>,
+    characterName: String,
+    gameName: String,
+    terms: AppTerms
+): String = buildString {
+    appendLine(terms.text("build.compare.share.title", "Comparação de builds"))
+    appendShareContext(characterName, gameName, terms)
+
+    builds.forEachIndexed { index, build ->
+        appendLine()
+        if (index > 0) appendLine("—")
+        appendLine()
+        append(buildDetailsText(build, terms))
+    }
+}.trim()
+
+private fun StringBuilder.appendShareContext(
+    characterName: String,
+    gameName: String,
+    terms: AppTerms
+) {
+    appendLine("${terms.text("build.share.character", "Personagem")}: $characterName")
+    appendLine("${terms.text("build.share.game", "Jogo")}: $gameName")
+}
+
+private fun buildDetailsText(build: CharacterBuild, terms: AppTerms): String = buildString {
     val buildTypeName = when (build.type) {
         BuildType.META -> terms.text("build.type.meta", build.type.displayName)
         BuildType.F2P -> terms.text("build.type.f2p", build.type.displayName)
     }
 
-    appendLine("${terms.text("build.share.character", "Personagem")}: $characterName")
-    appendLine("${terms.text("build.share.game", "Jogo")}: $gameName")
-    appendLine()
     appendLine(build.title)
     appendLine("$buildTypeName • ${build.version}")
     appendLine()
