@@ -9,7 +9,7 @@ import org.junit.Test
 
 class BuildShareFormatterTest {
     @Test
-    fun includesBuildDetailsAndSourceLinks() {
+    fun includesCharacterGameBuildDetailsAndSourceLinks() {
         val build = CharacterBuild(
             id = "share-test",
             characterId = "character-1",
@@ -27,8 +27,15 @@ class BuildShareFormatterTest {
             )
         )
 
-        val text = buildShareText(build, AppTerms.Empty)
+        val text = buildShareText(
+            build = build,
+            characterName = "Personagem teste",
+            gameName = "Jogo teste",
+            terms = AppTerms.Empty
+        )
 
+        assertTrue(text.contains("Personagem: Personagem teste"))
+        assertTrue(text.contains("Jogo: Jogo teste"))
         assertTrue(text.contains("Build de teste"))
         assertTrue(text.contains("Meta • 1.0"))
         assertTrue(text.contains("Arma: Arma teste"))
