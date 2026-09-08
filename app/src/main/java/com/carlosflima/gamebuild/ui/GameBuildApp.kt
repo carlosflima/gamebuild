@@ -460,7 +460,7 @@ private fun BuildScreen(
                 }
             }
         } else {
-            items(builds, key = { it.id }) { build -> BuildCard(build, terms) }
+            items(builds, key = { it.id }) { build -> BuildCard(build, character, terms) }
         }
     }
 }
@@ -596,7 +596,7 @@ private fun CharacterImage(character: GameCharacter, modifier: Modifier = Modifi
 }
 
 @Composable
-private fun BuildCard(build: CharacterBuild, terms: AppTerms) {
+private fun BuildCard(build: CharacterBuild, character: GameCharacter, terms: AppTerms) {
     val context = LocalContext.current
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
@@ -609,8 +609,16 @@ private fun BuildCard(build: CharacterBuild, terms: AppTerms) {
                 onClick = {
                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
                         type = "text/plain"
-                        putExtra(Intent.EXTRA_SUBJECT, build.title)
-                        putExtra(Intent.EXTRA_TEXT, buildShareText(build, terms))
+                        putExtra(Intent.EXTRA_SUBJECT, "${character.name} — ${build.title}")
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            buildShareText(
+                                build = build,
+                                characterName = character.name,
+                                gameName = terms.gameName(character.game),
+                                terms = terms
+                            )
+                        )
                     }
                     context.startActivity(
                         Intent.createChooser(
