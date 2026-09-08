@@ -605,6 +605,24 @@ private fun BuildCard(build: CharacterBuild, terms: AppTerms) {
                 "${terms.buildTypeName(build.type)} • ${build.version}",
                 style = MaterialTheme.typography.labelLarge
             )
+            TextButton(
+                onClick = {
+                    val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_SUBJECT, build.title)
+                        putExtra(Intent.EXTRA_TEXT, buildShareText(build, terms))
+                    }
+                    context.startActivity(
+                        Intent.createChooser(
+                            shareIntent,
+                            terms.text("build.share.chooser", "Compartilhar build")
+                        )
+                    )
+                },
+                contentPadding = PaddingValues(0.dp)
+            ) {
+                Text(terms.text("build.share.button", "Compartilhar build"))
+            }
             HorizontalDivider()
             BuildVisualSection(
                 title = terms.text("build.section.weapon", "Arma"),
