@@ -6,7 +6,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GameRepositoryTest {
-    private val repository: GameRepository = FakeGameRepository()
+    private val repository: GameRepository = LocalGameRepository()
 
     @Test
     fun `NTE exposes the local character catalog`() {
