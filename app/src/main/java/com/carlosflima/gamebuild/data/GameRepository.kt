@@ -9,7 +9,7 @@ interface GameRepository {
     fun getBuilds(characterId: String): List<CharacterBuild>
 }
 
-class FakeGameRepository : GameRepository {
+class LocalGameRepository : GameRepository {
     override fun getCharacters(game: Game): List<GameCharacter> = when (game) {
         Game.NTE -> NteLocalDataSource.characters
         Game.WARFRAME, Game.ENDFIELD -> emptyList()
