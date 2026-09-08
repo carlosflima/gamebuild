@@ -22,7 +22,7 @@ class GameBuildViewModelTest {
 
     private val repository = object : GameRepository {
         override fun getCharacters(game: Game): List<GameCharacter> = characters
-        override fun getBuilds(characterId: String): List<CharacterBuild> = builds
+        override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = builds
     }
 
     @Test
