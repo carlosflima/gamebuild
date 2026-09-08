@@ -23,15 +23,21 @@ class GameRepositoryTest {
     }
 
     @Test
-    fun `known character returns its builds`() {
-        val builds = repository.getBuilds("nte-nanally")
+    fun `known NTE character returns its builds`() {
+        val builds = repository.getBuilds(Game.NTE, "nte-nanally")
 
         assertTrue(builds.isNotEmpty())
         assertTrue(builds.all { it.characterId == "nte-nanally" })
     }
 
     @Test
-    fun `unknown character returns no builds`() {
-        assertTrue(repository.getBuilds("missing-character").isEmpty())
+    fun `unsupported game does not expose NTE builds`() {
+        assertTrue(repository.getBuilds(Game.WARFRAME, "nte-nanally").isEmpty())
+        assertTrue(repository.getBuilds(Game.ENDFIELD, "nte-nanally").isEmpty())
+    }
+
+    @Test
+    fun `unknown NTE character returns no builds`() {
+        assertTrue(repository.getBuilds(Game.NTE, "missing-character").isEmpty())
     }
 }
