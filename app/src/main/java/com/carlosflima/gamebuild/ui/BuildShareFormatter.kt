@@ -4,12 +4,20 @@ import com.carlosflima.gamebuild.domain.AppTerms
 import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
 
-internal fun buildShareText(build: CharacterBuild, terms: AppTerms): String = buildString {
+internal fun buildShareText(
+    build: CharacterBuild,
+    characterName: String,
+    gameName: String,
+    terms: AppTerms
+): String = buildString {
     val buildTypeName = when (build.type) {
         BuildType.META -> terms.text("build.type.meta", build.type.displayName)
         BuildType.F2P -> terms.text("build.type.f2p", build.type.displayName)
     }
 
+    appendLine("${terms.text("build.share.character", "Personagem")}: $characterName")
+    appendLine("${terms.text("build.share.game", "Jogo")}: $gameName")
+    appendLine()
     appendLine(build.title)
     appendLine("$buildTypeName • ${build.version}")
     appendLine()
