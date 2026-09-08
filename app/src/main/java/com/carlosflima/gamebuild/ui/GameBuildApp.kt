@@ -538,7 +538,7 @@ private fun BuildComparisonCard(
                             type = "text/plain"
                             putExtra(
                                 Intent.EXTRA_SUBJECT,
-                                "${character.name} — ${terms.text("build.compare.share.title", "Comparação de builds")}" 
+                                "${character.name} — ${terms.text("build.compare.share.title", "Comparação de builds")}"
                             )
                             putExtra(
                                 Intent.EXTRA_TEXT,
