@@ -10,13 +10,13 @@ interface GameRepository {
 }
 
 class LocalGameRepository : GameRepository {
-    override fun getCharacters(game: Game): List<GameCharacter> = when (game) {
-        Game.NTE -> NteLocalDataSource.characters
-        Game.WARFRAME, Game.ENDFIELD -> emptyList()
-    }
+    private val dataSources: Map<Game, LocalGameDataSource> = mapOf(
+        Game.NTE to NteLocalDataSource
+    )
 
-    override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = when (game) {
-        Game.NTE -> NteLocalDataSource.getBuilds(characterId)
-        Game.WARFRAME, Game.ENDFIELD -> emptyList()
-    }
+    override fun getCharacters(game: Game): List<GameCharacter> =
+        dataSources[game]?.characters.orEmpty()
+
+    override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> =
+        dataSources[game]?.getBuilds(characterId).orEmpty()
 }
