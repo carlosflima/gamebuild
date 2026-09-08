@@ -6,7 +6,7 @@ import com.carlosflima.gamebuild.domain.GameCharacter
 
 interface GameRepository {
     fun getCharacters(game: Game): List<GameCharacter>
-    fun getBuilds(characterId: String): List<CharacterBuild>
+    fun getBuilds(game: Game, characterId: String): List<CharacterBuild>
 }
 
 class LocalGameRepository : GameRepository {
@@ -15,6 +15,8 @@ class LocalGameRepository : GameRepository {
         Game.WARFRAME, Game.ENDFIELD -> emptyList()
     }
 
-    override fun getBuilds(characterId: String): List<CharacterBuild> =
-        NteLocalDataSource.getBuilds(characterId)
+    override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = when (game) {
+        Game.NTE -> NteLocalDataSource.getBuilds(characterId)
+        Game.WARFRAME, Game.ENDFIELD -> emptyList()
+    }
 }

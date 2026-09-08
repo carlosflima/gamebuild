@@ -23,7 +23,7 @@ class GameBuildNavigationStateTest {
 
     private val repository = object : GameRepository {
         override fun getCharacters(game: Game): List<GameCharacter> = characters
-        override fun getBuilds(characterId: String): List<CharacterBuild> = builds
+        override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = builds
     }
 
     @Test
@@ -86,7 +86,7 @@ class GameBuildNavigationStateTest {
     fun repositoryErrorsAreExposedAndCanBeCleared() {
         val characterFailureRepository = object : GameRepository {
             override fun getCharacters(game: Game): List<GameCharacter> = error("roster unavailable")
-            override fun getBuilds(characterId: String): List<CharacterBuild> = emptyList()
+            override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = emptyList()
         }
         val rosterViewModel = GameBuildViewModel(characterFailureRepository)
 
@@ -99,7 +99,7 @@ class GameBuildNavigationStateTest {
 
         val buildFailureRepository = object : GameRepository {
             override fun getCharacters(game: Game): List<GameCharacter> = characters
-            override fun getBuilds(characterId: String): List<CharacterBuild> = error("builds unavailable")
+            override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = error("builds unavailable")
         }
         val buildViewModel = GameBuildViewModel(buildFailureRepository)
         buildViewModel.selectGame(Game.NTE)
