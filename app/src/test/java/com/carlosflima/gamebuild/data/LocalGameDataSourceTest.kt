@@ -5,6 +5,7 @@ import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertSame
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class LocalGameDataSourceTest {
@@ -21,6 +22,14 @@ class LocalGameDataSourceTest {
         assertSame(NteLocalDataSource, dataSources[Game.NTE])
         assertSame(WarframeLocalDataSource, dataSources[Game.WARFRAME])
         assertSame(EndfieldLocalDataSource, dataSources[Game.ENDFIELD])
+    }
+
+    @Test
+    fun `future game sources start registered but empty`() {
+        listOf(WarframeLocalDataSource, EndfieldLocalDataSource).forEach { dataSource ->
+            assertTrue(dataSource.characters.isEmpty())
+            assertTrue(dataSource.getBuilds("missing-character").isEmpty())
+        }
     }
 
     @Test(expected = IllegalArgumentException::class)
