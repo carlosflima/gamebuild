@@ -5,7 +5,7 @@ import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
 
 internal object NteBuildCatalog {
-    private val builds: List<CharacterBuild> = listOf(
+    internal val builds: List<CharacterBuild> = listOf(
         CharacterBuild(
             id = "nte-nanally-meta",
             characterId = "nte-nanally",
