@@ -24,6 +24,16 @@ class NteLocalDataSourceTest {
     }
 
     @Test
+    fun `every tracked character has at least one build`() {
+        NteLocalDataSource.characters.forEach { character ->
+            assertTrue(
+                "Expected at least one build for ${character.id}",
+                NteLocalDataSource.getBuilds(character.id).isNotEmpty()
+            )
+        }
+    }
+
+    @Test
     fun `builds reference known characters and have unique ids`() {
         val characters = NteLocalDataSource.characters
         val characterIds = characters.map { it.id }.toSet()

@@ -48,6 +48,17 @@ class GameRepositoryTest {
     }
 
     @Test
+    fun `default future games stay empty while their catalogs are in preparation`() {
+        val defaultRepository = LocalGameRepository()
+        val nteCharacterId = NteLocalDataSource.characters.first().id
+
+        listOf(Game.WARFRAME, Game.ENDFIELD).forEach { game ->
+            assertTrue(defaultRepository.getCharacters(game).isEmpty())
+            assertTrue(defaultRepository.getBuilds(game, nteCharacterId).isEmpty())
+        }
+    }
+
+    @Test
     fun `registered game exposes source characters`() {
         assertEquals(listOf(character), repository.getCharacters(Game.NTE))
     }
