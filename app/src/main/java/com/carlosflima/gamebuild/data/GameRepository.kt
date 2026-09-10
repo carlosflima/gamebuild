@@ -9,16 +9,16 @@ interface GameRepository {
     fun getBuilds(game: Game, characterId: String): List<CharacterBuild>
 }
 
+internal val defaultLocalGameDataSources: List<LocalGameDataSource> = listOf(
+    NteLocalDataSource,
+    WarframeLocalDataSource,
+    EndfieldLocalDataSource
+)
+
 class LocalGameRepository internal constructor(
     sources: List<LocalGameDataSource>
 ) : GameRepository {
-    constructor() : this(
-        listOf(
-            NteLocalDataSource,
-            WarframeLocalDataSource,
-            EndfieldLocalDataSource
-        )
-    )
+    constructor() : this(defaultLocalGameDataSources)
 
     private val dataSources: Map<Game, LocalGameDataSource> =
         localGameDataSourceMapOf(*sources.toTypedArray())
