@@ -12,7 +12,13 @@ interface GameRepository {
 class LocalGameRepository internal constructor(
     sources: List<LocalGameDataSource>
 ) : GameRepository {
-    constructor() : this(listOf(NteLocalDataSource))
+    constructor() : this(
+        listOf(
+            NteLocalDataSource,
+            WarframeLocalDataSource,
+            EndfieldLocalDataSource
+        )
+    )
 
     private val dataSources: Map<Game, LocalGameDataSource> =
         localGameDataSourceMapOf(*sources.toTypedArray())
