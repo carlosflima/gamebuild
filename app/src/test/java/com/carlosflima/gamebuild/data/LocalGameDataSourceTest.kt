@@ -11,12 +11,8 @@ import org.junit.Test
 class LocalGameDataSourceTest {
 
     @Test
-    fun `map indexes all default sources by declared game`() {
-        val dataSources = localGameDataSourceMapOf(
-            NteLocalDataSource,
-            WarframeLocalDataSource,
-            EndfieldLocalDataSource
-        )
+    fun `default source list covers every game by declared identity`() {
+        val dataSources = localGameDataSourceMapOf(*defaultLocalGameDataSources.toTypedArray())
 
         assertEquals(Game.entries.size, dataSources.size)
         assertSame(NteLocalDataSource, dataSources[Game.NTE])
