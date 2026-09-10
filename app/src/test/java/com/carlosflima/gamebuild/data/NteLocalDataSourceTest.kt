@@ -27,7 +27,8 @@ class NteLocalDataSourceTest {
     fun `builds reference known characters and have unique ids`() {
         val characters = NteLocalDataSource.characters
         val characterIds = characters.map { it.id }.toSet()
-        val builds = characters.flatMap { character ->
+        val builds = NteBuildCatalog.builds
+        val indexedBuilds = characters.flatMap { character ->
             NteLocalDataSource.getBuilds(character.id).onEach { build ->
                 assertEquals(character.id, build.characterId)
             }
@@ -35,16 +36,13 @@ class NteLocalDataSourceTest {
 
         assertTrue(builds.isNotEmpty())
         assertEquals(builds.size, builds.map { it.id }.distinct().size)
-        builds.forEach { build ->
-            assertTrue(build.characterId in characterIds)
-        }
+        assertTrue(builds.all { build -> build.characterId in characterIds })
+        assertEquals(builds.map { it.id }.toSet(), indexedBuilds.map { it.id }.toSet())
     }
 
     @Test
     fun `builds keep essential content structurally complete`() {
-        val builds = NteLocalDataSource.characters.flatMap { character ->
-            NteLocalDataSource.getBuilds(character.id)
-        }
+        val builds = NteBuildCatalog.builds
 
         builds.forEach { build ->
             assertTrue(build.id.isNotBlank())
