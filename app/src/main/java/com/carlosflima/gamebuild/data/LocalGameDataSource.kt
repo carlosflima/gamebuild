@@ -10,3 +10,18 @@ internal interface LocalGameDataSource {
 
     fun getBuilds(characterId: String): List<CharacterBuild>
 }
+
+internal fun localGameDataSourceMapOf(
+    vararg dataSources: LocalGameDataSource
+): Map<Game, LocalGameDataSource> {
+    val duplicateGames = dataSources
+        .groupBy { it.game }
+        .filterValues { it.size > 1 }
+        .keys
+
+    require(duplicateGames.isEmpty()) {
+        "Duplicate local game data sources: ${duplicateGames.joinToString { it.name }}"
+    }
+
+    return dataSources.associateBy { it.game }
+}
