@@ -48,14 +48,17 @@ class GameRepositoryTest {
     }
 
     @Test
-    fun `default future games stay empty while their catalogs are in preparation`() {
+    fun `default repository exposes Warframe roster without leaking game data`() {
         val defaultRepository = LocalGameRepository()
         val nteCharacterId = NteLocalDataSource.characters.first().id
 
-        listOf(Game.WARFRAME, Game.ENDFIELD).forEach { game ->
-            assertTrue(defaultRepository.getCharacters(game).isEmpty())
-            assertTrue(defaultRepository.getBuilds(game, nteCharacterId).isEmpty())
-        }
+        assertEquals(
+            WarframeLocalDataSource.characters,
+            defaultRepository.getCharacters(Game.WARFRAME)
+        )
+        assertTrue(defaultRepository.getCharacters(Game.ENDFIELD).isEmpty())
+        assertTrue(defaultRepository.getBuilds(Game.WARFRAME, nteCharacterId).isEmpty())
+        assertTrue(defaultRepository.getBuilds(Game.ENDFIELD, nteCharacterId).isEmpty())
     }
 
     @Test
