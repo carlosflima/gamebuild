@@ -4,13 +4,15 @@ Aplicativo Android para consultar, filtrar e comparar builds de personagens em u
 
 ## Estado atual — V0.3.5
 
-A versão atual já possui fluxo funcional para Neverness to Everness (NTE), com seleção de personagem, builds Meta/F2P, comparação rápida e apresentação visual de armas e equipamentos.
+A baseline funcional de Neverness to Everness (NTE) desta versão está concluída: o roster atualmente acompanhado pelo app possui cobertura de builds, seleção de personagem, alternativas Meta/F2P quando aplicáveis, comparação rápida e apresentação visual de armas e equipamentos.
+
+A estrutura local de dados para Warframe e Arknights: Endfield também já foi inicializada e registrada no repositório. Esses jogos permanecem indisponíveis na interface até que seus catálogos recebam conteúdo mínimo confiável.
 
 ### Jogos
 
-- **Neverness to Everness (NTE)** — disponível.
-- **Warframe** — em breve.
-- **Arknights: Endfield** — em breve.
+- **Neverness to Everness (NTE)** — baseline funcional concluída e disponível.
+- **Warframe** — estrutura de dados inicializada; conteúdo em preparação.
+- **Arknights: Endfield** — estrutura de dados inicializada; conteúdo em preparação.
 
 Os jogos ainda indisponíveis aparecem na seleção inicial com ação desabilitada e indicação **Em breve**.
 
@@ -34,6 +36,7 @@ Os jogos ainda indisponíveis aparecem na seleção inicial com ação desabilit
 - Jetpack Compose + Material 3;
 - ViewModel + StateFlow;
 - Repository Pattern;
+- fontes e catálogos locais separados por jogo;
 - Coil para carregamento de imagens;
 - GitHub Actions;
 - Java 17;
@@ -64,7 +67,8 @@ As instruções de configuração e teste seguro estão em [`docs/release-signin
 
 ## Próximos passos
 
-- ampliar os dados e atributos detalhados das builds;
-- melhorar fallbacks locais para imagens remotas;
-- continuar a evolução visual das páginas de personagens;
+- povoar o catálogo de Warframe com um primeiro conjunto pequeno e verificável de personagens/builds antes de habilitá-lo na UI;
+- iniciar depois o catálogo de Arknights: Endfield com o mesmo critério de qualidade;
+- continuar melhorias incrementais no NTE quando houver novos dados confiáveis, sem reabrir a baseline já concluída;
+- melhorar fallbacks locais para imagens remotas e a evolução visual das páginas;
 - configurar e testar o workflow manual de release assinada em ambiente controlado antes de qualquer publicação real.
