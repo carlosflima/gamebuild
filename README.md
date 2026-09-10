@@ -6,12 +6,12 @@ Aplicativo Android para consultar, filtrar e comparar builds de personagens em u
 
 A baseline funcional de Neverness to Everness (NTE) desta versão está concluída: o roster atualmente acompanhado pelo app possui cobertura de builds, seleção de personagem, alternativas Meta/F2P quando aplicáveis, comparação rápida e apresentação visual de armas e equipamentos.
 
-A estrutura local de dados para Warframe e Arknights: Endfield também já foi inicializada e registrada no repositório. Esses jogos permanecem indisponíveis na interface até que seus catálogos recebam conteúdo mínimo confiável.
+Warframe já possui um primeiro roster verificável com Excalibur, Mag e Volt, baseado nas páginas oficiais atuais. O catálogo de builds ainda está vazio e o jogo permanece indisponível na interface até que esse conteúdo receba curadoria própria. A estrutura local de Arknights: Endfield também está inicializada, ainda sem conteúdo.
 
 ### Jogos
 
 - **Neverness to Everness (NTE)** — baseline funcional concluída e disponível.
-- **Warframe** — estrutura de dados inicializada; conteúdo em preparação.
+- **Warframe** — roster inicial com Excalibur, Mag e Volt; builds em preparação.
 - **Arknights: Endfield** — estrutura de dados inicializada; conteúdo em preparação.
 
 Os jogos ainda indisponíveis aparecem na seleção inicial com ação desabilitada e indicação **Em breve**.
@@ -67,7 +67,7 @@ As instruções de configuração e teste seguro estão em [`docs/release-signin
 
 ## Próximos passos
 
-- povoar o catálogo de Warframe com um primeiro conjunto pequeno e verificável de personagens/builds antes de habilitá-lo na UI;
+- curar um primeiro conjunto pequeno e verificável de builds para Excalibur, Mag e Volt antes de habilitar Warframe na UI;
 - iniciar depois o catálogo de Arknights: Endfield com o mesmo critério de qualidade;
 - continuar melhorias incrementais no NTE quando houver novos dados confiáveis, sem reabrir a baseline já concluída;
 - melhorar fallbacks locais para imagens remotas e a evolução visual das páginas;
