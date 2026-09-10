@@ -101,6 +101,23 @@ class GameBuildViewModelTest {
         assertEquals(builds, viewModel.uiState.value.comparisonBuilds)
     }
 
+    @Test
+    fun unavailableBuildTypeKeepsCurrentBuildState() {
+        val singleBuild = build("meta-only", BuildType.META)
+        val singleTypeRepository = object : GameRepository {
+            override fun getCharacters(game: Game): List<GameCharacter> = characters
+            override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = listOf(singleBuild)
+        }
+        val viewModel = GameBuildViewModel(singleTypeRepository)
+        viewModel.selectGame(Game.NTE)
+        viewModel.selectCharacter(characters.first())
+
+        viewModel.selectBuildType(BuildType.F2P)
+
+        assertEquals(null, viewModel.uiState.value.selectedBuildType)
+        assertEquals(listOf(singleBuild), viewModel.uiState.value.filteredBuilds)
+    }
+
     private fun build(id: String, type: BuildType) = CharacterBuild(
         id = id,
         characterId = characters.first().id,
