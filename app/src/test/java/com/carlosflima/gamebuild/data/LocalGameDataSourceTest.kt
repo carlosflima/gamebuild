@@ -10,11 +10,17 @@ import org.junit.Test
 class LocalGameDataSourceTest {
 
     @Test
-    fun `map indexes source by declared game`() {
-        val dataSources = localGameDataSourceMapOf(NteLocalDataSource)
+    fun `map indexes all default sources by declared game`() {
+        val dataSources = localGameDataSourceMapOf(
+            NteLocalDataSource,
+            WarframeLocalDataSource,
+            EndfieldLocalDataSource
+        )
 
-        assertEquals(1, dataSources.size)
+        assertEquals(Game.entries.size, dataSources.size)
         assertSame(NteLocalDataSource, dataSources[Game.NTE])
+        assertSame(WarframeLocalDataSource, dataSources[Game.WARFRAME])
+        assertSame(EndfieldLocalDataSource, dataSources[Game.ENDFIELD])
     }
 
     @Test(expected = IllegalArgumentException::class)
