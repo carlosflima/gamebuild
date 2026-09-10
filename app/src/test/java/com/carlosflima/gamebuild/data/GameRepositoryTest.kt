@@ -1,43 +1,76 @@
 package com.carlosflima.gamebuild.data
 
+import com.carlosflima.gamebuild.domain.BuildType
+import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
+import com.carlosflima.gamebuild.domain.GameCharacter
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class GameRepositoryTest {
-    private val repository: GameRepository = LocalGameRepository()
+    private val character = GameCharacter(
+        id = "test-character",
+        name = "Test Character",
+        role = "Test Role",
+        game = Game.NTE
+    )
+
+    private val build = CharacterBuild(
+        id = "test-build",
+        characterId = character.id,
+        title = "Test Build",
+        type = BuildType.META,
+        version = "test",
+        weapon = "test",
+        equipment = emptyList(),
+        statPriority = emptyList(),
+        team = emptyList(),
+        notes = "test"
+    )
+
+    private val source = object : LocalGameDataSource {
+        override val game: Game = Game.NTE
+        override val characters: List<GameCharacter> = listOf(character)
+
+        override fun getBuilds(characterId: String): List<CharacterBuild> =
+            if (characterId == character.id) listOf(build) else emptyList()
+    }
+
+    private val repository: GameRepository = LocalGameRepository(listOf(source))
 
     @Test
-    fun `NTE exposes the local character catalog`() {
+    fun `default repository wires the NTE source`() {
         assertEquals(
             NteLocalDataSource.characters,
-            repository.getCharacters(Game.NTE)
+            LocalGameRepository().getCharacters(Game.NTE)
         )
     }
 
     @Test
-    fun `unavailable games expose no characters`() {
+    fun `registered game exposes source characters`() {
+        assertEquals(listOf(character), repository.getCharacters(Game.NTE))
+    }
+
+    @Test
+    fun `unregistered games expose no characters`() {
         assertTrue(repository.getCharacters(Game.WARFRAME).isEmpty())
         assertTrue(repository.getCharacters(Game.ENDFIELD).isEmpty())
     }
 
     @Test
-    fun `known NTE character returns its builds`() {
-        val builds = repository.getBuilds(Game.NTE, "nte-nanally")
-
-        assertTrue(builds.isNotEmpty())
-        assertTrue(builds.all { it.characterId == "nte-nanally" })
+    fun `registered game delegates build lookup`() {
+        assertEquals(listOf(build), repository.getBuilds(Game.NTE, character.id))
     }
 
     @Test
-    fun `unsupported game does not expose NTE builds`() {
-        assertTrue(repository.getBuilds(Game.WARFRAME, "nte-nanally").isEmpty())
-        assertTrue(repository.getBuilds(Game.ENDFIELD, "nte-nanally").isEmpty())
+    fun `unregistered game does not expose registered builds`() {
+        assertTrue(repository.getBuilds(Game.WARFRAME, character.id).isEmpty())
+        assertTrue(repository.getBuilds(Game.ENDFIELD, character.id).isEmpty())
     }
 
     @Test
-    fun `unknown NTE character returns no builds`() {
+    fun `unknown character returns no builds`() {
         assertTrue(repository.getBuilds(Game.NTE, "missing-character").isEmpty())
     }
 }
