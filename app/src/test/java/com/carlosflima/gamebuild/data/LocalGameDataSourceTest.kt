@@ -21,11 +21,9 @@ class LocalGameDataSourceTest {
     }
 
     @Test
-    fun `future game sources start registered but empty`() {
-        listOf(WarframeLocalDataSource, EndfieldLocalDataSource).forEach { dataSource ->
-            assertTrue(dataSource.characters.isEmpty())
-            assertTrue(dataSource.getBuilds("missing-character").isEmpty())
-        }
+    fun `Endfield source stays empty while its catalog has not started`() {
+        assertTrue(EndfieldLocalDataSource.characters.isEmpty())
+        assertTrue(EndfieldLocalDataSource.getBuilds("missing-character").isEmpty())
     }
 
     @Test(expected = IllegalArgumentException::class)
