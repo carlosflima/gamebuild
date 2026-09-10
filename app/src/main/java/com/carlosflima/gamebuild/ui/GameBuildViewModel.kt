@@ -89,6 +89,9 @@ class GameBuildViewModel(private val repository: GameRepository = LocalGameRepos
     }
 
     fun selectCharacter(character: GameCharacter) {
+        val selectedGame = _uiState.value.selectedGame
+        if (selectedGame == null || character.game != selectedGame) return
+
         runCatching { repository.getBuilds(character.game, character.id) }
             .onSuccess { builds ->
                 _uiState.value = _uiState.value.copy(

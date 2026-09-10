@@ -55,6 +55,34 @@ class GameBuildViewModelTest {
     }
 
     @Test
+    fun selectingCharacterWithoutActiveGameKeepsInitialState() {
+        val viewModel = GameBuildViewModel(repository)
+
+        viewModel.selectCharacter(characters.first())
+
+        assertEquals(GameBuildUiState(), viewModel.uiState.value)
+    }
+
+    @Test
+    fun selectingCharacterFromAnotherGameKeepsCurrentRosterState() {
+        val viewModel = GameBuildViewModel(repository)
+        viewModel.selectGame(Game.NTE)
+        val foreignCharacter = GameCharacter(
+            id = "warframe-test",
+            name = "Foreign Character",
+            role = "Test",
+            game = Game.WARFRAME
+        )
+
+        viewModel.selectCharacter(foreignCharacter)
+
+        assertEquals(
+            GameBuildUiState(selectedGame = Game.NTE, characters = characters),
+            viewModel.uiState.value
+        )
+    }
+
+    @Test
     fun filtersBuildsByTypeAndRestoresAllBuilds() {
         val viewModel = GameBuildViewModel(repository)
         viewModel.selectGame(Game.NTE)
