@@ -10,9 +10,9 @@ interface GameRepository {
 }
 
 class LocalGameRepository : GameRepository {
-    private val dataSources: Map<Game, LocalGameDataSource> = mapOf(
-        Game.NTE to NteLocalDataSource
-    )
+    private val dataSources: Map<Game, LocalGameDataSource> = listOf(
+        NteLocalDataSource
+    ).associateBy { it.game }
 
     override fun getCharacters(game: Game): List<GameCharacter> =
         dataSources[game]?.characters.orEmpty()
