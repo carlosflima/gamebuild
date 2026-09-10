@@ -9,10 +9,13 @@ interface GameRepository {
     fun getBuilds(game: Game, characterId: String): List<CharacterBuild>
 }
 
-class LocalGameRepository : GameRepository {
-    private val dataSources: Map<Game, LocalGameDataSource> = localGameDataSourceMapOf(
-        NteLocalDataSource
-    )
+class LocalGameRepository internal constructor(
+    sources: List<LocalGameDataSource>
+) : GameRepository {
+    constructor() : this(listOf(NteLocalDataSource))
+
+    private val dataSources: Map<Game, LocalGameDataSource> =
+        localGameDataSourceMapOf(*sources.toTypedArray())
 
     override fun getCharacters(game: Game): List<GameCharacter> =
         dataSources[game]?.characters.orEmpty()
