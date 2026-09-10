@@ -107,6 +107,7 @@ class GameBuildViewModel(private val repository: GameRepository = LocalGameRepos
     }
 
     fun selectBuildType(type: BuildType?) {
+        if (type != null && type !in _uiState.value.availableBuildTypes) return
         _uiState.value = _uiState.value.copy(selectedBuildType = type)
     }
 
