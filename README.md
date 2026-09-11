@@ -8,13 +8,13 @@ A baseline funcional de Neverness to Everness (NTE) desta versão está concluí
 
 Warframe está disponível na interface com um primeiro roster verificável de Excalibur, Mag e Volt e uma build F2P inicial para cada um, versionada no snapshot do Update 43.5 com fontes externas registradas. A apresentação usa vocabulário específico de Warframe, incluindo Warframes, Mods e Esquadrão.
 
-Arknights: Endfield já possui um primeiro roster verificável com Endministrator, Perlica, Chen Qianyu e Wulfgard. O jogo permanece indisponível na interface enquanto as primeiras builds e a apresentação específica de operadores/equipamentos são preparadas.
+Arknights: Endfield possui um primeiro roster verificável com Endministrator, Perlica, Chen Qianyu e Wulfgard e uma build starter/F2P para cada operador, revisada para o snapshot `Dreamscape of Wind and Snow · 2026-09` com fontes externas registradas. O jogo permanece indisponível na interface enquanto a apresentação específica de operadores/equipamentos é preparada.
 
 ### Jogos
 
 - **Neverness to Everness (NTE)** — baseline funcional concluída e disponível.
 - **Warframe** — disponível com roster inicial e primeira build F2P de Excalibur, Mag e Volt.
-- **Arknights: Endfield** — roster inicial adicionado; builds e apresentação em preparação.
+- **Arknights: Endfield** — roster inicial e primeira build starter/F2P de quatro operadores concluídos; apresentação em preparação.
 
 Jogos ainda indisponíveis aparecem na seleção inicial com ação desabilitada e indicação **Em breve**.
 
@@ -70,7 +70,7 @@ As instruções de configuração e teste seguro estão em [`docs/release-signin
 ## Próximos passos
 
 - ampliar Warframe de forma incremental com conteúdo confiável e versionado por atualização;
-- adicionar as primeiras builds verificáveis de Arknights: Endfield e adaptar sua apresentação antes de habilitá-lo;
+- adaptar a apresentação de Arknights: Endfield para operadores/equipamentos antes de habilitá-lo na seleção;
 - continuar melhorias incrementais no NTE quando houver novos dados confiáveis, sem reabrir a baseline já concluída;
 - melhorar fallbacks locais para imagens remotas e a evolução visual das páginas;
 - configurar e testar o workflow manual de release assinada em ambiente controlado antes de qualquer publicação real.
