@@ -203,6 +203,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.gryphline.com/en-us/news/6172"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-antal-f2p-starter-2026-09",
+            characterId = "endfield-antal",
+            title = "Starter Electric Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Hypernova Auto",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Arts Intensity",
+                "Ultimate Gain Efficiency",
+                "Electric DMG"
+            ),
+            team = emptyList(),
+            notes = "Accessible progression setup for Antal's Electric support role. Hypernova Auto is a 4-star Arts Unit option, while AIC Light pieces are available through Authority progression and Gear Assembly. Prioritize Arts Intensity and Ultimate Gain so Focus, Susceptibility and Amp remain useful without requiring premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Antal Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/antal"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Antal",
+                    url = "https://endfield.wiki.gg/wiki/Antal"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Hypernova Auto",
+                    url = "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
