@@ -21,12 +21,12 @@ class LocalGameDataSourceTest {
     }
 
     @Test
-    fun `Endfield source exposes starter roster while builds stay empty`() {
+    fun `Endfield source exposes starter roster and builds`() {
         assertEquals(Game.ENDFIELD, EndfieldLocalDataSource.game)
         assertEquals(EndfieldCharacterCatalog.characters, EndfieldLocalDataSource.characters)
         assertTrue(EndfieldLocalDataSource.characters.isNotEmpty())
         assertTrue(
-            EndfieldLocalDataSource.getBuilds(EndfieldLocalDataSource.characters.first().id).isEmpty()
+            EndfieldLocalDataSource.getBuilds(EndfieldLocalDataSource.characters.first().id).isNotEmpty()
         )
     }
 
