@@ -29,5 +29,26 @@ internal fun AppTerms.forGame(game: Game): AppTerms = when (game) {
             )
         )
     )
-    Game.NTE, Game.ENDFIELD -> this
+    Game.ENDFIELD -> mergedWith(
+        AppTerms(
+            mapOf(
+                "character.list.titlePrefix" to
+                    text("game.endfield.character.list.titlePrefix", "Operadores"),
+                "character.search.label" to
+                    text("game.endfield.character.search.label", "Buscar operador"),
+                "character.search.placeholder" to
+                    text("game.endfield.character.search.placeholder", "Nome, classe ou elemento"),
+                "character.empty.title" to
+                    text("game.endfield.character.empty.title", "Nenhum operador encontrado"),
+                "character.empty.body" to
+                    text(
+                        "game.endfield.character.empty.body",
+                        "Tente buscar por outro nome, classe ou elemento."
+                    ),
+                "build.share.character" to
+                    text("game.endfield.build.share.character", "Operador")
+            )
+        )
+    )
+    Game.NTE -> this
 }
