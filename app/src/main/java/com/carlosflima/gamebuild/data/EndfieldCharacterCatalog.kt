@@ -28,6 +28,12 @@ internal object EndfieldCharacterCatalog {
             name = "Wulfgard",
             role = "Caster · Heat",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-yvonne",
+            name = "Yvonne",
+            role = "Striker · Cryo",
+            game = Game.ENDFIELD
         )
     )
 }

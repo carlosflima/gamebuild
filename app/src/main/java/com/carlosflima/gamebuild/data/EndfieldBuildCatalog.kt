@@ -129,6 +129,41 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.gryphline.com/en-us/news/5209"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-yvonne-f2p-starter-2026-09",
+            characterId = "endfield-yvonne",
+            title = "Starter Cryo DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Howling Guard",
+            equipment = listOf(
+                "Mordvolt Insulation Vest T1",
+                "Mordvolt Insulation Gloves",
+                "Mordvolt Insulation Wrench T1",
+                "Mordvolt Insulation Battery"
+            ),
+            statPriority = listOf(
+                "Intellect",
+                "Cryo DMG",
+                "Critical Rate"
+            ),
+            team = emptyList(),
+            notes = "Accessible early-game Cryo setup for Yvonne. Howling Guard is a lower-rarity alternative when premium handcannons are unavailable, while Mordvolt Insulation supports her Intellect-focused progression and Cryo damage before endgame gear becomes practical.",
+            sources = listOf(
+                BuildSource(
+                    name = "Game8 — Yvonne Build and Weapons",
+                    url = "https://game8.co/games/Arknights-Endfield/archives/523664"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Howling Guard",
+                    url = "https://endfield.wiki.gg/wiki/Howling_Guard"
+                ),
+                BuildSource(
+                    name = "Arknights: Endfield — Dreamscape of Wind and Snow update",
+                    url = "https://endfield.gryphline.com/en-us/news/5209"
+                )
+            )
         )
     )
 
