@@ -7,6 +7,6 @@ enum class Game(
     val isAvailable: Boolean
 ) {
     NTE("Neverness to Everness", "NTE", "Builds, characters and teams", true),
-    WARFRAME("Warframe", "Warframe", "Em breve — Warframes, weapons and builds", false),
+    WARFRAME("Warframe", "Warframe", "Warframes, mods and starter builds", true),
     ENDFIELD("Arknights: Endfield", "Endfield", "Em breve — Operators, weapons and teams", false)
 }
