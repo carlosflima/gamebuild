@@ -41,7 +41,7 @@ class GameBuildViewModelTest {
     }
 
     @Test
-    fun defaultRepositoryLoadsEndfieldRosterAndAntalBuild() {
+    fun defaultRepositoryLoadsEndfieldRosterAndAkekuriBuild() {
         val viewModel = GameBuildViewModel()
 
         viewModel.selectGame(Game.ENDFIELD)
@@ -49,18 +49,18 @@ class GameBuildViewModelTest {
         val rosterState = viewModel.uiState.value
         assertEquals(Game.ENDFIELD, rosterState.selectedGame)
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri"),
             rosterState.characters.map { it.name }
         )
         assertEquals(setOf(Game.ENDFIELD), rosterState.characters.map { it.game }.toSet())
 
-        val antal = rosterState.characters.first { it.name == "Antal" }
-        viewModel.selectCharacter(antal)
+        val akekuri = rosterState.characters.first { it.name == "Akekuri" }
+        viewModel.selectCharacter(akekuri)
 
         val buildState = viewModel.uiState.value
-        assertEquals("Antal", buildState.selectedCharacter?.name)
+        assertEquals("Akekuri", buildState.selectedCharacter?.name)
         assertEquals(
-            listOf("endfield-antal-f2p-starter-2026-09"),
+            listOf("endfield-akekuri-f2p-starter-2026-09"),
             buildState.builds.map { it.id }
         )
         assertEquals(BuildType.F2P, buildState.builds.single().type)
