@@ -59,10 +59,12 @@ private fun buildDetailsText(build: CharacterBuild, terms: AppTerms): String = b
         "${terms.text("build.section.stats", "Prioridade de stats")}: " +
             build.statPriority.joinToString(" > ").ifBlank { "—" }
     )
-    appendLine(
-        "${terms.text("build.section.team", "Equipe")}: " +
-            build.team.joinToString(" • ").ifBlank { "—" }
-    )
+    if (build.team.isNotEmpty()) {
+        appendLine(
+            "${terms.text("build.section.team", "Equipe")}: " +
+                build.team.joinToString(" • ")
+        )
+    }
 
     if (build.notes.isNotBlank()) {
         appendLine()
