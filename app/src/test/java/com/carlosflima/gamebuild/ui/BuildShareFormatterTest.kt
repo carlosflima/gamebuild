@@ -104,6 +104,38 @@ class BuildShareFormatterTest {
         assertFalse(text.contains("Equipe:"))
     }
 
+    @Test
+    fun endfieldUsesOperatorVocabularyAndKeepsEquipmentLabels() {
+        val build = sampleBuild(
+            id = "endfield-share",
+            title = "Starter Physical DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Sundering Steel",
+            team = emptyList()
+        )
+        val terms = AppTerms.Empty.forGame(Game.ENDFIELD)
+
+        val text = buildShareText(
+            build = build,
+            characterName = "Endministrator",
+            gameName = "Arknights: Endfield",
+            terms = terms
+        )
+
+        assertEquals("Operadores", terms.text("character.list.titlePrefix", "Personagens"))
+        assertEquals("Buscar operador", terms.text("character.search.label", "Buscar personagem"))
+        assertEquals(
+            "Nome, classe ou elemento",
+            terms.text("character.search.placeholder", "Nome ou função")
+        )
+        assertTrue(text.contains("Operador: Endministrator"))
+        assertTrue(text.contains("Arma: Sundering Steel"))
+        assertTrue(text.contains("Equipamentos: Item A • Item B"))
+        assertFalse(text.contains("Mods:"))
+        assertFalse(text.contains("Equipe:"))
+    }
+
     private fun sampleBuild(
         id: String,
         title: String,
