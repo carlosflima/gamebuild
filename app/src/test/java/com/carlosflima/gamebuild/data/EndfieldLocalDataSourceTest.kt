@@ -9,9 +9,9 @@ import org.junit.Test
 class EndfieldLocalDataSourceTest {
 
     @Test
-    fun `tracked roster contains starter operators and Yvonne`() {
+    fun `tracked roster contains current Endfield operators`() {
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus"),
             EndfieldLocalDataSource.characters.map { it.name }
         )
     }
@@ -50,7 +50,7 @@ class EndfieldLocalDataSourceTest {
             }
         }
 
-        assertEquals(5, builds.size)
+        assertEquals(6, builds.size)
         assertEquals(builds.size, builds.map { it.id }.distinct().size)
         assertTrue(builds.all { it.characterId in characterIds })
         assertEquals(builds.map { it.id }.toSet(), indexedBuilds.map { it.id }.toSet())
