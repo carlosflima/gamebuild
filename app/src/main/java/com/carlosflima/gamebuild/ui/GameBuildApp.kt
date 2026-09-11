@@ -73,6 +73,7 @@ fun GameBuildApp(
     viewModel: GameBuildViewModel = viewModel()
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val activeTerms = state.selectedGame?.let { terms.forGame(it) } ?: terms
     val canNavigateBack = state.selectedGame != null
 
     BackHandler(enabled = canNavigateBack) {
@@ -125,7 +126,7 @@ fun GameBuildApp(
                         buildTypes = state.availableBuildTypes,
                         selectedBuildType = state.selectedBuildType,
                         onBuildTypeChange = viewModel::selectBuildType,
-                        terms = terms,
+                        terms = activeTerms,
                         padding = padding
                     )
                     state.selectedGame != null -> CharacterSelection(
@@ -138,7 +139,7 @@ fun GameBuildApp(
                         onFilterClick = viewModel::toggleCharacterFilter,
                         onClearFilters = viewModel::clearCharacterFilters,
                         viewModel = viewModel,
-                        terms = terms,
+                        terms = activeTerms,
                         padding = padding
                     )
                     else -> GameSelection(viewModel, terms, padding)
@@ -582,10 +583,12 @@ private fun BuildComparisonCard(
                         terms.text("build.section.stats", "Prioridade de stats"),
                         build.statPriority.joinToString(" > ").ifBlank { "—" }
                     )
-                    BuildComparisonLine(
-                        terms.text("build.section.team", "Equipe"),
-                        build.team.joinToString(" • ").ifBlank { "—" }
-                    )
+                    if (build.team.isNotEmpty()) {
+                        BuildComparisonLine(
+                            terms.text("build.section.team", "Equipe"),
+                            build.team.joinToString(" • ")
+                        )
+                    }
                 }
             }
         }
@@ -809,6 +812,7 @@ private fun BuildItemImage(value: String, imageUrl: String?) {
 
 @Composable
 private fun BuildSection(title: String, values: List<String>) {
+    if (values.isEmpty()) return
     Text(title, style = MaterialTheme.typography.titleMedium)
     values.forEach { value -> Text("• $value") }
 }
