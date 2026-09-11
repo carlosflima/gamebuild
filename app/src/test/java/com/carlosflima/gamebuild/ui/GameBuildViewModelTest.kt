@@ -44,14 +44,33 @@ class GameBuildViewModelTest {
     fun unavailableGameDoesNotNavigateToCharacterList() {
         val viewModel = GameBuildViewModel(repository)
 
-        viewModel.selectGame(Game.WARFRAME)
+        viewModel.selectGame(Game.ENDFIELD)
 
         assertEquals(null, viewModel.uiState.value.selectedGame)
         assertEquals(emptyList<GameCharacter>(), viewModel.uiState.value.characters)
         assertEquals(
-            "Conteúdo de Warframe ainda está em preparação.",
+            "Conteúdo de Arknights: Endfield ainda está em preparação.",
             viewModel.uiState.value.errorMessage
         )
+    }
+
+    @Test
+    fun defaultRepositoryLoadsWarframeRosterAndStarterBuild() {
+        val viewModel = GameBuildViewModel()
+
+        viewModel.selectGame(Game.WARFRAME)
+
+        val rosterState = viewModel.uiState.value
+        assertEquals(Game.WARFRAME, rosterState.selectedGame)
+        assertEquals(listOf("Excalibur", "Mag", "Volt"), rosterState.characters.map { it.name })
+        assertEquals(setOf(Game.WARFRAME), rosterState.characters.map { it.game }.toSet())
+
+        viewModel.selectCharacter(rosterState.characters.first())
+
+        val buildState = viewModel.uiState.value
+        assertEquals("Excalibur", buildState.selectedCharacter?.name)
+        assertEquals(listOf("warframe-excalibur-f2p-starter-43-5"), buildState.builds.map { it.id })
+        assertEquals(BuildType.F2P, buildState.builds.single().type)
     }
 
     @Test
