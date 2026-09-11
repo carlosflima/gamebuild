@@ -41,17 +41,28 @@ class GameBuildViewModelTest {
     }
 
     @Test
-    fun unavailableGameDoesNotNavigateToCharacterList() {
-        val viewModel = GameBuildViewModel(repository)
+    fun defaultRepositoryLoadsEndfieldRosterAndStarterBuild() {
+        val viewModel = GameBuildViewModel()
 
         viewModel.selectGame(Game.ENDFIELD)
 
-        assertEquals(null, viewModel.uiState.value.selectedGame)
-        assertEquals(emptyList<GameCharacter>(), viewModel.uiState.value.characters)
+        val rosterState = viewModel.uiState.value
+        assertEquals(Game.ENDFIELD, rosterState.selectedGame)
         assertEquals(
-            "Conteúdo de Arknights: Endfield ainda está em preparação.",
-            viewModel.uiState.value.errorMessage
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard"),
+            rosterState.characters.map { it.name }
         )
+        assertEquals(setOf(Game.ENDFIELD), rosterState.characters.map { it.game }.toSet())
+
+        viewModel.selectCharacter(rosterState.characters.first())
+
+        val buildState = viewModel.uiState.value
+        assertEquals("Endministrator", buildState.selectedCharacter?.name)
+        assertEquals(
+            listOf("endfield-endministrator-f2p-starter-2026-09"),
+            buildState.builds.map { it.id }
+        )
+        assertEquals(BuildType.F2P, buildState.builds.single().type)
     }
 
     @Test
