@@ -8,13 +8,13 @@ A baseline funcional de Neverness to Everness (NTE) desta versão está concluí
 
 Warframe está disponível na interface com um primeiro roster verificável de Excalibur, Mag e Volt e uma build F2P inicial para cada um, versionada no snapshot do Update 43.5 com fontes externas registradas. A apresentação usa vocabulário específico de Warframe, incluindo Warframes, Mods e Esquadrão.
 
-Arknights: Endfield está disponível na interface com um roster verificável de Endministrator, Perlica, Chen Qianyu, Wulfgard, Yvonne, Typhoeus, Antal e Akekuri e uma build F2P para cada operador, revisada para o snapshot `Dreamscape of Wind and Snow · 2026-09` com fontes externas registradas. A apresentação usa vocabulário específico de operadores e preserva os conceitos de armas e equipamentos.
+Arknights: Endfield está disponível na interface com um roster verificável de Endministrator, Perlica, Chen Qianyu, Wulfgard, Yvonne, Typhoeus, Antal, Akekuri e Avywenna e uma build F2P para cada operador, revisada para o snapshot `Dreamscape of Wind and Snow · 2026-09` com fontes externas registradas. A apresentação usa vocabulário específico de operadores e preserva os conceitos de armas e equipamentos.
 
 ### Jogos
 
 - **Neverness to Everness (NTE)** — baseline funcional concluída e disponível.
 - **Warframe** — disponível com roster inicial e primeira build F2P de Excalibur, Mag e Volt.
-- **Arknights: Endfield** — disponível com oito operadores acompanhados, builds F2P e apresentação específica de operadores.
+- **Arknights: Endfield** — disponível com nove operadores acompanhados, builds F2P e apresentação específica de operadores.
 
 Jogos ainda indisponíveis aparecem na seleção inicial com ação desabilitada e indicação **Em breve**.
 
