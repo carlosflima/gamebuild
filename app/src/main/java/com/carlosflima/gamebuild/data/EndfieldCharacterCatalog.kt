@@ -52,6 +52,12 @@ internal object EndfieldCharacterCatalog {
             name = "Akekuri",
             role = "Vanguard · Heat",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-avywenna",
+            name = "Avywenna",
+            role = "Striker · Electric",
+            game = Game.ENDFIELD
         )
     )
 }

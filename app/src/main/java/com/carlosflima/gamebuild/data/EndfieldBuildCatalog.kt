@@ -281,6 +281,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/Catastrophe"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-avywenna-f2p-starter-2026-09",
+            characterId = "endfield-avywenna",
+            title = "Starter Electric DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Aggeloslayer",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Arts Intensity",
+                "Electric DMG",
+                "ATK"
+            ),
+            team = emptyList(),
+            notes = "Accessible early-progression Electric DPS setup for Avywenna. Aggeloslayer is a 4-star Polearm from Arsenal Exchange whose Arts damage and battle-skill ATK effect fit her Thunderlance loop, while AIC Light provides inexpensive Authority-level gear before higher-tier sets are worth investing in.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Avywenna Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/avywenna"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Avywenna",
+                    url = "https://endfield.wiki.gg/wiki/Avywenna"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Aggeloslayer",
+                    url = "https://endfield.wiki.gg/wiki/Aggeloslayer"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
