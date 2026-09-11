@@ -6,13 +6,15 @@ Aplicativo Android para consultar, filtrar e comparar builds de personagens em u
 
 A baseline funcional de Neverness to Everness (NTE) desta versão está concluída: o roster atualmente acompanhado pelo app possui cobertura de builds, seleção de personagem, alternativas Meta/F2P quando aplicáveis, comparação rápida e apresentação visual de armas e equipamentos.
 
-Warframe está disponível na interface com um primeiro roster verificável de Excalibur, Mag e Volt e uma build F2P inicial para cada um, versionada no snapshot do Update 43.5 com fontes externas registradas. A apresentação usa vocabulário específico de Warframe, incluindo Warframes, Mods e Esquadrão. A estrutura local de Arknights: Endfield também está inicializada, ainda sem conteúdo.
+Warframe está disponível na interface com um primeiro roster verificável de Excalibur, Mag e Volt e uma build F2P inicial para cada um, versionada no snapshot do Update 43.5 com fontes externas registradas. A apresentação usa vocabulário específico de Warframe, incluindo Warframes, Mods e Esquadrão.
+
+Arknights: Endfield já possui um primeiro roster verificável com Endministrator, Perlica, Chen Qianyu e Wulfgard. O jogo permanece indisponível na interface enquanto as primeiras builds e a apresentação específica de operadores/equipamentos são preparadas.
 
 ### Jogos
 
 - **Neverness to Everness (NTE)** — baseline funcional concluída e disponível.
 - **Warframe** — disponível com roster inicial e primeira build F2P de Excalibur, Mag e Volt.
-- **Arknights: Endfield** — estrutura de dados inicializada; conteúdo em preparação.
+- **Arknights: Endfield** — roster inicial adicionado; builds e apresentação em preparação.
 
 Jogos ainda indisponíveis aparecem na seleção inicial com ação desabilitada e indicação **Em breve**.
 
@@ -68,7 +70,7 @@ As instruções de configuração e teste seguro estão em [`docs/release-signin
 ## Próximos passos
 
 - ampliar Warframe de forma incremental com conteúdo confiável e versionado por atualização;
-- iniciar o catálogo de Arknights: Endfield com o mesmo critério de qualidade;
+- adicionar as primeiras builds verificáveis de Arknights: Endfield e adaptar sua apresentação antes de habilitá-lo;
 - continuar melhorias incrementais no NTE quando houver novos dados confiáveis, sem reabrir a baseline já concluída;
 - melhorar fallbacks locais para imagens remotas e a evolução visual das páginas;
 - configurar e testar o workflow manual de release assinada em ambiente controlado antes de qualquer publicação real.
