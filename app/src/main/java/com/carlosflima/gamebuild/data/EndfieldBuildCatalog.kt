@@ -320,6 +320,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-catcher-f2p-starter-2026-09",
+            characterId = "endfield-catcher",
+            title = "Starter Physical Tank",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Quencher",
+            equipment = listOf(
+                "Catastrophe Heavy Armor",
+                "Catastrophe Gloves",
+                "Catastrophe Gauze Cartridge",
+                "Catastrophe Filter"
+            ),
+            statPriority = listOf(
+                "HP",
+                "Defense",
+                "Ultimate Gain Efficiency"
+            ),
+            team = emptyList(),
+            notes = "F2P-oriented Physical tank setup for Catcher. Quencher is a 4-star Great Sword available through Arsenal Exchange, while Catastrophe accelerates Ultimate access for more frequent Weaken and protection windows. Prioritize HP and Defense first, then Ultimate Gain Efficiency for reliable defensive rotations.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Catcher Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/catcher"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Catcher",
+                    url = "https://endfield.wiki.gg/wiki/Catcher"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Quencher",
+                    url = "https://endfield.wiki.gg/wiki/Quencher"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Catastrophe gear",
+                    url = "https://endfield.wiki.gg/wiki/Gear"
+                )
+            )
         )
     )
 
