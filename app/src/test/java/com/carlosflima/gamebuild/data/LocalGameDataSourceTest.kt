@@ -21,9 +21,13 @@ class LocalGameDataSourceTest {
     }
 
     @Test
-    fun `Endfield source stays empty while its catalog has not started`() {
-        assertTrue(EndfieldLocalDataSource.characters.isEmpty())
-        assertTrue(EndfieldLocalDataSource.getBuilds("missing-character").isEmpty())
+    fun `Endfield source exposes starter roster while builds stay empty`() {
+        assertEquals(Game.ENDFIELD, EndfieldLocalDataSource.game)
+        assertEquals(EndfieldCharacterCatalog.characters, EndfieldLocalDataSource.characters)
+        assertTrue(EndfieldLocalDataSource.characters.isNotEmpty())
+        assertTrue(
+            EndfieldLocalDataSource.getBuilds(EndfieldLocalDataSource.characters.first().id).isEmpty()
+        )
     }
 
     @Test(expected = IllegalArgumentException::class)
