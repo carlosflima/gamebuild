@@ -8,13 +8,13 @@ A baseline funcional de Neverness to Everness (NTE) desta versão está concluí
 
 Warframe está disponível na interface com um primeiro roster verificável de Excalibur, Mag e Volt e uma build F2P inicial para cada um, versionada no snapshot do Update 43.5 com fontes externas registradas. A apresentação usa vocabulário específico de Warframe, incluindo Warframes, Mods e Esquadrão.
 
-Arknights: Endfield possui um primeiro roster verificável com Endministrator, Perlica, Chen Qianyu e Wulfgard e uma build starter/F2P para cada operador, revisada para o snapshot `Dreamscape of Wind and Snow · 2026-09` com fontes externas registradas. A apresentação já usa vocabulário específico de operadores e preserva os conceitos de armas e equipamentos. O jogo permanece indisponível na seleção até o gate final de navegação/carregamento.
+Arknights: Endfield está disponível na interface com um primeiro roster verificável de Endministrator, Perlica, Chen Qianyu e Wulfgard e uma build starter/F2P para cada operador, revisada para o snapshot `Dreamscape of Wind and Snow · 2026-09` com fontes externas registradas. A apresentação usa vocabulário específico de operadores e preserva os conceitos de armas e equipamentos.
 
 ### Jogos
 
 - **Neverness to Everness (NTE)** — baseline funcional concluída e disponível.
 - **Warframe** — disponível com roster inicial e primeira build F2P de Excalibur, Mag e Volt.
-- **Arknights: Endfield** — roster, builds starter/F2P e apresentação específica concluídos; habilitação em validação.
+- **Arknights: Endfield** — disponível com roster inicial, builds starter/F2P e apresentação específica de operadores.
 
 Jogos ainda indisponíveis aparecem na seleção inicial com ação desabilitada e indicação **Em breve**.
 
@@ -70,7 +70,7 @@ As instruções de configuração e teste seguro estão em [`docs/release-signin
 ## Próximos passos
 
 - ampliar Warframe de forma incremental com conteúdo confiável e versionado por atualização;
-- validar navegação/carregamento de Arknights: Endfield e habilitá-lo na seleção;
+- ampliar Arknights: Endfield de forma incremental com conteúdo confiável e versionado por atualização;
 - continuar melhorias incrementais no NTE quando houver novos dados confiáveis, sem reabrir a baseline já concluída;
 - melhorar fallbacks locais para imagens remotas e a evolução visual das páginas;
 - configurar e testar o workflow manual de release assinada em ambiente controlado antes de qualquer publicação real.

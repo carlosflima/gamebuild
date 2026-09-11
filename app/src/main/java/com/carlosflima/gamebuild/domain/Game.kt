@@ -8,5 +8,5 @@ enum class Game(
 ) {
     NTE("Neverness to Everness", "NTE", "Builds, characters and teams", true),
     WARFRAME("Warframe", "Warframe", "Warframes, mods and starter builds", true),
-    ENDFIELD("Arknights: Endfield", "Endfield", "Em breve — Operators, weapons and teams", false)
+    ENDFIELD("Arknights: Endfield", "Endfield", "Operators, weapons and teams", true)
 }
