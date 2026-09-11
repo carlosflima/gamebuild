@@ -164,6 +164,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.gryphline.com/en-us/news/5209"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-typhoeus-f2p-2026-09",
+            characterId = "endfield-typhoeus",
+            title = "F2P Nature Burst",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Fluorescent Roc",
+            equipment = listOf(
+                "Deep Rampart Armor",
+                "Deep Rampart Gauntlets",
+                "Deep Rampart Comms",
+                "Deep Rampart Comms"
+            ),
+            statPriority = listOf(
+                "Agility",
+                "Arts Intensity",
+                "Nature DMG"
+            ),
+            team = emptyList(),
+            notes = "F2P-oriented setup for the current Typhoeus snapshot. Fluorescent Roc is a 4-star Arts Unit alternative, while craftable Deep Rampart pieces align with her Agility scaling and repeated Nature Burst damage without requiring her signature or Battle Pass weapon.",
+            sources = listOf(
+                BuildSource(
+                    name = "Prydwen — Typhoeus Best Build Guide · Patch 1.5",
+                    url = "https://www.prydwen.gg/arknights-endfield/characters/typhoeus"
+                ),
+                BuildSource(
+                    name = "Prydwen — Fluorescent Roc",
+                    url = "https://www.prydwen.gg/arknights-endfield/weapons"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Deep Rampart Armor formula",
+                    url = "https://endfield.wiki.gg/wiki/Deep_Rampart_Armor_(Formula)"
+                ),
+                BuildSource(
+                    name = "Arknights: Endfield — Winter Hunt",
+                    url = "https://endfield.gryphline.com/en-us/news/6172"
+                )
+            )
         )
     )
 

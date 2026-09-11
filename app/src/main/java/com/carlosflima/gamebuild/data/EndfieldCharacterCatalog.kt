@@ -34,6 +34,12 @@ internal object EndfieldCharacterCatalog {
             name = "Yvonne",
             role = "Striker · Cryo",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-typhoeus",
+            name = "Typhoeus",
+            role = "Striker · Nature",
+            game = Game.ENDFIELD
         )
     )
 }
