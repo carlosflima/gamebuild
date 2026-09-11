@@ -242,6 +242,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-akekuri-f2p-starter-2026-09",
+            characterId = "endfield-akekuri",
+            title = "Starter Heat SP Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Wave Tide",
+            equipment = listOf(
+                "Catastrophe Heavy Armor",
+                "Catastrophe Gloves",
+                "Catastrophe Gauze Cartridge",
+                "Catastrophe Filter"
+            ),
+            statPriority = listOf(
+                "Ultimate Gain Efficiency",
+                "ATK",
+                "Intellect"
+            ),
+            team = emptyList(),
+            notes = "F2P-oriented Heat support setup centered on Akekuri's SP recovery. Wave Tide is a 4-star Sword available through Arsenal Exchange, while Catastrophe supports faster Ultimate access and is obtainable through Authority progression and Gear Assembly. Prioritize Ultimate Gain Efficiency, ATK and Intellect for reliable team rotations.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Akekuri Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/akekuri"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Akekuri",
+                    url = "https://endfield.wiki.gg/wiki/Akekuri"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Wave Tide",
+                    url = "https://endfield.wiki.gg/wiki/Wave_Tide"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Catastrophe",
+                    url = "https://endfield.wiki.gg/wiki/Catastrophe"
+                )
+            )
         )
     )
 
