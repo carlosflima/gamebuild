@@ -106,6 +106,12 @@ internal object EndfieldCharacterCatalog {
             name = "Ardelia",
             role = "Supporter · Nature",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-ember",
+            name = "Ember",
+            role = "Defender · Heat",
+            game = Game.ENDFIELD
         )
     )
 }
