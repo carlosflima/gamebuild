@@ -41,7 +41,7 @@ class GameBuildViewModelTest {
     }
 
     @Test
-    fun defaultRepositoryLoadsEndfieldRosterAndLifengBuild() {
+    fun defaultRepositoryLoadsEndfieldRosterAndPogranichnikBuild() {
         val viewModel = GameBuildViewModel()
 
         viewModel.selectGame(Game.ENDFIELD)
@@ -49,18 +49,18 @@ class GameBuildViewModelTest {
         val rosterState = viewModel.uiState.value
         assertEquals(Game.ENDFIELD, rosterState.selectedGame)
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng", "Pogranichnik"),
             rosterState.characters.map { it.name }
         )
         assertEquals(setOf(Game.ENDFIELD), rosterState.characters.map { it.game }.toSet())
 
-        val lifeng = rosterState.characters.first { it.name == "Lifeng" }
-        viewModel.selectCharacter(lifeng)
+        val pogranichnik = rosterState.characters.first { it.name == "Pogranichnik" }
+        viewModel.selectCharacter(pogranichnik)
 
         val buildState = viewModel.uiState.value
-        assertEquals("Lifeng", buildState.selectedCharacter?.name)
+        assertEquals("Pogranichnik", buildState.selectedCharacter?.name)
         assertEquals(
-            listOf("endfield-lifeng-f2p-starter-2026-09"),
+            listOf("endfield-pogranichnik-f2p-starter-2026-09"),
             buildState.builds.map { it.id }
         )
         assertEquals(BuildType.F2P, buildState.builds.single().type)

@@ -200,6 +200,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-pogranichnik-f2p-starter-2026-09",
+            characterId = "endfield-pogranichnik",
+            title = "Starter Physical SP Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Wave Tide",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "ATK",
+                "Physical DMG",
+                "Ultimate Gain Efficiency"
+            ),
+            team = emptyList(),
+            notes = "Accessible Physical Vanguard setup centered on Pogranichnik's Breach and SP-recovery utility. Wave Tide is a 4-star Sword that remains viable through mid-game progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize ATK and Physical damage for his support-DPS contribution, then Ultimate Gain Efficiency for smoother Shieldguard rotations without requiring Never Rest, Thermite Cutter or other premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Pogranichnik Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/pogranichnik"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Pogranichnik",
+                    url = "https://endfield.wiki.gg/wiki/Pogranichnik"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Wave Tide",
+                    url = "https://endfield.wiki.gg/wiki/Wave_Tide"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
