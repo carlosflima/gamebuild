@@ -139,7 +139,7 @@ class GameBuildViewModelTest {
             override fun getCharacters(game: Game): List<GameCharacter> = characters
             override fun getBuilds(game: Game, characterId: String): List<CharacterBuild> = listOf(singleBuild)
         }
-        val viewModel = GameBuildViewModel(repository = singleTypeRepository)
+        val viewModel = GameBuildViewModel(singleTypeRepository)
         viewModel.selectGame(Game.NTE)
         viewModel.selectCharacter(characters.first())
 
