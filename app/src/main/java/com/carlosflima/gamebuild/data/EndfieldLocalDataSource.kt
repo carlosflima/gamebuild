@@ -9,5 +9,6 @@ internal object EndfieldLocalDataSource : LocalGameDataSource {
     override val characters: List<GameCharacter> = EndfieldCharacterCatalog.characters
 
     override fun getBuilds(characterId: String): List<CharacterBuild> =
-        EndfieldBuildCatalog.getBuilds(characterId)
+        EndfieldBuildCatalog.getBuilds(characterId) +
+            EndfieldAdditionalBuildCatalog.getBuilds(characterId)
 }
