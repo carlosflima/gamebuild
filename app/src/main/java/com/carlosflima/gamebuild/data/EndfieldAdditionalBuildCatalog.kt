@@ -434,6 +434,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-zhuang-fangyi-f2p-starter-2026-09",
+            characterId = "endfield-zhuang-fangyi",
+            title = "Starter Electric Main DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Fluorescent Roc",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Will",
+                "Electric DMG",
+                "ATK"
+            ),
+            team = emptyList(),
+            notes = "Accessible Electric main-DPS setup for Zhuang Fangyi's Electrification-consuming Sunderblade loop. Fluorescent Roc is a 4-star Arts Unit with Will and a Battle Skill-triggered ATK buff that matches her high skill frequency, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Will, Electric damage and ATK for sustained Thunder Strike pressure without requiring Wild Wanderer, Flickers in the Mist, Lone Barge or other premium Arts Units.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Zhuang Fangyi Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/zhuang-fangyi"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Zhuang Fangyi",
+                    url = "https://endfield.wiki.gg/wiki/Zhuang_Fangyi"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Fluorescent Roc",
+                    url = "https://endfield.wiki.gg/wiki/Fluorescent_Roc"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
