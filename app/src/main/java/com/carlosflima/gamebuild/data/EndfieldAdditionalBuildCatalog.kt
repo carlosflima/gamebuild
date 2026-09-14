@@ -83,6 +83,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-ardelia-f2p-starter-2026-09",
+            characterId = "endfield-ardelia",
+            title = "Starter Nature Sustain Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Hypernova Auto",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "HP",
+                "Treatment Efficiency",
+                "Ultimate Gain Efficiency"
+            ),
+            team = emptyList(),
+            notes = "Accessible sustain-support setup for Ardelia's healing, Corrosion loop and dual Susceptibility utility. Hypernova Auto is a 4-star Arts Unit from Arsenal Exchange, while AIC Light is available through Authority progression and Gear Assembly. Prioritize HP and Treatment Efficiency for stronger sustain, then Ultimate Gain Efficiency for more reliable support rotations without requiring her 6-star login weapon.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Ardelia Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/ardelia"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Ardelia",
+                    url = "https://endfield.wiki.gg/wiki/Ardelia"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Hypernova Auto",
+                    url = "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
