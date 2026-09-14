@@ -278,6 +278,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-gilberta-f2p-starter-2026-09",
+            characterId = "endfield-gilberta",
+            title = "Starter Nature Grouping Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Hypernova Auto",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Intellect",
+                "Ultimate Gain Efficiency",
+                "Nature DMG"
+            ),
+            team = emptyList(),
+            notes = "Accessible Nature support setup for Gilberta's grouping, Lift and Arts Susceptibility utility. Hypernova Auto is a 4-star Arts Unit that remains useful through mid-game progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Intellect for her support scaling, then Ultimate Gain Efficiency for more frequent gravity-field rotations and Nature damage for her personal contribution, without requiring premium Arts Units.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Gilberta Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/gilberta"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Gilberta",
+                    url = "https://endfield.wiki.gg/wiki/Gilberta"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Hypernova Auto",
+                    url = "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
