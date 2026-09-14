@@ -136,6 +136,12 @@ internal object EndfieldCharacterCatalog {
             name = "Gilberta",
             role = "Supporter · Nature",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-liino",
+            name = "Liino",
+            role = "Supporter · Electric",
+            game = Game.ENDFIELD
         )
     )
 }
