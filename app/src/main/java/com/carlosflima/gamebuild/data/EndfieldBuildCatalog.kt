@@ -437,6 +437,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-snowshine-f2p-starter-2026-09",
+            characterId = "endfield-snowshine",
+            title = "Starter Cryo Tank",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Quencher",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "HP",
+                "Defense",
+                "Cryo DMG"
+            ),
+            team = emptyList(),
+            notes = "Accessible Cryo defender setup for Snowshine's Protect, HP treatment and retaliation utility. Quencher is a 4-star Great Sword available through Arsenal Exchange, while AIC Light is obtainable through Authority progression and Gear Assembly. Prioritize HP and Defense for survivability, then Cryo damage for her retaliation and Snow Zone without requiring premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Snowshine Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/snowshine"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Snowshine",
+                    url = "https://endfield.wiki.gg/wiki/Snowshine"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Quencher",
+                    url = "https://endfield.wiki.gg/wiki/Quencher"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
