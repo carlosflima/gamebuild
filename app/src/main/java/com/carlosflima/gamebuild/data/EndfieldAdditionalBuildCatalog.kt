@@ -551,6 +551,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-camille-f2p-starter-2026-09",
+            characterId = "endfield-camille",
+            title = "Starter Heat SP Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Pathfinder's Beacon",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Agility",
+                "Ultimate Gain Efficiency",
+                "ATK"
+            ),
+            team = emptyList(),
+            notes = "Accessible Heat support setup for Camille's Heat Susceptibility, Weaken, SP-recovery and Link loop. Pathfinder's Beacon is a 4-star Polearm with Agility and ATK scaling, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Agility, Ultimate Gain Efficiency and ATK to keep his support rotations frequent without requiring Blessing of Lustrous Carmine, Beacon of Duty, Chimeric Justice or other higher-rarity Polearms.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Camille Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/camille"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Camille",
+                    url = "https://endfield.wiki.gg/wiki/Camille"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Pathfinder's Beacon",
+                    url = "https://endfield.wiki.gg/wiki/Pathfinder%27s_Beacon"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
