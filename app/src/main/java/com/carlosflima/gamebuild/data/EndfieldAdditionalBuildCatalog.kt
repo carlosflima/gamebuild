@@ -239,6 +239,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-last-rite-f2p-starter-2026-09",
+            characterId = "endfield-last-rite",
+            title = "Starter Cryo Burst DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Industry 0.1",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "ATK",
+                "Cryo DMG",
+                "Arts Intensity"
+            ),
+            team = emptyList(),
+            notes = "Accessible Cryo burst setup for Last Rite's Cryo Infliction and Final Strike loop. Industry 0.1 is a 4-star Great Sword that provides a straightforward early-game ATK route, while AIC Light becomes available through Authority progression and Gear Assembly. Prioritize ATK and Cryo damage for burst windows, then Arts Intensity, without requiring Seeker of Dark Lung, Khravengger, Sundered Prince or other premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Last Rite Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/last-rite"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Last Rite",
+                    url = "https://endfield.wiki.gg/wiki/Last_Rite"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Industry 0.1",
+                    url = "https://endfield.wiki.gg/wiki/Industry_0.1"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
