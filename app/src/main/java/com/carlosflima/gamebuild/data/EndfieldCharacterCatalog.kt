@@ -124,6 +124,12 @@ internal object EndfieldCharacterCatalog {
             name = "Pogranichnik",
             role = "Vanguard · Physical",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-last-rite",
+            name = "Last Rite",
+            role = "Striker · Cryo",
+            game = Game.ENDFIELD
         )
     )
 }
