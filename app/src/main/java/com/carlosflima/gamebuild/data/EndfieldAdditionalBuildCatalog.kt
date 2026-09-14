@@ -512,6 +512,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-mi-fu-f2p-starter-2026-09",
+            characterId = "endfield-mi-fu",
+            title = "Starter Physical Crush Carry",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Industry 0.1",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Strength",
+                "Physical DMG",
+                "ATK"
+            ),
+            team = emptyList(),
+            notes = "Accessible Physical Guard setup for Mi Fu's Physical Susceptibility and Crush loop. Industry 0.1 is the recommended 4-star Great Sword for early progression and provides Strength plus ATK support, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Strength, Physical damage and ATK to improve her World Splitter and Crush pressure without requiring Amaranthine Tassel, Phantom Pain, Ancient Canal or other higher-rarity Great Swords.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Mi Fu Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/mi-fu"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Mi Fu",
+                    url = "https://endfield.wiki.gg/wiki/Mi_Fu"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Industry 0.1",
+                    url = "https://endfield.wiki.gg/wiki/Industry_0.1"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 

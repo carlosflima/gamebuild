@@ -41,7 +41,7 @@ class GameBuildViewModelTest {
     }
 
     @Test
-    fun defaultRepositoryLoadsEndfieldRosterAndDaPanBuild() {
+    fun defaultRepositoryLoadsEndfieldRosterAndMiFuBuild() {
         val viewModel = GameBuildViewModel()
 
         viewModel.selectGame(Game.ENDFIELD)
@@ -49,18 +49,18 @@ class GameBuildViewModelTest {
         val rosterState = viewModel.uiState.value
         assertEquals(Game.ENDFIELD, rosterState.selectedGame)
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng", "Pogranichnik", "Last Rite", "Gilberta", "Liino", "Tangtang", "Laevatain", "Zhuang Fangyi", "Da Pan"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng", "Pogranichnik", "Last Rite", "Gilberta", "Liino", "Tangtang", "Laevatain", "Zhuang Fangyi", "Da Pan", "Mi Fu"),
             rosterState.characters.map { it.name }
         )
         assertEquals(setOf(Game.ENDFIELD), rosterState.characters.map { it.game }.toSet())
 
-        val daPan = rosterState.characters.first { it.name == "Da Pan" }
-        viewModel.selectCharacter(daPan)
+        val miFu = rosterState.characters.first { it.name == "Mi Fu" }
+        viewModel.selectCharacter(miFu)
 
         val buildState = viewModel.uiState.value
-        assertEquals("Da Pan", buildState.selectedCharacter?.name)
+        assertEquals("Mi Fu", buildState.selectedCharacter?.name)
         assertEquals(
-            listOf("endfield-da-pan-f2p-starter-2026-09"),
+            listOf("endfield-mi-fu-f2p-starter-2026-09"),
             buildState.builds.map { it.id }
         )
         assertEquals(BuildType.F2P, buildState.builds.single().type)
