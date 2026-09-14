@@ -76,6 +76,12 @@ internal object EndfieldCharacterCatalog {
             name = "Xaihi",
             role = "Supporter · Cryo",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-snowshine",
+            name = "Snowshine",
+            role = "Defender · Cryo",
+            game = Game.ENDFIELD
         )
     )
 }
