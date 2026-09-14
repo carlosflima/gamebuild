@@ -317,6 +317,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-liino-f2p-starter-2026-09",
+            characterId = "endfield-liino",
+            title = "Starter Electric Sustain Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Aggeloslayer",
+            equipment = listOf(
+                "Basic PPE",
+                "Basic Gloves",
+                "Emergency Comm",
+                "Emergency Compression Core"
+            ),
+            statPriority = listOf(
+                "Will",
+                "Treatment Efficiency",
+                "Ultimate Gain Efficiency"
+            ),
+            team = emptyList(),
+            notes = "Low-cost early progression setup for Liino's Vocalist and Cosmovoice sustain support. Aggeloslayer is an accessible 4-star Polearm with Will, while the Basic and Emergency pieces come from Authority progression and Gear Assembly and avoid over-investing before specialized support gear unlocks. Prioritize Will for her support scaling, then Treatment Efficiency and Ultimate Gain Efficiency for stronger healing and more reliable Dawnstar Concerto rotations without requiring premium Polearms.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Liino Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/liino"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Liino",
+                    url = "https://endfield.wiki.gg/wiki/Liino"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Aggeloslayer",
+                    url = "https://endfield.wiki.gg/wiki/Aggeloslayer"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Basic PPE",
+                    url = "https://endfield.wiki.gg/wiki/Basic_PPE"
+                )
+            )
         )
     )
 
