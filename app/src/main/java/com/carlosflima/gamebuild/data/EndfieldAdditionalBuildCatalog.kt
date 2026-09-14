@@ -473,6 +473,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-da-pan-f2p-starter-2026-09",
+            characterId = "endfield-da-pan",
+            title = "Starter Physical Crush DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Industry 0.1",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "ATK",
+                "Strength",
+                "Physical DMG"
+            ),
+            team = emptyList(),
+            notes = "Accessible Physical DPS setup for Da Pan's self-sufficient Vulnerability and Crush loop. Industry 0.1 is a 4-star Great Sword with Strength and a Battle Skill-triggered ATK buff that remains the recommended 4-star option through mid-game progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize ATK, Strength and Physical damage to improve his Combo Skill and Crush pressure without requiring Exemplar, OBJ Heavy Burden, Ancient Canal or other higher-rarity Great Swords.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Da Pan Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/da-pan"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Da Pan",
+                    url = "https://endfield.wiki.gg/wiki/Da_Pan"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Industry 0.1",
+                    url = "https://endfield.wiki.gg/wiki/Industry_0.1"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
