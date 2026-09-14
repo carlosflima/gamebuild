@@ -398,6 +398,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-xaihi-f2p-starter-2026-09",
+            characterId = "endfield-xaihi",
+            title = "Starter Cryo Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Fluorescent Roc",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Intellect",
+                "Ultimate Gain Efficiency",
+                "Will"
+            ),
+            team = emptyList(),
+            notes = "Accessible Cryo support setup for Xaihi's healing and Amp role. Fluorescent Roc is a 4-star Arts Unit available through Arsenal Exchange, while AIC Light is obtainable through Authority progression and Gear Assembly. Prioritize Intellect and Ultimate Gain Efficiency for support uptime, with Will improving her HP treatment without requiring 5-star or 6-star weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Xaihi Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/xaihi"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Xaihi",
+                    url = "https://endfield.wiki.gg/wiki/Xaihi"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Fluorescent Roc",
+                    url = "https://endfield.wiki.gg/wiki/Fluorescent_Roc"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
