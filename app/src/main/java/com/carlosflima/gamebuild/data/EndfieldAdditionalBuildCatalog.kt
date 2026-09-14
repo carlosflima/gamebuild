@@ -395,6 +395,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-laevatain-f2p-starter-2026-09",
+            characterId = "endfield-laevatain",
+            title = "Starter Heat Burst DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Wave Tide",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Arts Intensity",
+                "Heat DMG",
+                "ATK"
+            ),
+            team = emptyList(),
+            notes = "Accessible Heat burst setup for Laevatain's Melting Flame and Combust damage loop. Wave Tide is a 4-star Sword that remains viable through mid-game progression and rewards Combo Skill triggers with an ATK buff, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Arts Intensity, Heat damage and ATK for her burst windows without requiring Twelve Questions, White Night Nova, Forgeborn Scathe, Umbral Torch or other premium Swords.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Laevatain Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/laevatain"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Laevatain",
+                    url = "https://endfield.wiki.gg/wiki/Laevatain"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Wave Tide",
+                    url = "https://endfield.wiki.gg/wiki/Wave_Tide"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
