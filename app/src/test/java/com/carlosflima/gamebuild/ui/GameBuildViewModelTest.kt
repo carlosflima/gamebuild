@@ -143,6 +143,8 @@ class GameBuildViewModelTest {
         viewModel.selectGame(Game.NTE)
         viewModel.selectCharacter(characters.first())
 
+        viewModel.selectBuildType(BuildType.F2P)
+
         assertEquals(null, viewModel.uiState.value.selectedBuildType)
         assertEquals(listOf(singleBuild), viewModel.uiState.value.filteredBuilds)
     }
