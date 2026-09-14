@@ -356,6 +356,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/Basic_PPE"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-tangtang-f2p-starter-2026-09",
+            characterId = "endfield-tangtang",
+            title = "Starter Cryo Susceptibility Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Long Road",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Ultimate Gain Efficiency",
+                "Cryo DMG",
+                "ATK"
+            ),
+            team = emptyList(),
+            notes = "Accessible Cryo support setup for Tangtang's Whirlpool rotation, Cryo Infliction and Arts Susceptibility utility. Long Road is a 4-star Handcannon whose Combo Skill trigger aligns with her combo-heavy loop, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Ultimate Gain Efficiency for smoother rotations, then Cryo damage and ATK for her personal contribution, without requiring Brigand's Calling, Clannibal, Home Longing or other 6-star Handcannons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Tangtang Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/tangtang"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Tangtang",
+                    url = "https://endfield.wiki.gg/wiki/Tangtang"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Long Road",
+                    url = "https://endfield.wiki.gg/wiki/Long_Road"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
