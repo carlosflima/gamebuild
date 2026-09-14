@@ -590,6 +590,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-rossi-f2p-starter-2026-09",
+            characterId = "endfield-rossi",
+            title = "Starter Physical Crit DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Wave Tide",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "ATK",
+                "Physical DMG",
+                "Critical Rate"
+            ),
+            team = emptyList(),
+            notes = "Accessible Physical Guard setup for Rossi's Vulnerability, Lift and critical-damage loop. Wave Tide is a 4-star Sword with Intellect and ATK scaling whose Combo Skill trigger provides a practical low-rarity damage route, while AIC Light is available through Authority progression and Gear Assembly. Prioritize ATK, Physical damage and Critical Rate for her Physical-focused progression without requiring Lupine Scarlet, Glorious Memory, Sundering Steel or other higher-rarity Swords.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Rossi Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/rossi"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Rossi",
+                    url = "https://endfield.wiki.gg/wiki/Rossi"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Wave Tide",
+                    url = "https://endfield.wiki.gg/wiki/Wave_Tide"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
