@@ -94,6 +94,12 @@ internal object EndfieldCharacterCatalog {
             name = "Estella",
             role = "Guard · Cryo",
             game = Game.ENDFIELD
+        ),
+        GameCharacter(
+            id = "endfield-fluorite",
+            name = "Fluorite",
+            role = "Caster · Nature",
+            game = Game.ENDFIELD
         )
     )
 }
