@@ -359,6 +359,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/Gear"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-alesh-f2p-starter-2026-09",
+            characterId = "endfield-alesh",
+            title = "Starter Cryo SP Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Wave Tide",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Ultimate Gain Efficiency",
+                "ATK",
+                "Cryo DMG"
+            ),
+            team = emptyList(),
+            notes = "Accessible Cryo support setup centered on Alesh's SP recovery and Solidification utility. Wave Tide is a 4-star Sword available through Arsenal Exchange, and AIC Light is an Authority-level progression set. Prioritize Ultimate Gain Efficiency and ATK, then Cryo damage, without requiring Thermite Cutter or other premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Alesh Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/alesh"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Alesh",
+                    url = "https://endfield.wiki.gg/wiki/Alesh"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Wave Tide",
+                    url = "https://endfield.wiki.gg/wiki/Wave_Tide"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
