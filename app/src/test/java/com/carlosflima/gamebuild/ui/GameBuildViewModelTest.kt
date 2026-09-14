@@ -41,7 +41,7 @@ class GameBuildViewModelTest {
     }
 
     @Test
-    fun defaultRepositoryLoadsEndfieldRosterAndSnowshineBuild() {
+    fun defaultRepositoryLoadsEndfieldRosterAndArclightBuild() {
         val viewModel = GameBuildViewModel()
 
         viewModel.selectGame(Game.ENDFIELD)
@@ -49,18 +49,18 @@ class GameBuildViewModelTest {
         val rosterState = viewModel.uiState.value
         assertEquals(Game.ENDFIELD, rosterState.selectedGame)
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight"),
             rosterState.characters.map { it.name }
         )
         assertEquals(setOf(Game.ENDFIELD), rosterState.characters.map { it.game }.toSet())
 
-        val snowshine = rosterState.characters.first { it.name == "Snowshine" }
-        viewModel.selectCharacter(snowshine)
+        val arclight = rosterState.characters.first { it.name == "Arclight" }
+        viewModel.selectCharacter(arclight)
 
         val buildState = viewModel.uiState.value
-        assertEquals("Snowshine", buildState.selectedCharacter?.name)
+        assertEquals("Arclight", buildState.selectedCharacter?.name)
         assertEquals(
-            listOf("endfield-snowshine-f2p-starter-2026-09"),
+            listOf("endfield-arclight-f2p-starter-2026-09"),
             buildState.builds.map { it.id }
         )
         assertEquals(BuildType.F2P, buildState.builds.single().type)
