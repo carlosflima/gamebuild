@@ -141,8 +141,8 @@ class GameBuildViewModelTest {
         }
         val viewModel = GameBuildViewModel(singleTypeRepository)
         viewModel.selectGame(Game.NTE)
-
         viewModel.selectCharacter(characters.first())
+
         viewModel.selectBuildType(BuildType.F2P)
 
         assertEquals(null, viewModel.uiState.value.selectedBuildType)
