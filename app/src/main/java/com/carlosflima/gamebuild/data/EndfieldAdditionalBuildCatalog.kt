@@ -44,6 +44,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-fluorite-f2p-starter-2026-09",
+            characterId = "endfield-fluorite",
+            title = "Starter Nature Infliction Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Howling Guard",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Arts Intensity",
+                "Ultimate Gain Efficiency",
+                "Nature DMG"
+            ),
+            team = emptyList(),
+            notes = "Accessible progression setup for Fluorite's Nature and Cryo Infliction support. Howling Guard is a 4-star Handcannon available through Arsenal Exchange, while AIC Light is a low-cost Authority/Gear Assembly set for early progression. Prioritize Arts Intensity and Ultimate Gain Efficiency for reliable elemental application, then Nature damage, without over-investing in premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Fluorite Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/fluorite"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Fluorite",
+                    url = "https://endfield.wiki.gg/wiki/Fluorite"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Howling Guard",
+                    url = "https://endfield.wiki.gg/wiki/Howling_Guard"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light"
+                )
+            )
         )
     )
 
