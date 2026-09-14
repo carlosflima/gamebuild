@@ -161,6 +161,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-lifeng-f2p-starter-2026-09",
+            characterId = "endfield-lifeng",
+            title = "Starter Physical Sub-DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Aggeloslayer",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Agility",
+                "Physical DMG",
+                "ATK"
+            ),
+            team = emptyList(),
+            notes = "Accessible Physical sub-DPS setup for Lifeng's grouping and Physical Susceptibility utility. Aggeloslayer is a 4-star Polearm that remains a low-cost mid-game option, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Agility, Physical damage and ATK to support both his personal damage and Physical-team enabling without requiring premium Polearms.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Lifeng Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/lifeng"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Lifeng",
+                    url = "https://endfield.wiki.gg/wiki/Lifeng"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Aggeloslayer",
+                    url = "https://endfield.wiki.gg/wiki/Aggeloslayer"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
