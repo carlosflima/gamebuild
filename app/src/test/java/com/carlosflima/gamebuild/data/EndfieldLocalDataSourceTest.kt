@@ -11,7 +11,7 @@ class EndfieldLocalDataSourceTest {
     @Test
     fun `tracked roster contains current Endfield operators`() {
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella"),
             EndfieldLocalDataSource.characters.map { it.name }
         )
     }
@@ -43,14 +43,14 @@ class EndfieldLocalDataSourceTest {
     @Test
     fun `starter builds reference known characters and have unique ids`() {
         val characterIds = EndfieldLocalDataSource.characters.map { it.id }.toSet()
-        val builds = EndfieldBuildCatalog.builds
+        val builds = EndfieldBuildCatalog.builds + EndfieldAdditionalBuildCatalog.builds
         val indexedBuilds = EndfieldLocalDataSource.characters.flatMap { character ->
             EndfieldLocalDataSource.getBuilds(character.id).onEach { build ->
                 assertEquals(character.id, build.characterId)
             }
         }
 
-        assertEquals(14, builds.size)
+        assertEquals(15, builds.size)
         assertEquals(builds.size, builds.map { it.id }.distinct().size)
         assertTrue(builds.all { it.characterId in characterIds })
         assertEquals(builds.map { it.id }.toSet(), indexedBuilds.map { it.id }.toSet())
@@ -58,7 +58,9 @@ class EndfieldLocalDataSourceTest {
 
     @Test
     fun `starter builds are F2P current-version snapshots with sources`() {
-        EndfieldBuildCatalog.builds.forEach { build ->
+        val builds = EndfieldBuildCatalog.builds + EndfieldAdditionalBuildCatalog.builds
+
+        builds.forEach { build ->
             assertEquals(BuildType.F2P, build.type)
             assertEquals("Dreamscape of Wind and Snow · 2026-09", build.version)
             assertTrue(build.weapon.isNotBlank())
