@@ -476,6 +476,45 @@ internal object EndfieldBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-arclight-f2p-starter-2026-09",
+            characterId = "endfield-arclight",
+            title = "Starter Electric SP Support",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Wave Tide",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Ultimate Gain Efficiency",
+                "ATK",
+                "Electric DMG"
+            ),
+            team = emptyList(),
+            notes = "Accessible Electric SP-support setup for Arclight's Link and SP recovery role. Wave Tide is a 4-star Sword available through Arsenal Exchange, while AIC Light is obtainable through Authority progression and Gear Assembly. Prioritize Ultimate Gain Efficiency and ATK for reliable rotations, then Electric damage, without requiring Thermite Cutter or other premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Arclight Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/arclight"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Arclight",
+                    url = "https://endfield.wiki.gg/wiki/Arclight"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Wave Tide",
+                    url = "https://endfield.wiki.gg/wiki/Wave_Tide"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
