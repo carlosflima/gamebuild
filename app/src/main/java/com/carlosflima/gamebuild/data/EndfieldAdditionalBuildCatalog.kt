@@ -122,6 +122,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-ember-f2p-starter-2026-09",
+            characterId = "endfield-ember",
+            title = "Starter Heat Tank",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Industry 0.1",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "HP",
+                "Treatment Efficiency",
+                "Defense"
+            ),
+            team = emptyList(),
+            notes = "Accessible tank-support setup for Ember's team shielding and reactive HP treatment. Industry 0.1 is a 4-star Great Sword suitable for early progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize HP for stronger Ultimate shields, then Treatment Efficiency and Defense for sustain, without requiring Finishing Call, Sundered Prince or other premium weapons.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Ember Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/ember"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Ember",
+                    url = "https://endfield.wiki.gg/wiki/Ember"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Industry 0.1",
+                    url = "https://endfield.wiki.gg/wiki/Industry_0.1"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
