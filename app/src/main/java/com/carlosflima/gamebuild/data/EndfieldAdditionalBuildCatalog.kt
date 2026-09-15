@@ -629,6 +629,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-arcane-f2p-starter-2026-09",
+            characterId = "endfield-arcane",
+            title = "Starter Nature Corrosion DPS",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Hypernova Auto",
+            equipment = listOf(
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
+            ),
+            statPriority = listOf(
+                "Intellect",
+                "Nature DMG",
+                "Arts Intensity"
+            ),
+            team = emptyList(),
+            notes = "Accessible INT-state Nature DPS setup for Arcane's Corrosion and dual Susceptibility loop. Hypernova Auto is a 4-star Arts Unit with Intellect and Arts damage that the progression guide recommends for early play, while AIC Light is available through Authority progression and Gear Assembly. Keep Intellect at or above Will, then prioritize Nature damage and Arts Intensity to strengthen her Corrosion-focused rotations without requiring Type 42: Solemn Phalanx, Junction Point, Oblivion or other 6-star or premium Arts Units.",
+            sources = listOf(
+                BuildSource(
+                    name = "Endfield Hub — Arcane Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/arcane"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Arcane",
+                    url = "https://endfield.wiki.gg/wiki/Arcane"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Hypernova Auto",
+                    url = "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+                )
+            )
         )
     )
 
