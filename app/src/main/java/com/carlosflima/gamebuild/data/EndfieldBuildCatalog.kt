@@ -105,24 +105,32 @@ internal object EndfieldBuildCatalog {
             title = "Starter Heat DPS",
             type = BuildType.F2P,
             version = "Dreamscape of Wind and Snow · 2026-09",
-            weapon = "Rational Farewell",
+            weapon = "Howling Guard",
             equipment = listOf(
-                "Aburrey Heavy Armor",
-                "Armored MSGR Gloves T1",
-                "Aburrey UV Lamp",
-                "Aburrey UV Lamp"
+                "AIC Light Armor",
+                "AIC Tactical Gloves",
+                "AIC Light Plate",
+                "AIC Ceramic Plate"
             ),
             statPriority = listOf(
-                "Strength",
+                "ATK",
                 "Heat DMG",
-                "Skill DMG"
+                "Arts Intensity"
             ),
             team = emptyList(),
-            notes = "Starter Heat setup for early progression. Rational Farewell supports Wulfgard's Strength and Heat damage, while the accessible gear mix emphasizes skill damage before endgame sets become practical.",
+            notes = "Low-rarity Heat setup for early-to-mid progression. Howling Guard is a 4-star Handcannon whose battle-skill hit grants an ATK buff; AIC Light pieces become craftable through Authority progression. Prioritize ATK, Heat damage and Arts Intensity for Wulfgard's Heat attacks and reactions without requiring Rational Farewell or a 6-star weapon.",
             sources = listOf(
                 BuildSource(
-                    name = "Game8 — Wulfgard Build and Weapons",
-                    url = "https://game8.co/games/Arknights-Endfield/archives/523673"
+                    name = "Endfield Hub — Wulfgard Best Build Guide",
+                    url = "https://endfieldhub.org/guides/progression/wulfgard"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Howling Guard",
+                    url = "https://endfield.wiki.gg/wiki/Howling_Guard"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — AIC Light Armor Formula",
+                    url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor_(Recipe)"
                 ),
                 BuildSource(
                     name = "Arknights: Endfield — Dreamscape of Wind and Snow update",
