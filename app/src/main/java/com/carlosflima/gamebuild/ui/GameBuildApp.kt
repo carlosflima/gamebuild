@@ -15,9 +15,9 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -98,7 +98,7 @@ fun GameBuildApp(
                 containerColor = Color.Transparent,
                 topBar = {
                     TopAppBar(
-                        title = { Text(terms.text("app.title", "Game Builds — V0.3")) },
+                        title = { Text(terms.text("app.title", "Game Builds — V0.3.5")) },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = Color.Transparent),
                         navigationIcon = {
                             if (canNavigateBack) {
@@ -238,16 +238,16 @@ private fun GameSelectionCard(
     val gameDescription = terms.gameDescription(game)
 
     Card(Modifier.fillMaxWidth()) {
-        Box(Modifier.fillMaxWidth().height(176.dp)) {
+        Box(Modifier.fillMaxWidth()) {
             Image(
                 painter = painterResource(gameBackground(game)),
                 contentDescription = null,
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.matchParentSize(),
                 contentScale = ContentScale.Crop
             )
-            Box(Modifier.fillMaxSize().background(Color.Black.copy(alpha = 0.42f)))
+            Box(Modifier.matchParentSize().background(Color.Black.copy(alpha = 0.42f)))
             Column(
-                modifier = Modifier.fillMaxSize().padding(18.dp),
+                modifier = Modifier.fillMaxWidth().heightIn(min = 176.dp).padding(18.dp),
                 verticalArrangement = Arrangement.Bottom
             ) {
                 Text(gameName, style = MaterialTheme.typography.headlineSmall)
@@ -454,7 +454,7 @@ private fun BuildScreen(
                         Text(
                             terms.text(
                                 "build.empty.body",
-                                "Os dados desta personagem ainda não foram adicionados à V0.3."
+                                "Os dados desta personagem ainda não foram adicionados à V0.3.5."
                             )
                         )
                     }
@@ -749,7 +749,7 @@ private fun BuildVisualSection(
             ) {
                 BuildItemImage(value = value, imageUrl = imageUrl)
             }
-            Column(Modifier.width(230.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Column(Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(value)
                 if (details != null) {
                     Text(
