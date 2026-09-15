@@ -172,14 +172,14 @@ private fun AppBackground(
             Box(Modifier.fillMaxSize()) {
                 Image(
                     painter = painterResource(characterFallbackBackground(selectedCharacter.game)),
-                    contentDescription = "Fundo de ${selectedCharacter.name}",
+                    contentDescription = null,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
                 selectedCharacter.imageUrl?.let { imageUrl ->
                     AsyncImage(
                         model = imageUrl,
-                        contentDescription = "Fundo de ${selectedCharacter.name}",
+                        contentDescription = null,
                         modifier = Modifier.fillMaxSize(),
                         contentScale = ContentScale.Crop
                     )
@@ -241,7 +241,7 @@ private fun GameSelectionCard(
         Box(Modifier.fillMaxWidth().height(176.dp)) {
             Image(
                 painter = painterResource(gameBackground(game)),
-                contentDescription = "Fundo de $gameName",
+                contentDescription = null,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
