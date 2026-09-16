@@ -1,28 +1,44 @@
-# GameBuild — Architecture V0.1
+# Game Builds — Arquitetura
 
 ## Objetivo
 
-Aplicativo Android para consulta de builds de personagens de múltiplos jogos.
+Aplicativo Android para consultar builds versionadas de personagens de múltiplos jogos. Os catálogos são distribuídos no APK; cada build registra suas referências externas.
 
-## Stack
+## Camadas
 
-- Kotlin
-- Jetpack Compose
-- Material 3
-- ViewModel + StateFlow
-- Repository Pattern
-- Gradle Kotlin DSL
-- GitHub Actions
+- **Domínio:** `Game`, `GameCharacter`, `CharacterBuild`, `BuildSource` e `AppTerms` representam jogos, personagens, builds, referências e textos da interface.
+- **Dados:** `LocalGameRepository` encaminha consultas às implementações de `LocalGameDataSource` de NTE, Warframe e Endfield. Cada jogo mantém seus catálogos de personagens e builds; Endfield também usa `EndfieldAdditionalBuildCatalog`.
+- **Estado:** `GameBuildViewModel` expõe `GameBuildUiState` por `StateFlow`. Seleção de jogo e personagem, busca, filtros, comparação e mensagens de erro derivam desse estado.
+- **Interface:** `GameBuildApp` usa Jetpack Compose e Material 3. Observa o estado com respeito ao ciclo de vida e encaminha as ações ao ViewModel.
 
-## V0.1
+O repositório verifica registros duplicados de fontes locais por jogo. Os catálogos indexam as builds pelo identificador do personagem.
 
-1. Seleção do jogo
-2. Seleção do personagem
-3. Tela inicial de build
-4. Estado de erro básico
+## Navegação e apresentação
 
-Os dados são locais e fictícios nesta fase. Nenhuma fonte externa é tratada como verdade antes da implementação do Data Engine.
+O fluxo é seleção de jogo → lista de personagens → builds do personagem. Botão e gesto de voltar usam as mesmas transições do ViewModel. Retornar à lista preserva busca e filtro; retornar aos jogos limpa o estado.
 
-## Próxima camada
+A tela permite filtrar builds por tipo e comparar alternativas quando há mais de um tipo disponível. O compartilhamento é formatado por `BuildShareFormatter` e entregue ao seletor do Android. Fontes abrem em aplicativos externos; falhas de abertura recebem feedback na interface.
 
-A V0.2 introduzirá fontes reais, modelos de build, cache local, imagens e atualização de dados.
+`GameTerms` adapta o vocabulário por jogo, como Operadores em Endfield e Mods em Warframe. Coil carrega imagens remotas, com fundos locais e iniciais como fallback. Os cartões de seleção podem crescer conforme o conteúdo e o tamanho da fonte.
+
+O ViewModel mantém o estado durante mudanças de configuração. O app não implementa restauração explícita desse estado após a morte do processo.
+
+## Builds e referências
+
+Builds incluem tipo, versão, arma, equipamentos, prioridades, equipe, notas e fontes. Esses dados são locais: os links servem como referências e não são baixados para substituir automaticamente as builds.
+
+Atualizações de roster e builds exigem uma nova versão do aplicativo. A baseline de cada jogo e os snapshots acompanhados estão descritos no [README](../README.md).
+
+## Textos remotos e funcionamento offline
+
+`TermsRepository` combina os textos empacotados em `app/src/main/assets/terms.json` com o último cache válido. A atualização remota roda em `Dispatchers.IO` e consulta exclusivamente `config/terms.json` na branch `main` deste repositório.
+
+O download exige HTTPS, não segue redirecionamentos, usa timeouts e limita o documento a 64 KiB. `TermsDocumentParser` valida schema, chaves, quantidade de entradas e valores. Se a atualização falhar, a interface mantém os textos já carregados.
+
+A configuração remota altera apenas os textos mapeados. Ela não modifica catálogos, lógica de navegação ou funcionalidades. Consulte [o catálogo de termos](../config/README.md) para o fluxo de edição.
+
+## Verificação
+
+A CI Android compila o APK debug, executa testes unitários e Android lint, compila a release endurecida e disponibiliza o APK debug identificado pela versão.
+
+Os testes cobrem integridade e isolamento dos catálogos, filtros e transições de estado, formatação do compartilhamento, vocabulário por jogo e validação dos termos. A CI atual não executa testes instrumentados de interface; fontes ampliadas, TalkBack, imagens offline e abertura de aplicativos externos precisam de verificação em dispositivo ou emulador.
