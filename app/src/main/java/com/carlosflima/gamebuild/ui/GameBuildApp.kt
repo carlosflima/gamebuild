@@ -73,7 +73,7 @@ private val GameBuildDarkColors = darkColorScheme(
 @Composable
 fun GameBuildApp(
     terms: AppTerms = AppTerms.Empty,
-    viewModel: GameBuildViewModel = viewModel()
+    viewModel: GameBuildViewModel = viewModel(factory = GameBuildViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     val activeTerms = state.selectedGame?.let { terms.forGame(it) } ?: terms

@@ -21,7 +21,7 @@ A tela permite filtrar builds por tipo e comparar alternativas quando há mais d
 
 `GameTerms` adapta o vocabulário por jogo, como Operadores em Endfield e Mods em Warframe. Coil carrega imagens remotas, com fundos locais e iniciais como fallback. Os cartões de seleção podem crescer conforme o conteúdo e o tamanho da fonte.
 
-O ViewModel mantém o estado durante mudanças de configuração. O app não implementa restauração explícita desse estado após a morte do processo.
+O ViewModel mantém o estado durante mudanças de configuração. Um `SavedStateHandle` fornecido pela factory do Android permite restaurar jogo, personagem, busca e filtros após recriação do processo com a tarefa preservada. Apenas nomes, IDs e textos de seleção são salvos; roster e builds são recarregados dos catálogos atuais, descartando seleções indisponíveis. Voltar aos jogos ou trocar de jogo limpa as seleções anteriores. Esse estado não é um histórico permanente e não é restaurado após force-stop ou remoção da tarefa.
 
 ## Builds e referências
 
