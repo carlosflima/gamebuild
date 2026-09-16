@@ -1,7 +1,10 @@
 package com.carlosflima.gamebuild.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -551,11 +554,12 @@ private fun BuildComparisonCard(
                                 )
                             )
                         }
-                        context.startActivity(
+                        context.openExternalActivity(
                             Intent.createChooser(
                                 shareIntent,
                                 terms.text("build.compare.share.chooser", "Compartilhar comparação")
-                            )
+                            ),
+                            terms
                         )
                     },
                     contentPadding = PaddingValues(0.dp)
@@ -663,11 +667,12 @@ private fun BuildCard(build: CharacterBuild, character: GameCharacter, terms: Ap
                             )
                         )
                     }
-                    context.startActivity(
+                    context.openExternalActivity(
                         Intent.createChooser(
                             shareIntent,
                             terms.text("build.share.chooser", "Compartilhar build")
-                        )
+                        ),
+                        terms
                     )
                 },
                 contentPadding = PaddingValues(0.dp)
@@ -704,7 +709,12 @@ private fun BuildCard(build: CharacterBuild, character: GameCharacter, terms: Ap
                 build.sources.forEach { source ->
                     if (source.url != null) {
                         TextButton(
-                            onClick = { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(source.url))) },
+                            onClick = {
+                                context.openExternalActivity(
+                                    Intent(Intent.ACTION_VIEW, Uri.parse(source.url)),
+                                    terms
+                                )
+                            },
                             contentPadding = PaddingValues(0.dp)
                         ) { Text(source.name) }
                     } else {
@@ -832,4 +842,25 @@ private fun AppTerms.gameDescription(game: Game): String = when (game) {
 private fun AppTerms.buildTypeName(type: BuildType): String = when (type) {
     BuildType.META -> text("build.type.meta", type.displayName)
     BuildType.F2P -> text("build.type.f2p", type.displayName)
+}
+
+private fun Context.openExternalActivity(intent: Intent, terms: AppTerms) {
+    try {
+        startActivity(intent)
+    } catch (_: ActivityNotFoundException) {
+        showExternalActivityError(terms)
+    } catch (_: SecurityException) {
+        showExternalActivityError(terms)
+    }
+}
+
+private fun Context.showExternalActivityError(terms: AppTerms) {
+    Toast.makeText(
+        this,
+        terms.text(
+            "common.externalAction.error",
+            "Não foi possível abrir outro aplicativo para esta ação."
+        ),
+        Toast.LENGTH_LONG
+    ).show()
 }
