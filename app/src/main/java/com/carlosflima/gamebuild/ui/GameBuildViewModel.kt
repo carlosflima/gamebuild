@@ -2,15 +2,20 @@ package com.carlosflima.gamebuild.ui
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewModelScope
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.carlosflima.gamebuild.data.LocalGameRepository
 import com.carlosflima.gamebuild.data.GameRepository
+import com.carlosflima.gamebuild.data.RemoteEndfieldRepository
 import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
+import kotlinx.coroutines.CancellationException
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -61,12 +66,21 @@ data class GameBuildUiState(
         get() = if (selectedBuildType == null && availableBuildTypes.size > 1) builds else emptyList()
 }
 
+data class CatalogSyncState(
+    val isRefreshing: Boolean = false,
+    val publishedAt: String? = null,
+    val failed: Boolean = false
+)
+
 class GameBuildViewModel(
     private val repository: GameRepository = LocalGameRepository(),
     private val savedStateHandle: SavedStateHandle = SavedStateHandle()
 ) : ViewModel() {
     private val _uiState = MutableStateFlow(restoreState())
     val uiState: StateFlow<GameBuildUiState> = _uiState.asStateFlow()
+    private val _catalogSyncState = MutableStateFlow(CatalogSyncState())
+    val catalogSyncState: StateFlow<CatalogSyncState> = _catalogSyncState.asStateFlow()
+    private var catalogInitialized = false
 
     private var currentState: GameBuildUiState
         get() = _uiState.value
@@ -81,6 +95,44 @@ class GameBuildViewModel(
 
     init {
         currentState = _uiState.value
+    }
+
+    fun initializeCatalog() {
+        if (catalogInitialized) return
+        catalogInitialized = true
+        refreshEndfieldBuilds()
+    }
+
+    fun refreshEndfieldBuilds() {
+        if (_catalogSyncState.value.isRefreshing) return
+        _catalogSyncState.value = _catalogSyncState.value.copy(isRefreshing = true, failed = false)
+        viewModelScope.launch {
+            try {
+                repository.loadCachedEndfieldBuilds()
+                applyCatalogUpdate()
+                val refreshed = repository.refreshEndfieldBuilds()
+                applyCatalogUpdate()
+                _catalogSyncState.value = _catalogSyncState.value.copy(failed = !refreshed)
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (_: Exception) {
+                _catalogSyncState.value = _catalogSyncState.value.copy(failed = true)
+            } finally {
+                _catalogSyncState.value = _catalogSyncState.value.copy(isRefreshing = false)
+            }
+        }
+    }
+
+    private fun applyCatalogUpdate() {
+        _catalogSyncState.value = _catalogSyncState.value.copy(publishedAt = repository.endfieldCatalogDate)
+        val state = currentState
+        if (state.selectedGame != Game.ENDFIELD) return
+        val character = state.selectedCharacter ?: return
+        val builds = repository.getBuilds(Game.ENDFIELD, character.id)
+        currentState = state.copy(
+            builds = builds,
+            selectedBuildType = state.selectedBuildType?.takeIf { type -> builds.any { it.type == type } }
+        )
     }
 
     fun selectGame(game: Game) {
@@ -186,7 +238,10 @@ class GameBuildViewModel(
     companion object {
         val Factory = viewModelFactory {
             initializer {
-                GameBuildViewModel(savedStateHandle = createSavedStateHandle())
+                GameBuildViewModel(
+                    repository = RemoteEndfieldRepository.create(checkNotNull(this[APPLICATION_KEY])),
+                    savedStateHandle = createSavedStateHandle()
+                )
             }
         }
 

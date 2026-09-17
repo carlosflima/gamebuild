@@ -1,0 +1,1158 @@
+{
+  "schemaVersion": 1,
+  "revision": 1,
+  "publishedAt": "2026-09-17",
+  "gameVersion": "Dreamscape of Wind and Snow · 2026-09",
+  "builds": [
+    {
+      "id": "endfield-endministrator-f2p-starter-2026-09",
+      "characterId": "endfield-endministrator",
+      "title": "Starter Physical DPS",
+      "type": "F2P",
+      "weapon": "Sundering Steel",
+      "equipment": [
+        "Roving MSGR Jacket",
+        "Roving MSGR Fists",
+        "Roving MSGR Flashlight",
+        "Roving MSGR Gyro"
+      ],
+      "statPriority": [
+        "Agility",
+        "Physical DMG",
+        "Strength"
+      ],
+      "team": [],
+      "notes": "Early-progression Physical DPS setup built around accessible Sundering Steel and the Roving MSGR set. Prioritize Agility and Physical damage, and keep HP high when practical to benefit from the set bonus.",
+      "sources": [
+        {
+          "name": "Game8 — Endministrator Best Build and Weapons",
+          "url": "https://game8.co/games/Arknights-Endfield/archives/523676"
+        },
+        {
+          "name": "Arknights: Endfield — Dreamscape of Wind and Snow update",
+          "url": "https://endfield.gryphline.com/en-us/news/5209"
+        }
+      ]
+    },
+    {
+      "id": "endfield-perlica-f2p-starter-2026-09",
+      "characterId": "endfield-perlica",
+      "title": "Starter Electric Support",
+      "type": "F2P",
+      "weapon": "Wild Wanderer",
+      "equipment": [
+        "Mordvolt Insulation Vest T1",
+        "Mordvolt Insulation Gloves",
+        "Mordvolt Insulation Wrench T1",
+        "Mordvolt Insulation Wrench T1"
+      ],
+      "statPriority": [
+        "Intellect",
+        "Electric DMG",
+        "Arts Intensity"
+      ],
+      "team": [],
+      "notes": "Accessible early-game support setup focused on Perlica's Electric Infliction and Electrification. Wild Wanderer adds team value while Mordvolt Insulation strengthens her own Arts damage during progression.",
+      "sources": [
+        {
+          "name": "Game8 — Perlica Best Build and Weapons",
+          "url": "https://game8.co/games/Arknights-Endfield/archives/523675"
+        },
+        {
+          "name": "Arknights: Endfield — Dreamscape of Wind and Snow update",
+          "url": "https://endfield.gryphline.com/en-us/news/5209"
+        }
+      ]
+    },
+    {
+      "id": "endfield-chen-qianyu-f2p-starter-2026-09",
+      "characterId": "endfield-chen-qianyu",
+      "title": "Starter Vulnerability Sub-DPS",
+      "type": "F2P",
+      "weapon": "Sundering Steel",
+      "equipment": [
+        "Roving MSGR Jacket",
+        "Roving MSGR Fists",
+        "Roving MSGR Flashlight",
+        "Roving MSGR Gyro"
+      ],
+      "statPriority": [
+        "Agility",
+        "Physical DMG",
+        "Strength"
+      ],
+      "team": [],
+      "notes": "Early-game sub-DPS setup for applying Lift and Vulnerability while contributing Physical damage. Sundering Steel and Roving MSGR emphasize Agility and Physical damage with low progression overhead.",
+      "sources": [
+        {
+          "name": "Game8 — Chen Qianyu Build and Weapons",
+          "url": "https://game8.co/games/Arknights-Endfield/archives/523674"
+        },
+        {
+          "name": "Arknights: Endfield — Dreamscape of Wind and Snow update",
+          "url": "https://endfield.gryphline.com/en-us/news/5209"
+        }
+      ]
+    },
+    {
+      "id": "endfield-wulfgard-f2p-starter-2026-09",
+      "characterId": "endfield-wulfgard",
+      "title": "Starter Heat DPS",
+      "type": "F2P",
+      "weapon": "Howling Guard",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "ATK",
+        "Heat DMG",
+        "Arts Intensity"
+      ],
+      "team": [],
+      "notes": "Low-rarity Heat setup for early-to-mid progression. Howling Guard is a 4-star Handcannon whose battle-skill hit grants an ATK buff; AIC Light pieces become craftable through Authority progression. Prioritize ATK, Heat damage and Arts Intensity for Wulfgard's Heat attacks and reactions without requiring Rational Farewell or a 6-star weapon.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Wulfgard Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/wulfgard"
+        },
+        {
+          "name": "Endfield Talos Wiki — Howling Guard",
+          "url": "https://endfield.wiki.gg/wiki/Howling_Guard"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor Formula",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor_(Recipe)"
+        },
+        {
+          "name": "Arknights: Endfield — Dreamscape of Wind and Snow update",
+          "url": "https://endfield.gryphline.com/en-us/news/5209"
+        }
+      ]
+    },
+    {
+      "id": "endfield-yvonne-f2p-starter-2026-09",
+      "characterId": "endfield-yvonne",
+      "title": "Starter Cryo DPS",
+      "type": "F2P",
+      "weapon": "Howling Guard",
+      "equipment": [
+        "Mordvolt Insulation Vest T1",
+        "Mordvolt Insulation Gloves",
+        "Mordvolt Insulation Wrench T1",
+        "Mordvolt Insulation Battery"
+      ],
+      "statPriority": [
+        "Intellect",
+        "Cryo DMG",
+        "Critical Rate"
+      ],
+      "team": [],
+      "notes": "Accessible early-game Cryo setup for Yvonne. Howling Guard is a lower-rarity alternative when premium handcannons are unavailable, while Mordvolt Insulation supports her Intellect-focused progression and Cryo damage before endgame gear becomes practical.",
+      "sources": [
+        {
+          "name": "Game8 — Yvonne Build and Weapons",
+          "url": "https://game8.co/games/Arknights-Endfield/archives/523664"
+        },
+        {
+          "name": "Endfield Talos Wiki — Howling Guard",
+          "url": "https://endfield.wiki.gg/wiki/Howling_Guard"
+        },
+        {
+          "name": "Arknights: Endfield — Dreamscape of Wind and Snow update",
+          "url": "https://endfield.gryphline.com/en-us/news/5209"
+        }
+      ]
+    },
+    {
+      "id": "endfield-typhoeus-f2p-2026-09",
+      "characterId": "endfield-typhoeus",
+      "title": "F2P Nature Burst",
+      "type": "F2P",
+      "weapon": "Fluorescent Roc",
+      "equipment": [
+        "Deep Rampart Armor",
+        "Deep Rampart Gauntlets",
+        "Deep Rampart Comms",
+        "Deep Rampart Comms"
+      ],
+      "statPriority": [
+        "Agility",
+        "Arts Intensity",
+        "Nature DMG"
+      ],
+      "team": [],
+      "notes": "F2P-oriented setup for the current Typhoeus snapshot. Fluorescent Roc is a 4-star Arts Unit alternative, while craftable Deep Rampart pieces align with her Agility scaling and repeated Nature Burst damage without requiring her signature or Battle Pass weapon.",
+      "sources": [
+        {
+          "name": "Prydwen — Typhoeus Best Build Guide · Patch 1.5",
+          "url": "https://www.prydwen.gg/arknights-endfield/characters/typhoeus"
+        },
+        {
+          "name": "Prydwen — Fluorescent Roc",
+          "url": "https://www.prydwen.gg/arknights-endfield/weapons"
+        },
+        {
+          "name": "Endfield Talos Wiki — Deep Rampart Armor formula",
+          "url": "https://endfield.wiki.gg/wiki/Deep_Rampart_Armor_(Formula)"
+        },
+        {
+          "name": "Arknights: Endfield — Winter Hunt",
+          "url": "https://endfield.gryphline.com/en-us/news/6172"
+        }
+      ]
+    },
+    {
+      "id": "endfield-antal-f2p-starter-2026-09",
+      "characterId": "endfield-antal",
+      "title": "Starter Electric Support",
+      "type": "F2P",
+      "weapon": "Hypernova Auto",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Arts Intensity",
+        "Ultimate Gain Efficiency",
+        "Electric DMG"
+      ],
+      "team": [],
+      "notes": "Accessible progression setup for Antal's Electric support role. Hypernova Auto is a 4-star Arts Unit option, while AIC Light pieces are available through Authority progression and Gear Assembly. Prioritize Arts Intensity and Ultimate Gain so Focus, Susceptibility and Amp remain useful without requiring premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Antal Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/antal"
+        },
+        {
+          "name": "Endfield Talos Wiki — Antal",
+          "url": "https://endfield.wiki.gg/wiki/Antal"
+        },
+        {
+          "name": "Endfield Talos Wiki — Hypernova Auto",
+          "url": "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-akekuri-f2p-starter-2026-09",
+      "characterId": "endfield-akekuri",
+      "title": "Starter Heat SP Support",
+      "type": "F2P",
+      "weapon": "Wave Tide",
+      "equipment": [
+        "Catastrophe Heavy Armor",
+        "Catastrophe Gloves",
+        "Catastrophe Gauze Cartridge",
+        "Catastrophe Filter"
+      ],
+      "statPriority": [
+        "Ultimate Gain Efficiency",
+        "ATK",
+        "Intellect"
+      ],
+      "team": [],
+      "notes": "F2P-oriented Heat support setup centered on Akekuri's SP recovery. Wave Tide is a 4-star Sword available through Arsenal Exchange, while Catastrophe supports faster Ultimate access and is obtainable through Authority progression and Gear Assembly. Prioritize Ultimate Gain Efficiency, ATK and Intellect for reliable team rotations.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Akekuri Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/akekuri"
+        },
+        {
+          "name": "Endfield Talos Wiki — Akekuri",
+          "url": "https://endfield.wiki.gg/wiki/Akekuri"
+        },
+        {
+          "name": "Endfield Talos Wiki — Wave Tide",
+          "url": "https://endfield.wiki.gg/wiki/Wave_Tide"
+        },
+        {
+          "name": "Endfield Talos Wiki — Catastrophe",
+          "url": "https://endfield.wiki.gg/wiki/Catastrophe"
+        }
+      ]
+    },
+    {
+      "id": "endfield-avywenna-f2p-starter-2026-09",
+      "characterId": "endfield-avywenna",
+      "title": "Starter Electric DPS",
+      "type": "F2P",
+      "weapon": "Aggeloslayer",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Arts Intensity",
+        "Electric DMG",
+        "ATK"
+      ],
+      "team": [],
+      "notes": "Accessible early-progression Electric DPS setup for Avywenna. Aggeloslayer is a 4-star Polearm from Arsenal Exchange whose Arts damage and battle-skill ATK effect fit her Thunderlance loop, while AIC Light provides inexpensive Authority-level gear before higher-tier sets are worth investing in.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Avywenna Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/avywenna"
+        },
+        {
+          "name": "Endfield Talos Wiki — Avywenna",
+          "url": "https://endfield.wiki.gg/wiki/Avywenna"
+        },
+        {
+          "name": "Endfield Talos Wiki — Aggeloslayer",
+          "url": "https://endfield.wiki.gg/wiki/Aggeloslayer"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-catcher-f2p-starter-2026-09",
+      "characterId": "endfield-catcher",
+      "title": "Starter Physical Tank",
+      "type": "F2P",
+      "weapon": "Quencher",
+      "equipment": [
+        "Catastrophe Heavy Armor",
+        "Catastrophe Gloves",
+        "Catastrophe Gauze Cartridge",
+        "Catastrophe Filter"
+      ],
+      "statPriority": [
+        "HP",
+        "Defense",
+        "Ultimate Gain Efficiency"
+      ],
+      "team": [],
+      "notes": "F2P-oriented Physical tank setup for Catcher. Quencher is a 4-star Great Sword available through Arsenal Exchange, while Catastrophe accelerates Ultimate access for more frequent Weaken and protection windows. Prioritize HP and Defense first, then Ultimate Gain Efficiency for reliable defensive rotations.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Catcher Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/catcher"
+        },
+        {
+          "name": "Endfield Talos Wiki — Catcher",
+          "url": "https://endfield.wiki.gg/wiki/Catcher"
+        },
+        {
+          "name": "Endfield Talos Wiki — Quencher",
+          "url": "https://endfield.wiki.gg/wiki/Quencher"
+        },
+        {
+          "name": "Endfield Talos Wiki — Catastrophe gear",
+          "url": "https://endfield.wiki.gg/wiki/Gear"
+        }
+      ]
+    },
+    {
+      "id": "endfield-alesh-f2p-starter-2026-09",
+      "characterId": "endfield-alesh",
+      "title": "Starter Cryo SP Support",
+      "type": "F2P",
+      "weapon": "Wave Tide",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Ultimate Gain Efficiency",
+        "ATK",
+        "Cryo DMG"
+      ],
+      "team": [],
+      "notes": "Accessible Cryo support setup centered on Alesh's SP recovery and Solidification utility. Wave Tide is a 4-star Sword available through Arsenal Exchange, and AIC Light is an Authority-level progression set. Prioritize Ultimate Gain Efficiency and ATK, then Cryo damage, without requiring Thermite Cutter or other premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Alesh Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/alesh"
+        },
+        {
+          "name": "Endfield Talos Wiki — Alesh",
+          "url": "https://endfield.wiki.gg/wiki/Alesh"
+        },
+        {
+          "name": "Endfield Talos Wiki — Wave Tide",
+          "url": "https://endfield.wiki.gg/wiki/Wave_Tide"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-xaihi-f2p-starter-2026-09",
+      "characterId": "endfield-xaihi",
+      "title": "Starter Cryo Support",
+      "type": "F2P",
+      "weapon": "Fluorescent Roc",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Intellect",
+        "Ultimate Gain Efficiency",
+        "Will"
+      ],
+      "team": [],
+      "notes": "Accessible Cryo support setup for Xaihi's healing and Amp role. Fluorescent Roc is a 4-star Arts Unit available through Arsenal Exchange, while AIC Light is obtainable through Authority progression and Gear Assembly. Prioritize Intellect and Ultimate Gain Efficiency for support uptime, with Will improving her HP treatment without requiring 5-star or 6-star weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Xaihi Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/xaihi"
+        },
+        {
+          "name": "Endfield Talos Wiki — Xaihi",
+          "url": "https://endfield.wiki.gg/wiki/Xaihi"
+        },
+        {
+          "name": "Endfield Talos Wiki — Fluorescent Roc",
+          "url": "https://endfield.wiki.gg/wiki/Fluorescent_Roc"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-snowshine-f2p-starter-2026-09",
+      "characterId": "endfield-snowshine",
+      "title": "Starter Cryo Tank",
+      "type": "F2P",
+      "weapon": "Quencher",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "HP",
+        "Defense",
+        "Cryo DMG"
+      ],
+      "team": [],
+      "notes": "Accessible Cryo defender setup for Snowshine's Protect, HP treatment and retaliation utility. Quencher is a 4-star Great Sword available through Arsenal Exchange, while AIC Light is obtainable through Authority progression and Gear Assembly. Prioritize HP and Defense for survivability, then Cryo damage for her retaliation and Snow Zone without requiring premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Snowshine Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/snowshine"
+        },
+        {
+          "name": "Endfield Talos Wiki — Snowshine",
+          "url": "https://endfield.wiki.gg/wiki/Snowshine"
+        },
+        {
+          "name": "Endfield Talos Wiki — Quencher",
+          "url": "https://endfield.wiki.gg/wiki/Quencher"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-arclight-f2p-starter-2026-09",
+      "characterId": "endfield-arclight",
+      "title": "Starter Electric SP Support",
+      "type": "F2P",
+      "weapon": "Wave Tide",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Ultimate Gain Efficiency",
+        "ATK",
+        "Electric DMG"
+      ],
+      "team": [],
+      "notes": "Accessible Electric SP-support setup for Arclight's Link and SP recovery role. Wave Tide is a 4-star Sword available through Arsenal Exchange, while AIC Light is obtainable through Authority progression and Gear Assembly. Prioritize Ultimate Gain Efficiency and ATK for reliable rotations, then Electric damage, without requiring Thermite Cutter or other premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Arclight Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/arclight"
+        },
+        {
+          "name": "Endfield Talos Wiki — Arclight",
+          "url": "https://endfield.wiki.gg/wiki/Arclight"
+        },
+        {
+          "name": "Endfield Talos Wiki — Wave Tide",
+          "url": "https://endfield.wiki.gg/wiki/Wave_Tide"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-estella-f2p-starter-2026-09",
+      "characterId": "endfield-estella",
+      "title": "Starter Cryo Debuff Support",
+      "type": "F2P",
+      "weapon": "Aggeloslayer",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Will",
+        "Physical DMG",
+        "Ultimate Gain Efficiency"
+      ],
+      "team": [],
+      "notes": "Accessible progression setup for Estella's Cryo Infliction, Lift and Physical Susceptibility utility. Aggeloslayer is a 4-star Polearm option with Will scaling, while AIC Light is an early Authority/Gear Assembly set. Prioritize Will and Physical damage for her debuff-oriented combo contribution, then Ultimate Gain Efficiency for smoother rotations without requiring premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Estella Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/estella"
+        },
+        {
+          "name": "Endfield Talos Wiki — Estella",
+          "url": "https://endfield.wiki.gg/wiki/Estella"
+        },
+        {
+          "name": "Endfield Talos Wiki — Aggeloslayer",
+          "url": "https://endfield.wiki.gg/wiki/Aggeloslayer"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light"
+        }
+      ]
+    },
+    {
+      "id": "endfield-fluorite-f2p-starter-2026-09",
+      "characterId": "endfield-fluorite",
+      "title": "Starter Nature Infliction Support",
+      "type": "F2P",
+      "weapon": "Howling Guard",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Arts Intensity",
+        "Ultimate Gain Efficiency",
+        "Nature DMG"
+      ],
+      "team": [],
+      "notes": "Accessible progression setup for Fluorite's Nature and Cryo Infliction support. Howling Guard is a 4-star Handcannon available through Arsenal Exchange, while AIC Light is a low-cost Authority/Gear Assembly set for early progression. Prioritize Arts Intensity and Ultimate Gain Efficiency for reliable elemental application, then Nature damage, without over-investing in premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Fluorite Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/fluorite"
+        },
+        {
+          "name": "Endfield Talos Wiki — Fluorite",
+          "url": "https://endfield.wiki.gg/wiki/Fluorite"
+        },
+        {
+          "name": "Endfield Talos Wiki — Howling Guard",
+          "url": "https://endfield.wiki.gg/wiki/Howling_Guard"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light"
+        }
+      ]
+    },
+    {
+      "id": "endfield-ardelia-f2p-starter-2026-09",
+      "characterId": "endfield-ardelia",
+      "title": "Starter Nature Sustain Support",
+      "type": "F2P",
+      "weapon": "Hypernova Auto",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "HP",
+        "Treatment Efficiency",
+        "Ultimate Gain Efficiency"
+      ],
+      "team": [],
+      "notes": "Accessible sustain-support setup for Ardelia's healing, Corrosion loop and dual Susceptibility utility. Hypernova Auto is a 4-star Arts Unit from Arsenal Exchange, while AIC Light is available through Authority progression and Gear Assembly. Prioritize HP and Treatment Efficiency for stronger sustain, then Ultimate Gain Efficiency for more reliable support rotations without requiring her 6-star login weapon.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Ardelia Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/ardelia"
+        },
+        {
+          "name": "Endfield Talos Wiki — Ardelia",
+          "url": "https://endfield.wiki.gg/wiki/Ardelia"
+        },
+        {
+          "name": "Endfield Talos Wiki — Hypernova Auto",
+          "url": "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-ember-f2p-starter-2026-09",
+      "characterId": "endfield-ember",
+      "title": "Starter Heat Tank",
+      "type": "F2P",
+      "weapon": "Industry 0.1",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "HP",
+        "Treatment Efficiency",
+        "Defense"
+      ],
+      "team": [],
+      "notes": "Accessible tank-support setup for Ember's team shielding and reactive HP treatment. Industry 0.1 is a 4-star Great Sword suitable for early progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize HP for stronger Ultimate shields, then Treatment Efficiency and Defense for sustain, without requiring Finishing Call, Sundered Prince or other premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Ember Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/ember"
+        },
+        {
+          "name": "Endfield Talos Wiki — Ember",
+          "url": "https://endfield.wiki.gg/wiki/Ember"
+        },
+        {
+          "name": "Endfield Talos Wiki — Industry 0.1",
+          "url": "https://endfield.wiki.gg/wiki/Industry_0.1"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-lifeng-f2p-starter-2026-09",
+      "characterId": "endfield-lifeng",
+      "title": "Starter Physical Sub-DPS",
+      "type": "F2P",
+      "weapon": "Aggeloslayer",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Agility",
+        "Physical DMG",
+        "ATK"
+      ],
+      "team": [],
+      "notes": "Accessible Physical sub-DPS setup for Lifeng's grouping and Physical Susceptibility utility. Aggeloslayer is a 4-star Polearm that remains a low-cost mid-game option, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Agility, Physical damage and ATK to support both his personal damage and Physical-team enabling without requiring premium Polearms.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Lifeng Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/lifeng"
+        },
+        {
+          "name": "Endfield Talos Wiki — Lifeng",
+          "url": "https://endfield.wiki.gg/wiki/Lifeng"
+        },
+        {
+          "name": "Endfield Talos Wiki — Aggeloslayer",
+          "url": "https://endfield.wiki.gg/wiki/Aggeloslayer"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-pogranichnik-f2p-starter-2026-09",
+      "characterId": "endfield-pogranichnik",
+      "title": "Starter Physical SP Support",
+      "type": "F2P",
+      "weapon": "Wave Tide",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "ATK",
+        "Physical DMG",
+        "Ultimate Gain Efficiency"
+      ],
+      "team": [],
+      "notes": "Accessible Physical Vanguard setup centered on Pogranichnik's Breach and SP-recovery utility. Wave Tide is a 4-star Sword that remains viable through mid-game progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize ATK and Physical damage for his support-DPS contribution, then Ultimate Gain Efficiency for smoother Shieldguard rotations without requiring Never Rest, Thermite Cutter or other premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Pogranichnik Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/pogranichnik"
+        },
+        {
+          "name": "Endfield Talos Wiki — Pogranichnik",
+          "url": "https://endfield.wiki.gg/wiki/Pogranichnik"
+        },
+        {
+          "name": "Endfield Talos Wiki — Wave Tide",
+          "url": "https://endfield.wiki.gg/wiki/Wave_Tide"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-last-rite-f2p-starter-2026-09",
+      "characterId": "endfield-last-rite",
+      "title": "Starter Cryo Burst DPS",
+      "type": "F2P",
+      "weapon": "Industry 0.1",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "ATK",
+        "Cryo DMG",
+        "Arts Intensity"
+      ],
+      "team": [],
+      "notes": "Accessible Cryo burst setup for Last Rite's Cryo Infliction and Final Strike loop. Industry 0.1 is a 4-star Great Sword that provides a straightforward early-game ATK route, while AIC Light becomes available through Authority progression and Gear Assembly. Prioritize ATK and Cryo damage for burst windows, then Arts Intensity, without requiring Seeker of Dark Lung, Khravengger, Sundered Prince or other premium weapons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Last Rite Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/last-rite"
+        },
+        {
+          "name": "Endfield Talos Wiki — Last Rite",
+          "url": "https://endfield.wiki.gg/wiki/Last_Rite"
+        },
+        {
+          "name": "Endfield Talos Wiki — Industry 0.1",
+          "url": "https://endfield.wiki.gg/wiki/Industry_0.1"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-gilberta-f2p-starter-2026-09",
+      "characterId": "endfield-gilberta",
+      "title": "Starter Nature Grouping Support",
+      "type": "F2P",
+      "weapon": "Hypernova Auto",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Intellect",
+        "Ultimate Gain Efficiency",
+        "Nature DMG"
+      ],
+      "team": [],
+      "notes": "Accessible Nature support setup for Gilberta's grouping, Lift and Arts Susceptibility utility. Hypernova Auto is a 4-star Arts Unit that remains useful through mid-game progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Intellect for her support scaling, then Ultimate Gain Efficiency for more frequent gravity-field rotations and Nature damage for her personal contribution, without requiring premium Arts Units.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Gilberta Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/gilberta"
+        },
+        {
+          "name": "Endfield Talos Wiki — Gilberta",
+          "url": "https://endfield.wiki.gg/wiki/Gilberta"
+        },
+        {
+          "name": "Endfield Talos Wiki — Hypernova Auto",
+          "url": "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-liino-f2p-starter-2026-09",
+      "characterId": "endfield-liino",
+      "title": "Starter Electric Sustain Support",
+      "type": "F2P",
+      "weapon": "Aggeloslayer",
+      "equipment": [
+        "Basic PPE",
+        "Basic Gloves",
+        "Emergency Comm",
+        "Emergency Compression Core"
+      ],
+      "statPriority": [
+        "Will",
+        "Treatment Efficiency",
+        "Ultimate Gain Efficiency"
+      ],
+      "team": [],
+      "notes": "Low-cost early progression setup for Liino's Vocalist and Cosmovoice sustain support. Aggeloslayer is an accessible 4-star Polearm with Will, while the Basic and Emergency pieces come from Authority progression and Gear Assembly and avoid over-investing before specialized support gear unlocks. Prioritize Will for her support scaling, then Treatment Efficiency and Ultimate Gain Efficiency for stronger healing and more reliable Dawnstar Concerto rotations without requiring premium Polearms.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Liino Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/liino"
+        },
+        {
+          "name": "Endfield Talos Wiki — Liino",
+          "url": "https://endfield.wiki.gg/wiki/Liino"
+        },
+        {
+          "name": "Endfield Talos Wiki — Aggeloslayer",
+          "url": "https://endfield.wiki.gg/wiki/Aggeloslayer"
+        },
+        {
+          "name": "Endfield Talos Wiki — Basic PPE",
+          "url": "https://endfield.wiki.gg/wiki/Basic_PPE"
+        }
+      ]
+    },
+    {
+      "id": "endfield-tangtang-f2p-starter-2026-09",
+      "characterId": "endfield-tangtang",
+      "title": "Starter Cryo Susceptibility Support",
+      "type": "F2P",
+      "weapon": "Long Road",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Ultimate Gain Efficiency",
+        "Cryo DMG",
+        "ATK"
+      ],
+      "team": [],
+      "notes": "Accessible Cryo support setup for Tangtang's Whirlpool rotation, Cryo Infliction and Arts Susceptibility utility. Long Road is a 4-star Handcannon whose Combo Skill trigger aligns with her combo-heavy loop, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Ultimate Gain Efficiency for smoother rotations, then Cryo damage and ATK for her personal contribution, without requiring Brigand's Calling, Clannibal, Home Longing or other 6-star Handcannons.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Tangtang Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/tangtang"
+        },
+        {
+          "name": "Endfield Talos Wiki — Tangtang",
+          "url": "https://endfield.wiki.gg/wiki/Tangtang"
+        },
+        {
+          "name": "Endfield Talos Wiki — Long Road",
+          "url": "https://endfield.wiki.gg/wiki/Long_Road"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-laevatain-f2p-starter-2026-09",
+      "characterId": "endfield-laevatain",
+      "title": "Starter Heat Burst DPS",
+      "type": "F2P",
+      "weapon": "Wave Tide",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Arts Intensity",
+        "Heat DMG",
+        "ATK"
+      ],
+      "team": [],
+      "notes": "Accessible Heat burst setup for Laevatain's Melting Flame and Combust damage loop. Wave Tide is a 4-star Sword that remains viable through mid-game progression and rewards Combo Skill triggers with an ATK buff, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Arts Intensity, Heat damage and ATK for her burst windows without requiring Twelve Questions, White Night Nova, Forgeborn Scathe, Umbral Torch or other premium Swords.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Laevatain Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/laevatain"
+        },
+        {
+          "name": "Endfield Talos Wiki — Laevatain",
+          "url": "https://endfield.wiki.gg/wiki/Laevatain"
+        },
+        {
+          "name": "Endfield Talos Wiki — Wave Tide",
+          "url": "https://endfield.wiki.gg/wiki/Wave_Tide"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-zhuang-fangyi-f2p-starter-2026-09",
+      "characterId": "endfield-zhuang-fangyi",
+      "title": "Starter Electric Main DPS",
+      "type": "F2P",
+      "weapon": "Fluorescent Roc",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Will",
+        "Electric DMG",
+        "ATK"
+      ],
+      "team": [],
+      "notes": "Accessible Electric main-DPS setup for Zhuang Fangyi's Electrification-consuming Sunderblade loop. Fluorescent Roc is a 4-star Arts Unit with Will and a Battle Skill-triggered ATK buff that matches her high skill frequency, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Will, Electric damage and ATK for sustained Thunder Strike pressure without requiring Wild Wanderer, Flickers in the Mist, Lone Barge or other premium Arts Units.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Zhuang Fangyi Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/zhuang-fangyi"
+        },
+        {
+          "name": "Endfield Talos Wiki — Zhuang Fangyi",
+          "url": "https://endfield.wiki.gg/wiki/Zhuang_Fangyi"
+        },
+        {
+          "name": "Endfield Talos Wiki — Fluorescent Roc",
+          "url": "https://endfield.wiki.gg/wiki/Fluorescent_Roc"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-da-pan-f2p-starter-2026-09",
+      "characterId": "endfield-da-pan",
+      "title": "Starter Physical Crush DPS",
+      "type": "F2P",
+      "weapon": "Industry 0.1",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "ATK",
+        "Strength",
+        "Physical DMG"
+      ],
+      "team": [],
+      "notes": "Accessible Physical DPS setup for Da Pan's self-sufficient Vulnerability and Crush loop. Industry 0.1 is a 4-star Great Sword with Strength and a Battle Skill-triggered ATK buff that remains the recommended 4-star option through mid-game progression, while AIC Light is available through Authority progression and Gear Assembly. Prioritize ATK, Strength and Physical damage to improve his Combo Skill and Crush pressure without requiring Exemplar, OBJ Heavy Burden, Ancient Canal or other higher-rarity Great Swords.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Da Pan Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/da-pan"
+        },
+        {
+          "name": "Endfield Talos Wiki — Da Pan",
+          "url": "https://endfield.wiki.gg/wiki/Da_Pan"
+        },
+        {
+          "name": "Endfield Talos Wiki — Industry 0.1",
+          "url": "https://endfield.wiki.gg/wiki/Industry_0.1"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-mi-fu-f2p-starter-2026-09",
+      "characterId": "endfield-mi-fu",
+      "title": "Starter Physical Crush Carry",
+      "type": "F2P",
+      "weapon": "Industry 0.1",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Strength",
+        "Physical DMG",
+        "ATK"
+      ],
+      "team": [],
+      "notes": "Accessible Physical Guard setup for Mi Fu's Physical Susceptibility and Crush loop. Industry 0.1 is the recommended 4-star Great Sword for early progression and provides Strength plus ATK support, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Strength, Physical damage and ATK to improve her World Splitter and Crush pressure without requiring Amaranthine Tassel, Phantom Pain, Ancient Canal or other higher-rarity Great Swords.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Mi Fu Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/mi-fu"
+        },
+        {
+          "name": "Endfield Talos Wiki — Mi Fu",
+          "url": "https://endfield.wiki.gg/wiki/Mi_Fu"
+        },
+        {
+          "name": "Endfield Talos Wiki — Industry 0.1",
+          "url": "https://endfield.wiki.gg/wiki/Industry_0.1"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-camille-f2p-starter-2026-09",
+      "characterId": "endfield-camille",
+      "title": "Starter Heat SP Support",
+      "type": "F2P",
+      "weapon": "Pathfinder's Beacon",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Agility",
+        "Ultimate Gain Efficiency",
+        "ATK"
+      ],
+      "team": [],
+      "notes": "Accessible Heat support setup for Camille's Heat Susceptibility, Weaken, SP-recovery and Link loop. Pathfinder's Beacon is a 4-star Polearm with Agility and ATK scaling, while AIC Light is available through Authority progression and Gear Assembly. Prioritize Agility, Ultimate Gain Efficiency and ATK to keep his support rotations frequent without requiring Blessing of Lustrous Carmine, Beacon of Duty, Chimeric Justice or other higher-rarity Polearms.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Camille Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/camille"
+        },
+        {
+          "name": "Endfield Talos Wiki — Camille",
+          "url": "https://endfield.wiki.gg/wiki/Camille"
+        },
+        {
+          "name": "Endfield Talos Wiki — Pathfinder's Beacon",
+          "url": "https://endfield.wiki.gg/wiki/Pathfinder%27s_Beacon"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-rossi-f2p-starter-2026-09",
+      "characterId": "endfield-rossi",
+      "title": "Starter Physical Crit DPS",
+      "type": "F2P",
+      "weapon": "Wave Tide",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "ATK",
+        "Physical DMG",
+        "Critical Rate"
+      ],
+      "team": [],
+      "notes": "Accessible Physical Guard setup for Rossi's Vulnerability, Lift and critical-damage loop. Wave Tide is a 4-star Sword with Intellect and ATK scaling whose Combo Skill trigger provides a practical low-rarity damage route, while AIC Light is available through Authority progression and Gear Assembly. Prioritize ATK, Physical damage and Critical Rate for her Physical-focused progression without requiring Lupine Scarlet, Glorious Memory, Sundering Steel or other higher-rarity Swords.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Rossi Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/rossi"
+        },
+        {
+          "name": "Endfield Talos Wiki — Rossi",
+          "url": "https://endfield.wiki.gg/wiki/Rossi"
+        },
+        {
+          "name": "Endfield Talos Wiki — Wave Tide",
+          "url": "https://endfield.wiki.gg/wiki/Wave_Tide"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-arcane-f2p-starter-2026-09",
+      "characterId": "endfield-arcane",
+      "title": "Starter Nature Corrosion DPS",
+      "type": "F2P",
+      "weapon": "Hypernova Auto",
+      "equipment": [
+        "AIC Light Armor",
+        "AIC Tactical Gloves",
+        "AIC Light Plate",
+        "AIC Ceramic Plate"
+      ],
+      "statPriority": [
+        "Intellect",
+        "Nature DMG",
+        "Arts Intensity"
+      ],
+      "team": [],
+      "notes": "Accessible INT-state Nature DPS setup for Arcane's Corrosion and dual Susceptibility loop. Hypernova Auto is a 4-star Arts Unit with Intellect and Arts damage that the progression guide recommends for early play, while AIC Light is available through Authority progression and Gear Assembly. Keep Intellect at or above Will, then prioritize Nature damage and Arts Intensity to strengthen her Corrosion-focused rotations without requiring Type 42: Solemn Phalanx, Junction Point, Oblivion or other 6-star or premium Arts Units.",
+      "sources": [
+        {
+          "name": "Endfield Hub — Arcane Best Build Guide",
+          "url": "https://endfieldhub.org/guides/progression/arcane"
+        },
+        {
+          "name": "Endfield Talos Wiki — Arcane",
+          "url": "https://endfield.wiki.gg/wiki/Arcane"
+        },
+        {
+          "name": "Endfield Talos Wiki — Hypernova Auto",
+          "url": "https://endfield.wiki.gg/wiki/Hypernova_Auto"
+        },
+        {
+          "name": "Endfield Talos Wiki — AIC Light Armor",
+          "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    }
+  ]
+}

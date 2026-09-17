@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -41,6 +42,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -60,6 +62,8 @@ import com.carlosflima.gamebuild.domain.BuildType
 import com.carlosflima.gamebuild.domain.CharacterBuild
 import com.carlosflima.gamebuild.domain.Game
 import com.carlosflima.gamebuild.domain.GameCharacter
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 private val GameBuildDarkColors = darkColorScheme(
     background = Color(0xFF080A0F),
@@ -76,6 +80,8 @@ fun GameBuildApp(
     viewModel: GameBuildViewModel = viewModel(factory = GameBuildViewModel.Factory)
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val catalogSync by viewModel.catalogSyncState.collectAsStateWithLifecycle()
+    LaunchedEffect(viewModel) { viewModel.initializeCatalog() }
     val activeTerms = state.selectedGame?.let { terms.forGame(it) } ?: terms
     val canNavigateBack = state.selectedGame != null
 
@@ -99,6 +105,11 @@ fun GameBuildApp(
 
             Scaffold(
                 containerColor = Color.Transparent,
+                bottomBar = {
+                    if (state.selectedGame == Game.ENDFIELD) {
+                        CatalogUpdateBar(catalogSync, onRefresh = { viewModel.refreshEndfieldBuilds() })
+                    }
+                },
                 topBar = {
                     TopAppBar(
                         title = { Text(terms.text("app.title", "Game Builds — V0.3.5")) },
@@ -160,6 +171,37 @@ fun GameBuildApp(
                         text = { Text(message) }
                     )
                 }
+            }
+        }
+    }
+}
+
+@Composable
+private fun CatalogUpdateBar(state: CatalogSyncState, onRefresh: () -> Unit) {
+    Surface {
+        Row(
+            Modifier.fillMaxWidth().navigationBarsPadding().padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            Column(Modifier.weight(1f)) {
+                Text(
+                    state.publishedAt?.let {
+                        val date = LocalDate.parse(it).format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                        "Catálogo de $date"
+                    } ?: "Catálogo incluído no app",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                if (state.isRefreshing || state.failed) {
+                    Text(
+                        if (state.isRefreshing) "Buscando atualizações…"
+                        else "Não foi possível atualizar. Builds mantidas.",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            }
+            TextButton(onClick = onRefresh, enabled = !state.isRefreshing) {
+                Text("Atualizar")
             }
         }
     }
