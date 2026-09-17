@@ -2,7 +2,7 @@
 
 ## Objetivo
 
-Aplicativo Android para consultar builds versionadas de personagens de múltiplos jogos. Os catálogos são distribuídos no APK; cada build registra suas referências externas.
+Aplicativo Android para consultar builds versionadas de personagens de múltiplos jogos. Os catálogos são distribuídos no APK; Endfield também recebe conteúdo validado de um catálogo remoto. Cada build registra suas referências externas.
 
 ## Camadas
 
@@ -25,9 +25,17 @@ O ViewModel mantém o estado durante mudanças de configuração. Um `SavedState
 
 ## Builds e referências
 
-Builds incluem tipo, versão, arma, equipamentos, prioridades, equipe, notas e fontes. Esses dados são locais: os links servem como referências e não são baixados para substituir automaticamente as builds.
+Builds incluem tipo, versão, arma, equipamentos, prioridades, equipe, notas e fontes. Os links servem como referências e não são lidos automaticamente. NTE e Warframe usam os catálogos locais; Endfield pode receber atualizações de conteúdo pelo catálogo publicado neste repositório.
 
-Atualizações de roster e builds exigem uma nova versão do aplicativo. A baseline de cada jogo e os snapshots acompanhados estão descritos no [README](../README.md).
+Atualizações de roster, snapshot e formato exigem uma versão compatível do aplicativo. A baseline de cada jogo e os snapshots acompanhados estão descritos no [README](../README.md).
+
+### Catálogo remoto de Endfield
+
+A factory cria `RemoteEndfieldRepository`, que mantém os catálogos locais como reserva. O ViewModel carrega o cache em segundo plano e depois consulta `config/endfield-builds-v1.json` em main. A tela oferece atualização manual, data de publicação e feedback em falhas. O documento só substitui as builds após validação integral e gravação atômica do cache; revisões antigas ou alteradas sem incremento são recusadas.
+
+A versão inicial aceita apenas os 31 operadores conhecidos, seus IDs de build, F2P, equipe vazia e o snapshot atual. O download usa HTTPS fixo, não segue redirecionamentos, tem timeouts e limite de 256 KiB. Falhas preservam o cache/catálogo local. Ao receber dados, o ViewModel atualiza somente o detalhe Endfield atualmente aberto, sem perder busca, filtros ou navegação. Veja [o contrato e o fluxo de publicação](../config/ENDFIELD.md).
+
+A revisão de acessibilidade das recomendações continua no fluxo de PR. Esta etapa não automatiza a leitura dos sites.
 
 ## Textos remotos e funcionamento offline
 

@@ -7,6 +7,9 @@ import com.carlosflima.gamebuild.domain.GameCharacter
 interface GameRepository {
     fun getCharacters(game: Game): List<GameCharacter>
     fun getBuilds(game: Game, characterId: String): List<CharacterBuild>
+    val endfieldCatalogDate: String? get() = null
+    suspend fun loadCachedEndfieldBuilds() {}
+    suspend fun refreshEndfieldBuilds(): Boolean = false
 }
 
 internal val defaultLocalGameDataSources: List<LocalGameDataSource> = listOf(
