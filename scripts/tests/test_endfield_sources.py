@@ -173,6 +173,98 @@ class SourceCheckTest(unittest.TestCase):
             self.assertEqual("changed", report["changes"][0]["kind"])
             self.assertNotIn("diffUrl", report["changes"][0])
 
+    def test_markdown_change_shows_operators_metadata_and_revision_link(self):
+        report, _ = self.inspect({"Alpha": record(revision=11)})
+        rendered = checker.render_markdown(report)
+        self.assertIn("**Revisão necessária. Cobertura parcial.**", rendered)
+        self.assertIn("Consulta (UTC): " + NOW, rendered)
+        self.assertIn("Revisão do catálogo: 1", rendered)
+        self.assertIn("### Página alterada: Alpha", rendered)
+        self.assertIn("Operadores afetados: endfield-alpha, endfield-beta.", rendered)
+        self.assertIn("Baseline: Alpha; página 1; revisão 10; " + NOW, rendered)
+        self.assertIn("Consulta atual: Alpha; página 1; revisão 11; " + NOW, rendered)
+        self.assertIn("[Comparar revisões](" + report["changes"][0]["diffUrl"] + ")", rendered)
+        self.assertIn("Candidato completo; exige revisão", rendered)
+
+    def test_markdown_distinguishes_missing_new_and_removed_references(self):
+        for records, previous, label in (
+            ({"Alpha": None}, baseline(), "Página ausente"),
+            ({"Alpha": record()}, baseline({"Old": record("Old")}), "Nova referência"),
+        ):
+            with self.subTest(label=label):
+                report, _ = self.inspect(records, previous)
+                rendered = checker.render_markdown(report)
+                self.assertIn("### " + label + ": Alpha", rendered)
+                self.assertNotIn("Comparar revisões", rendered)
+                self.assertIn("sem registro", rendered)
+                if records["Alpha"] is None:
+                    self.assertIn("coleta incompleta", rendered)
+                    self.assertIn("Candidato incompleto; não adotar.", rendered)
+                else:
+                    self.assertIn("### Referência retirada: Old", rendered)
+                    self.assertIn("nenhum no catálogo atual", rendered)
+
+    def test_markdown_alias_change_shows_both_titles_without_inventing_diff(self):
+        report, _ = self.inspect({"Alpha": record("Target")})
+        rendered = checker.render_markdown(report)
+        self.assertIn("Baseline: Alpha;", rendered)
+        self.assertIn("Consulta atual: Target;", rendered)
+        self.assertNotIn("Comparar revisões", rendered)
+
+    def test_report_identifies_uncovered_operators_and_unsupported_sources(self):
+        data = catalog()
+        data["builds"].append({"characterId": "endfield-gamma", "type": "F2P", "team": [],
+                               "sources": [{"url": "https://example.org/guide"}]})
+        report, _ = checker.inspect_sources(data, baseline(),
+                                           fetch=lambda _: {"Alpha": record()}, checked_at=NOW)
+        self.assertEqual(["endfield-gamma"], report["uncoveredOperators"])
+        self.assertEqual(2, report["counts"]["coveredOperators"])
+        self.assertEqual(3, report["counts"]["totalOperators"])
+        rendered = checker.render_markdown(report)
+        self.assertIn("Operadores sem referência Wiki: endfield-gamma.", rendered)
+        self.assertIn("[https://example.org/guide](https://example.org/guide) — endfield-gamma", rendered)
+        self.assertIn("ao menos uma referência Wiki: 2/3", rendered)
+
+    def test_unchanged_markdown_keeps_partial_coverage_and_review_requirement(self):
+        report, _ = self.inspect({"Alpha": record()})
+        rendered = checker.render_markdown(report)
+        self.assertIn("Nenhuma mudança nas páginas consultadas. Cobertura parcial.", rendered)
+        self.assertIn("Páginas confirmadas sem alteração: 1", rendered)
+        self.assertIn("Operadores sem referência Wiki: nenhum.", rendered)
+        self.assertIn("https://endfieldhub.org/guides/progression/alpha", rendered)
+        self.assertIn("Templates, módulos e imagens", rendered)
+        self.assertIn("exige revisão antes de adoção", rendered)
+
+    def test_failed_markdown_does_not_claim_sources_are_unchanged(self):
+        report, _ = checker.inspect_sources(catalog(), baseline(),
+                                           fetch=Mock(side_effect=TimeoutError("offline")), checked_at=NOW)
+        rendered = checker.render_markdown(report)
+        self.assertIn("Verificação não concluída", rendered)
+        self.assertIn("Pendências não apuradas", rendered)
+        self.assertIn("TimeoutError: offline", rendered)
+        self.assertIn("Candidato incompleto; não adotar.", rendered)
+        self.assertNotIn("Nenhuma mudança", rendered)
+        self.assertNotIn("Nenhuma pendência", rendered)
+
+    def test_markdown_keeps_external_text_and_special_urls_as_data(self):
+        data = catalog()
+        url = 'https://example.org/a_(b)?q=<tag>"'
+        data["builds"][0]["sources"].append({"url": url})
+        report, _ = checker.inspect_sources(data, baseline(), fetch=Mock(
+            side_effect=ValueError("<script>x</script>\n![img](bad) `code` | *bold* &")), checked_at=NOW)
+        rendered = checker.render_markdown(report)
+        self.assertNotIn("<script>", rendered)
+        self.assertNotIn("\n![img]", rendered)
+        self.assertIn(r"!\[img\](bad) \`code\` \| \*bold\* &amp;", rendered)
+        self.assertIn("(https://example.org/a_%28b%29?q=%3Ctag%3E%22)", rendered)
+
+    def test_markdown_handles_catalog_with_only_supported_sources(self):
+        data = catalog()
+        data["builds"][0]["sources"].pop()
+        report, _ = checker.inspect_sources(data, baseline(),
+                                           fetch=lambda _: {"Alpha": record()}, checked_at=NOW)
+        self.assertIn("Nenhuma URL de outro site no catálogo atual.", checker.render_markdown(report))
+
     def test_new_and_removed_references_require_review(self):
         report, _ = self.inspect({"Alpha": record()}, baseline({"Old": record("Old")}))
         self.assertEqual({"untracked", "removed_reference"},
@@ -254,6 +346,9 @@ class SourceCheckTest(unittest.TestCase):
                                         for file in ("catalog.json", "baseline.json")])
             self.assertTrue(checker.read_json(root / "out/candidate.json")["complete"])
             self.assertEqual("changed", checker.read_json(root / "out/report.json")["changes"][0]["kind"])
+            rendered = (root / "out/report.md").read_text(encoding="utf-8")
+            self.assertIn("### Página alterada: Alpha", rendered)
+            self.assertIn("endfield-beta", rendered)
 
     def test_command_invalidates_stale_candidate_on_network_failure(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -263,6 +358,36 @@ class SourceCheckTest(unittest.TestCase):
             self.assertEqual(2, self.run_command(root, Mock(side_effect=TimeoutError("offline"))))
             self.assertFalse(checker.read_json(root / "out/candidate.json")["complete"])
             self.assertTrue(checker.read_json(root / "out/report.json")["errors"])
+            self.assertIn("Verificação não concluída",
+                          (root / "out/report.md").read_text(encoding="utf-8"))
+
+    def test_markdown_output_cannot_overwrite_an_input(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            saved = root / "report.md"
+            checker.write_json(saved, baseline())
+            checker.write_json(root / "catalog.json", catalog())
+            original = saved.read_bytes()
+            with patch.object(checker, "fetch_revisions") as fetch, contextlib.redirect_stdout(io.StringIO()):
+                result = checker.main(["--catalog", str(root / "catalog.json"),
+                                       "--baseline", str(saved), "--output-dir", str(root)])
+            self.assertEqual(2, result)
+            fetch.assert_not_called()
+            self.assertEqual(original, saved.read_bytes())
+
+    def test_failed_markdown_write_leaves_candidate_incomplete(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            self.prepare_inputs(root)
+            write_text = checker.write_text
+            def fail_markdown(path, content):
+                if path.suffix == ".md":
+                    raise OSError("read-only report")
+                write_text(path, content)
+            with patch.object(checker, "write_text", side_effect=fail_markdown):
+                result = self.run_command(root, Mock(return_value={"Alpha": record()}))
+            self.assertEqual(2, result)
+            self.assertFalse(checker.read_json(root / "out/candidate.json")["complete"])
 
     def test_invalid_input_does_not_leave_an_adoptable_candidate(self):
         with tempfile.TemporaryDirectory() as folder:

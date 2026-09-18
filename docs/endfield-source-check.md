@@ -15,6 +15,7 @@ A consulta usa a API pública `https://endfield.wiki.gg/api.php`, em lotes seque
 Os resultados ficam em `build/source-check/`, já ignorado pelo Git:
 
 - `report.json`: páginas alteradas, ausentes, novas ou retiradas das referências; operadores afetados; erros e fontes sem cobertura.
+- `report.md`: versão legível da mesma consulta, com estado, data, revisão do catálogo, cobertura, operadores sem referência Wiki, pendências e links de comparação. Abra este arquivo para fazer a triagem; falhas aparecem como verificação não concluída, nunca como ausência de mudanças.
 - `candidate.json`: observação atual, separada da baseline. `complete: false` impede sua adoção se a coleta falhar ou alguma página estiver ausente. Um candidato anterior é invalidado antes de iniciar uma nova verificação.
 
 Parâmetros opcionais: `--catalog`, `--baseline` e `--output-dir`. Os arquivos de entrada não podem coincidir com os de saída. O verificador nunca modifica as builds ou a baseline recebida.
@@ -25,7 +26,7 @@ Parâmetros opcionais: `--catalog`, `--baseline` e `--output-dir`. Os arquivos d
 | `1` | Há pendências para revisão, incluindo páginas ausentes ou referências novas/removidas. |
 | `2` | Verificação não concluída por falha de entrada, rede, resposta ou gravação. Consulte o erro; não adote o candidato. |
 
-Confira sempre o código de saída e `checkedAt`: uma falha antes de escrever o relatório pode deixar o relatório anterior no diretório. Apenas `candidate.json` de uma coleta completa e revisada pode virar a nova baseline.
+Confira sempre o código de saída e `checkedAt` (consulta UTC no Markdown): uma falha de entrada ou gravação pode deixar relatórios anteriores no diretório. As saídas são gravadas atomicamente por arquivo, não como um conjunto; um candidato completo só é gravado depois dos dois relatórios. Apenas `candidate.json` de uma coleta completa e revisada pode virar a nova baseline.
 
 ## Cobertura inicial e limites
 
@@ -41,7 +42,7 @@ A ferramenta roda uma vez por execução. Não há agendamento, serviço em segu
 
 ## Revisar e publicar
 
-1. Abrir as páginas/diffs indicados e conferir o impacto nas builds, mantendo a rota F2P, o snapshot e a equipe vazia.
+1. Abrir `report.md`, conferir data, estado e cobertura, e acessar as páginas/diffs indicados para avaliar o impacto nas builds, mantendo a rota F2P, o snapshot e a equipe vazia. Os identificadores de operadores correspondem a `characterId` no catálogo; o relatório inclui todas as builds que compartilham cada referência.
 2. Se houver correção de conteúdo, seguir [a publicação do catálogo](../config/ENDFIELD.md), incluindo aumento de `revision` e data de publicação.
 3. Atualizar apenas os registros já revisados na baseline. Só adotar o candidato inteiro quando todas as suas pendências tiverem sido examinadas; uma baseline atualizada silencia essas diferenças nas próximas consultas.
 4. Fazer as mudanças por issue e branch da base exata assinada, com diff conferido, testes, CI Android completa e merge com `expected_head_sha`.
@@ -54,6 +55,6 @@ Uma indisponibilidade não deve ser tratada como ausência de mudanças nem usad
 python -B -m unittest discover -s scripts/tests -v
 ```
 
-A suíte é offline: cobre contrato da baseline publicada, deduplicação, aliases, páginas ausentes, revisões, erros, limites, preservação de entradas e escrita atômica. Os testes Python são executados separadamente da CI Android atual; nenhum workflow foi alterado.
+A suíte é offline: cobre contrato da baseline publicada, deduplicação, aliases, páginas ausentes, revisões, erros, limites, relatórios legíveis, links, caracteres especiais, preservação de entradas e escrita atômica. Os testes Python são executados separadamente da CI Android atual; nenhum workflow foi alterado.
 
 Referências técnicas: [MediaWiki Revisions](https://www.mediawiki.org/wiki/API:Revisions), [normalização e redirecionamentos](https://www.mediawiki.org/wiki/API:Query#Title_normalization_and_redirection) e [boas práticas da API](https://www.mediawiki.org/wiki/API:Etiquette).
