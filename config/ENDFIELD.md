@@ -32,7 +32,7 @@ O documento inteiro passa pela validação antes de ser salvo. A gravação usa 
 
 As consultas e a gravação ocorrem fora da thread da interface. A tela aplica o resultado ao personagem ainda selecionado, mantendo busca e filtros; respostas tardias não reabrem telas nem substituem o conteúdo de outro jogo. Pedidos simultâneos são evitados.
 
-Esta etapa não consulta nem monitora os sites de referência automaticamente. A publicação ainda depende da revisão das fontes e do merge. Não há novo workflow, alteração de release ou credenciais.
+O app consulta apenas o catálogo publicado. O [verificador de fontes](../docs/endfield-source-check.md) permite comparar as revisões das referências da Talos Wiki durante a manutenção, com cobertura parcial explícita. A publicação continua dependendo da revisão das fontes e do merge. Não há agendamento, novo workflow, alteração de release ou credenciais.
 
 ## Validação em dispositivo
 
