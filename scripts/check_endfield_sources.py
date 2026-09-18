@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 from datetime import datetime, timezone
+from html import escape
 import json
 import os
 from pathlib import Path
@@ -265,19 +266,105 @@ def inspect_sources(catalog, baseline, fetch=None, checked_at=None):
                    "coveredOperators": len(set().union(*supported.values())),
                    "totalOperators": len(operators), "unsupportedSources": len(unsupported)},
         "changes": changes, "errors": errors, "candidateComplete": complete,
+        "uncoveredOperators": sorted(operators - set().union(*supported.values())),
         "unsupportedSources": [{"url": url, "characters": sorted(characters)}
                                for url, characters in sorted(unsupported.items())],
     }
     return report, candidate
 
 
+def markdown_text(value):
+    value = escape(str(value), quote=False)
+    return "".join(" " if char.isspace() else "\\" + char if char in "\\`*_[]|" else char
+                   for char in value)
+
+
+def markdown_link(label, url):
+    # Keep URL delimiters but encode characters that could terminate a Markdown link.
+    destination = quote(url, safe=":/?#@!$&'*,;=+%")
+    return f"[{markdown_text(label)}]({destination})"
+
+
+def render_markdown(report):
+    counts = report["counts"]
+    if report["errors"]:
+        status = "Verificação não concluída"
+    elif not report["candidateComplete"]:
+        status = "Revisão necessária: coleta incompleta"
+    elif report["changes"]:
+        status = "Revisão necessária"
+    else:
+        status = "Nenhuma mudança nas páginas consultadas"
+    lines = [
+        "# Revisão de fontes Endfield", "", f"**{status}. Cobertura parcial.**", "",
+        f"Consulta (UTC): {markdown_text(report['checkedAt'])}  ",
+        f"Revisão do catálogo: {report['catalogRevision']}", "", "## Cobertura", "",
+        f"- Páginas Wiki acompanhadas: {counts['trackedPages']}.",
+        f"- Páginas confirmadas sem alteração: {counts['unchangedPages']}.",
+        f"- Operadores com ao menos uma referência Wiki: "
+        f"{counts['coveredOperators']}/{counts['totalOperators']}.",
+        f"- URLs de outros sites sem consulta automática: {counts['unsupportedSources']}.", "",
+        "A cobertura considera revisões diretas das páginas. Templates, módulos e imagens "
+        "podem mudar sem alterar essa revisão. Uma referência Wiki não cobre toda a build.", "",
+        "Operadores sem referência Wiki: " + (
+            ", ".join(map(markdown_text, report["uncoveredOperators"]))
+            if report["uncoveredOperators"] else "nenhum"
+        ) + ".", "",
+    ]
+    if report["errors"]:
+        lines.extend(["## Erros", ""])
+        lines.extend(f"- {markdown_text(error)}" for error in report["errors"])
+        lines.append("")
+    lines.extend(["## Pendências para revisão", ""])
+    kinds = {"changed": "Página alterada", "missing": "Página ausente",
+             "untracked": "Nova referência", "removed_reference": "Referência retirada"}
+    for change in report["changes"]:
+        lines.extend([
+            f"### {kinds[change['kind']]}: {markdown_text(change['title'])}", "",
+            markdown_link("Abrir página", change["url"]), "",
+            "Operadores afetados: " + (
+                ", ".join(map(markdown_text, change["characters"]))
+                if change["characters"] else "nenhum no catálogo atual"
+            ) + ".", "",
+        ])
+        for key, label in (("before", "Baseline"), ("after", "Consulta atual")):
+            revision = change[key]
+            details = (f"{markdown_text(revision['resolvedTitle'])}; página {revision['pageId']}; "
+                       f"revisão {revision['revisionId']}; {markdown_text(revision['timestamp'])}"
+                       if revision else "sem registro")
+            lines.append(f"- {label}: {details}.")
+        if "diffUrl" in change:
+            lines.extend(["", markdown_link("Comparar revisões", change["diffUrl"])])
+        lines.append("")
+    if not report["changes"]:
+        lines.extend(["Pendências não apuradas devido à falha na consulta." if report["errors"]
+                      else "Nenhuma pendência nas páginas consultadas.", ""])
+    lines.extend(["## Fontes sem consulta automática", ""])
+    for source in report["unsupportedSources"]:
+        lines.append(f"- {markdown_link(source['url'], source['url'])} — "
+                     + ", ".join(map(markdown_text, source["characters"])))
+    if not report["unsupportedSources"]:
+        lines.append("Nenhuma URL de outro site no catálogo atual.")
+    lines.extend(["", "## Próximos passos", "",
+                  "Candidato completo; exige revisão antes de adoção."
+                  if report["candidateComplete"] else "Candidato incompleto; não adotar.", "",
+                  "Confira páginas e diferenças antes de alterar recomendações: uma edição "
+                  "cosmética também gera alerta. Preserve a rota F2P, o snapshot e a equipe vazia.", "",
+                  "Builds e baseline permanecem preservadas. Publicações exigem revisão, PR, "
+                  "testes, CI completa e merge protegido. Falhas não significam ausência de mudanças.", ""])
+    return "\n".join(lines)
+
+
 def write_json(path, document):
+    write_text(path, json.dumps(document, ensure_ascii=False, indent=2, sort_keys=True) + "\n")
+
+
+def write_text(path, content):
     path.parent.mkdir(parents=True, exist_ok=True)
     descriptor, temporary = tempfile.mkstemp(prefix=path.name + ".", dir=path.parent)
     try:
         with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as output:
-            json.dump(document, output, ensure_ascii=False, indent=2, sort_keys=True)
-            output.write("\n")
+            output.write(content)
             output.flush()
             os.fsync(output.fileno())
         os.replace(temporary, path)
@@ -293,11 +380,12 @@ def main(argv=None):
     parser.add_argument("--output-dir", type=Path, default=ROOT / "build/source-check")
     args = parser.parse_args(argv)
     report_path = args.output_dir / "report.json"
+    markdown_path = args.output_dir / "report.md"
     candidate_path = args.output_dir / "candidate.json"
     try:
         inputs = {args.catalog.resolve(), args.baseline.resolve()}
-        outputs = {report_path.resolve(), candidate_path.resolve()}
-        require(len(inputs) == 2 and len(outputs) == 2 and not inputs & outputs,
+        outputs = {report_path.resolve(), markdown_path.resolve(), candidate_path.resolve()}
+        require(len(inputs) == 2 and len(outputs) == 3 and not inputs & outputs,
                 "Os arquivos de entrada não podem ser sobrescritos")
         # Invalidate older candidates before reading inputs or accessing the network.
         write_json(candidate_path, {
@@ -307,6 +395,7 @@ def main(argv=None):
         catalog, baseline = read_json(args.catalog), read_json(args.baseline)
         report, candidate = inspect_sources(catalog, baseline)
         write_json(report_path, report)
+        write_text(markdown_path, render_markdown(report))
         # Only a complete collection produces an adoptable candidate.
         write_json(candidate_path, candidate)
         counts = report["counts"]
@@ -314,6 +403,7 @@ def main(argv=None):
               f"{counts['coveredOperators']}/{counts['totalOperators']} operadores; "
               f"{len(report['changes'])} pendências, {len(report['errors'])} erros. Cobertura parcial.")
         print(f"Relatório: {report_path}")
+        print(f"Relatório para revisão: {markdown_path}")
         print("Builds e baseline preservadas. Candidato exige revisão e PR.")
         return 2 if report["errors"] else 1 if report["changes"] else 0
     except (OSError, ValueError, KeyError, TypeError) as error:
