@@ -28,6 +28,12 @@ internal object WarframeCharacterCatalog {
             name = "Rhino",
             role = "Survival / Crowd Control",
             game = Game.WARFRAME
+        ),
+        GameCharacter(
+            id = "warframe-frost",
+            name = "Frost",
+            role = "Crowd Control / Survival",
+            game = Game.WARFRAME
         )
     )
 }

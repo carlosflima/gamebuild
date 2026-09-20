@@ -154,6 +154,47 @@ internal object WarframeBuildCatalog {
                     url = "https://wiki.warframe.com/w/Warframes_Comparison/Acquisition"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "warframe-frost-f2p-starter-43-5",
+            characterId = "warframe-frost",
+            title = "Beginner Snow Globe / Avalanche",
+            type = BuildType.F2P,
+            version = "Update 43.5",
+            weapon = "Any starter weapon",
+            equipment = listOf(
+                "Steel Fiber",
+                "Vitality",
+                "Redirection",
+                "Intensify",
+                "Continuity",
+                "Streamline",
+                "Flow",
+                "Stretch"
+            ),
+            statPriority = listOf(
+                "Ability Strength",
+                "Ability Range",
+                "Armor",
+                "Ability Efficiency",
+                "Ability Duration"
+            ),
+            team = emptyList(),
+            notes = "0 Forma beginner setup centered on Snow Globe for objective protection and Avalanche for crowd control. It uses common base mods only, without augments, Prime mods, Helminth, Archon Shards or arcanes; prioritize Strength, Range and Armor first, then Efficiency and Duration as capacity allows.",
+            sources = listOf(
+                BuildSource(
+                    name = "Warframe — Frost official",
+                    url = "https://www.warframe.com/en/game/warframes/frost"
+                ),
+                BuildSource(
+                    name = "Warframe — Como obter o Frost",
+                    url = "https://www.warframe.com/pt-br/news/frost"
+                ),
+                BuildSource(
+                    name = "Overframe — qizai",
+                    url = "https://overframe.gg/build/735526/frost/basic-beginner-build-for-star-chart-clearing/"
+                )
+            )
         )
     )
 
