@@ -113,6 +113,47 @@ internal object WarframeBuildCatalog {
                     url = "https://www.warframe.com/pt-br/patch-notes"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "warframe-rhino-f2p-starter-43-5",
+            characterId = "warframe-rhino",
+            title = "Beginner Iron Skin / Roar",
+            type = BuildType.F2P,
+            version = "Update 43.5",
+            weapon = "Any starter weapon",
+            equipment = listOf(
+                "Dreamer's Bond",
+                "Steel Fiber",
+                "Vitality",
+                "Redirection",
+                "Intensify",
+                "Continuity",
+                "Streamline",
+                "Stretch"
+            ),
+            statPriority = listOf(
+                "Ability Strength",
+                "Armor",
+                "Ability Duration",
+                "Ability Efficiency",
+                "Health"
+            ),
+            team = emptyList(),
+            notes = "0 Forma beginner setup centered on Iron Skin for forgiving survivability and Roar for team damage support. The listed mods are low-cost progression pieces and avoid Prime mods, Helminth, Archon Shards, arcanes and Steel Path requirements; prioritize Strength and Armor first, then Duration and Efficiency as capacity allows.",
+            sources = listOf(
+                BuildSource(
+                    name = "Overframe — tinrib_weirdo",
+                    url = "https://overframe.gg/build/719064/rhino/rhino-starter-build/"
+                ),
+                BuildSource(
+                    name = "Warframe — Rhino official",
+                    url = "https://www.warframe.com/en/game/warframes/rhino"
+                ),
+                BuildSource(
+                    name = "WARFRAME Wiki — Warframe acquisition",
+                    url = "https://wiki.warframe.com/w/Warframes_Comparison/Acquisition"
+                )
+            )
         )
     )
 
