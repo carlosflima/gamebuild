@@ -34,6 +34,12 @@ internal object WarframeCharacterCatalog {
             name = "Frost",
             role = "Crowd Control / Survival",
             game = Game.WARFRAME
+        ),
+        GameCharacter(
+            id = "warframe-ember",
+            name = "Ember",
+            role = "Damage",
+            game = Game.WARFRAME
         )
     )
 }
