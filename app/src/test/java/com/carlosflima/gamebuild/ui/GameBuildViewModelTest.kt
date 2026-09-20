@@ -67,22 +67,22 @@ class GameBuildViewModelTest {
     }
 
     @Test
-    fun defaultRepositoryLoadsWarframeRosterAndFrostBuild() {
+    fun defaultRepositoryLoadsWarframeRosterAndEmberBuild() {
         val viewModel = GameBuildViewModel()
 
         viewModel.selectGame(Game.WARFRAME)
 
         val rosterState = viewModel.uiState.value
         assertEquals(Game.WARFRAME, rosterState.selectedGame)
-        assertEquals(listOf("Excalibur", "Mag", "Volt", "Rhino", "Frost"), rosterState.characters.map { it.name })
+        assertEquals(listOf("Excalibur", "Mag", "Volt", "Rhino", "Frost", "Ember"), rosterState.characters.map { it.name })
         assertEquals(setOf(Game.WARFRAME), rosterState.characters.map { it.game }.toSet())
 
-        val frost = rosterState.characters.first { it.name == "Frost" }
-        viewModel.selectCharacter(frost)
+        val ember = rosterState.characters.first { it.name == "Ember" }
+        viewModel.selectCharacter(ember)
 
         val buildState = viewModel.uiState.value
-        assertEquals("Frost", buildState.selectedCharacter?.name)
-        assertEquals(listOf("warframe-frost-f2p-starter-43-5"), buildState.builds.map { it.id })
+        assertEquals("Ember", buildState.selectedCharacter?.name)
+        assertEquals(listOf("warframe-ember-f2p-starter-43-5"), buildState.builds.map { it.id })
         assertEquals(BuildType.F2P, buildState.builds.single().type)
     }
 
