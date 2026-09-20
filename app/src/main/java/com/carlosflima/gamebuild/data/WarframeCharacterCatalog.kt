@@ -22,6 +22,12 @@ internal object WarframeCharacterCatalog {
             name = "Volt",
             role = "Damage / Support",
             game = Game.WARFRAME
+        ),
+        GameCharacter(
+            id = "warframe-rhino",
+            name = "Rhino",
+            role = "Survival / Crowd Control",
+            game = Game.WARFRAME
         )
     )
 }
