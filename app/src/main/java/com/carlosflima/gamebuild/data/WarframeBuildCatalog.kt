@@ -195,6 +195,48 @@ internal object WarframeBuildCatalog {
                     url = "https://overframe.gg/build/735526/frost/basic-beginner-build-for-star-chart-clearing/"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "warframe-ember-f2p-starter-43-5",
+            characterId = "warframe-ember",
+            title = "Beginner Immolation / Inferno",
+            type = BuildType.F2P,
+            version = "Update 43.5",
+            weapon = "Any starter weapon",
+            equipment = listOf(
+                "Energy Siphon",
+                "Vitality",
+                "Redirection",
+                "Steel Fiber",
+                "Flow",
+                "Continuity",
+                "Intensify",
+                "Streamline",
+                "Stretch"
+            ),
+            statPriority = listOf(
+                "Ability Strength",
+                "Ability Range",
+                "Ability Efficiency",
+                "Energy",
+                "Survivability"
+            ),
+            team = emptyList(),
+            notes = "0 Forma beginner setup centered on Immolation for damage reduction, Fire Blast for armor stripping and Inferno for low-level clearing. It uses common early-progression mods only, without Prime mods, augments, Helminth, Archon Shards or arcanes; prioritize Strength, Range and Efficiency, then expand the energy pool and survivability as capacity allows.",
+            sources = listOf(
+                BuildSource(
+                    name = "Warframe — Ember official",
+                    url = "https://www.warframe.com/pt-br/game/warframes/ember"
+                ),
+                BuildSource(
+                    name = "WARFRAME Wiki — Warframe acquisition",
+                    url = "https://wiki.warframe.com/w/Warframes_Comparison/Acquisition"
+                ),
+                BuildSource(
+                    name = "VoidRelay — Ember beginner build",
+                    url = "https://voidrelay.fr/en/builds/ember"
+                )
+            )
         )
     )
 
