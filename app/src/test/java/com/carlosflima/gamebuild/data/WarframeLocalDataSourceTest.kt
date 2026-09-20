@@ -9,9 +9,9 @@ import org.junit.Test
 class WarframeLocalDataSourceTest {
 
     @Test
-    fun `starter roster contains Excalibur Mag and Volt`() {
+    fun `starter roster contains Excalibur Mag Volt and Rhino`() {
         assertEquals(
-            listOf("Excalibur", "Mag", "Volt"),
+            listOf("Excalibur", "Mag", "Volt", "Rhino"),
             WarframeLocalDataSource.characters.map { it.name }
         )
     }
@@ -49,7 +49,7 @@ class WarframeLocalDataSourceTest {
             }
         }
 
-        assertEquals(3, builds.size)
+        assertEquals(4, builds.size)
         assertEquals(builds.size, builds.map { it.id }.distinct().size)
         assertTrue(builds.all { it.characterId in characterIds })
         assertEquals(builds.map { it.id }.toSet(), indexedBuilds.map { it.id }.toSet())
