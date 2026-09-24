@@ -11,7 +11,7 @@ class EndfieldLocalDataSourceTest {
     @Test
     fun `tracked roster contains current Endfield operators`() {
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng", "Pogranichnik", "Last Rite", "Gilberta", "Liino", "Tangtang", "Laevatain", "Zhuang Fangyi", "Da Pan", "Mi Fu", "Camille", "Rossi", "Arcane"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng", "Pogranichnik", "Last Rite", "Gilberta", "Liino", "Tangtang", "Laevatain", "Zhuang Fangyi", "Da Pan", "Mi Fu", "Camille", "Rossi", "Arcane", "Purrchena"),
             EndfieldLocalDataSource.characters.map { it.name }
         )
     }
@@ -50,7 +50,7 @@ class EndfieldLocalDataSourceTest {
             }
         }
 
-        assertEquals(31, builds.size)
+        assertEquals(32, builds.size)
         assertEquals(builds.size, builds.map { it.id }.distinct().size)
         assertTrue(builds.all { it.characterId in characterIds })
         assertEquals(builds.map { it.id }.toSet(), indexedBuilds.map { it.id }.toSet())
