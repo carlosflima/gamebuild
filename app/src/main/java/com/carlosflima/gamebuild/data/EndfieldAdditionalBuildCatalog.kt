@@ -668,6 +668,45 @@ internal object EndfieldAdditionalBuildCatalog {
                     url = "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
                 )
             )
+        ),
+        CharacterBuild(
+            id = "endfield-purrchena-f2p-event-2026-09",
+            characterId = "endfield-purrchena",
+            title = "Free Event Sustain Defender",
+            type = BuildType.F2P,
+            version = "Dreamscape of Wind and Snow · 2026-09",
+            weapon = "Dessert Moment",
+            equipment = listOf(
+                "Swordmancer Light Armor",
+                "Eternal Xiranite Gloves",
+                "Eternal Xiranite Heavy Slab",
+                "Eternal Xiranite Heavy Slab"
+            ),
+            statPriority = listOf(
+                "Strength",
+                "Treatment Efficiency",
+                "Ultimate Gain Efficiency"
+            ),
+            team = emptyList(),
+            notes = "Fully free event support setup for Purrchena's Protection, reactive healing, Nature Infliction, grouping and Arts Susceptibility utility. Purry Big Feline! RAWR! grants Purrchena, five Tokens and six copies of the 5-star Sword Dessert Moment without Headhunting, allowing both operator and weapon to reach maximum Potential. Prioritize Strength, Treatment Efficiency and Ultimate Gain Efficiency for sustain and more frequent support rotations.",
+            sources = listOf(
+                BuildSource(
+                    name = "Mobalytics — Purrchena Build Guide",
+                    url = "https://mobalytics.gg/arknights-endfield/characters/purrchena-build-guide"
+                ),
+                BuildSource(
+                    name = "TOPUPlive — Purrchena & Dessert Moment Guide",
+                    url = "https://www.topuplive.com/news/ark-purrchena-guide.html"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Purrchena",
+                    url = "https://endfield.wiki.gg/wiki/Purrchena"
+                ),
+                BuildSource(
+                    name = "Endfield Talos Wiki — Dessert Moment",
+                    url = "https://endfield.wiki.gg/wiki/Dessert_Moment"
+                )
+            )
         )
     )
 
