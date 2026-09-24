@@ -41,7 +41,7 @@ class GameBuildViewModelTest {
     }
 
     @Test
-    fun defaultRepositoryLoadsEndfieldRosterAndArcaneBuild() {
+    fun defaultRepositoryLoadsEndfieldRosterAndPurrchenaBuild() {
         val viewModel = GameBuildViewModel()
 
         viewModel.selectGame(Game.ENDFIELD)
@@ -49,18 +49,18 @@ class GameBuildViewModelTest {
         val rosterState = viewModel.uiState.value
         assertEquals(Game.ENDFIELD, rosterState.selectedGame)
         assertEquals(
-            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng", "Pogranichnik", "Last Rite", "Gilberta", "Liino", "Tangtang", "Laevatain", "Zhuang Fangyi", "Da Pan", "Mi Fu", "Camille", "Rossi", "Arcane"),
+            listOf("Endministrator", "Perlica", "Chen Qianyu", "Wulfgard", "Yvonne", "Typhoeus", "Antal", "Akekuri", "Avywenna", "Catcher", "Alesh", "Xaihi", "Snowshine", "Arclight", "Estella", "Fluorite", "Ardelia", "Ember", "Lifeng", "Pogranichnik", "Last Rite", "Gilberta", "Liino", "Tangtang", "Laevatain", "Zhuang Fangyi", "Da Pan", "Mi Fu", "Camille", "Rossi", "Arcane", "Purrchena"),
             rosterState.characters.map { it.name }
         )
         assertEquals(setOf(Game.ENDFIELD), rosterState.characters.map { it.game }.toSet())
 
-        val arcane = rosterState.characters.first { it.name == "Arcane" }
-        viewModel.selectCharacter(arcane)
+        val purrchena = rosterState.characters.first { it.name == "Purrchena" }
+        viewModel.selectCharacter(purrchena)
 
         val buildState = viewModel.uiState.value
-        assertEquals("Arcane", buildState.selectedCharacter?.name)
+        assertEquals("Purrchena", buildState.selectedCharacter?.name)
         assertEquals(
-            listOf("endfield-arcane-f2p-starter-2026-09"),
+            listOf("endfield-purrchena-f2p-event-2026-09"),
             buildState.builds.map { it.id }
         )
         assertEquals(BuildType.F2P, buildState.builds.single().type)
