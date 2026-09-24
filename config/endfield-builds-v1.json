@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "revision": 1,
-  "publishedAt": "2026-09-17",
+  "revision": 2,
+  "publishedAt": "2026-09-24",
   "gameVersion": "Dreamscape of Wind and Snow · 2026-09",
   "builds": [
     {
@@ -1151,6 +1151,44 @@
         {
           "name": "Endfield Talos Wiki — AIC Light Armor",
           "url": "https://endfield.wiki.gg/wiki/AIC_Light_Armor"
+        }
+      ]
+    },
+    {
+      "id": "endfield-purrchena-f2p-event-2026-09",
+      "characterId": "endfield-purrchena",
+      "title": "Free Event Sustain Defender",
+      "type": "F2P",
+      "weapon": "Dessert Moment",
+      "equipment": [
+        "Swordmancer Light Armor",
+        "Eternal Xiranite Gloves",
+        "Eternal Xiranite Heavy Slab",
+        "Eternal Xiranite Heavy Slab"
+      ],
+      "statPriority": [
+        "Strength",
+        "Treatment Efficiency",
+        "Ultimate Gain Efficiency"
+      ],
+      "team": [],
+      "notes": "Fully free event support setup for Purrchena's Protection, reactive healing, Nature Infliction, grouping and Arts Susceptibility utility. Purry Big Feline! RAWR! grants Purrchena, five Tokens and six copies of the 5-star Sword Dessert Moment without Headhunting, allowing both operator and weapon to reach maximum Potential. Prioritize Strength, Treatment Efficiency and Ultimate Gain Efficiency for sustain and more frequent support rotations.",
+      "sources": [
+        {
+          "name": "Mobalytics — Purrchena Build Guide",
+          "url": "https://mobalytics.gg/arknights-endfield/characters/purrchena-build-guide"
+        },
+        {
+          "name": "TOPUPlive — Purrchena & Dessert Moment Guide",
+          "url": "https://www.topuplive.com/news/ark-purrchena-guide.html"
+        },
+        {
+          "name": "Endfield Talos Wiki — Purrchena",
+          "url": "https://endfield.wiki.gg/wiki/Purrchena"
+        },
+        {
+          "name": "Endfield Talos Wiki — Dessert Moment",
+          "url": "https://endfield.wiki.gg/wiki/Dessert_Moment"
         }
       ]
     }
